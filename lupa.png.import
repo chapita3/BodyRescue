@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lupa.png-b856584e6bd6e085086fb2d7591583e7.stex"
+path="res://.import/lupa.png-b7fff169c42cf07949e270a8b15e4ec5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/lupa.png"
-dest_files=[ "res://.import/lupa.png-b856584e6bd6e085086fb2d7591583e7.stex" ]
+source_file="res://lupa.png"
+dest_files=[ "res://.import/lupa.png-b7fff169c42cf07949e270a8b15e4ec5.stex" ]
 
 [params]
 

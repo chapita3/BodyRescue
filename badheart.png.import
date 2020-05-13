@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/badheart.png-8e1db5e48ac8000d23b48e131d134f5e.stex"
+path="res://.import/badheart.png-9f55a642dab64c94a3be37c79e49cbd3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/badheart.png"
-dest_files=[ "res://.import/badheart.png-8e1db5e48ac8000d23b48e131d134f5e.stex" ]
+source_file="res://badheart.png"
+dest_files=[ "res://.import/badheart.png-9f55a642dab64c94a3be37c79e49cbd3.stex" ]
 
 [params]
 

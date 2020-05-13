@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/happyheart.png-0b995ed8540893eec13dafef11a9d926.stex"
+path="res://.import/happyheart.png-9b8c78eb261e8655fc15c06431b5f2bc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/happyheart.png"
-dest_files=[ "res://.import/happyheart.png-0b995ed8540893eec13dafef11a9d926.stex" ]
+source_file="res://happyheart.png"
+dest_files=[ "res://.import/happyheart.png-9b8c78eb261e8655fc15c06431b5f2bc.stex" ]
 
 [params]
 

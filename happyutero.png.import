@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/happyutero.png-d6bd3d23437f466620460b1f01fdab21.stex"
+path="res://.import/happyutero.png-df5193de5e2fb982d3852b580b6a0129.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/happyutero.png"
-dest_files=[ "res://.import/happyutero.png-d6bd3d23437f466620460b1f01fdab21.stex" ]
+source_file="res://happyutero.png"
+dest_files=[ "res://.import/happyutero.png-df5193de5e2fb982d3852b580b6a0129.stex" ]
 
 [params]
 

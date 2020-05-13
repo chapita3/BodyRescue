@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/badintestine.png-7c8763a5bda1d087ef275455965f2882.stex"
+path="res://.import/badintestine.png-5070f8a0e81aadbd76196202604c9694.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/badintestine.png"
-dest_files=[ "res://.import/badintestine.png-7c8763a5bda1d087ef275455965f2882.stex" ]
+source_file="res://badintestine.png"
+dest_files=[ "res://.import/badintestine.png-5070f8a0e81aadbd76196202604c9694.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bicho7.png-9a8f413c016be54485de255a54d9baba.stex"
+path="res://.import/bicho7.png-20f1d8c3aff2f3d97547c1771e881070.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/bicho7.png"
-dest_files=[ "res://.import/bicho7.png-9a8f413c016be54485de255a54d9baba.stex" ]
+source_file="res://bicho7.png"
+dest_files=[ "res://.import/bicho7.png-20f1d8c3aff2f3d97547c1771e881070.stex" ]
 
 [params]
 

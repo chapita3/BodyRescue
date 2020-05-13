@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/happybrain.png-ae99470acec550a9132592187b5f0783.stex"
+path="res://.import/happybrain.png-90867693cc9d022a35bca90f261b0fcf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/happybrain.png"
-dest_files=[ "res://.import/happybrain.png-ae99470acec550a9132592187b5f0783.stex" ]
+source_file="res://happybrain.png"
+dest_files=[ "res://.import/happybrain.png-90867693cc9d022a35bca90f261b0fcf.stex" ]
 
 [params]
 

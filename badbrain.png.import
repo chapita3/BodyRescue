@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/badbrain.png-1a6f1a34e7f7b45d4e861052dc5c5f28.stex"
+path="res://.import/badbrain.png-1ca7c867f9e9fa1b24ed6d2b0ad0fce7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/badbrain.png"
-dest_files=[ "res://.import/badbrain.png-1a6f1a34e7f7b45d4e861052dc5c5f28.stex" ]
+source_file="res://badbrain.png"
+dest_files=[ "res://.import/badbrain.png-1ca7c867f9e9fa1b24ed6d2b0ad0fce7.stex" ]
 
 [params]
 

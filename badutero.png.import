@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/badutero.png-eee363309166c0ccd336583968718674.stex"
+path="res://.import/badutero.png-7273134b5f36f70a87cab8c82fba0632.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/badutero.png"
-dest_files=[ "res://.import/badutero.png-eee363309166c0ccd336583968718674.stex" ]
+source_file="res://badutero.png"
+dest_files=[ "res://.import/badutero.png-7273134b5f36f70a87cab8c82fba0632.stex" ]
 
 [params]
 

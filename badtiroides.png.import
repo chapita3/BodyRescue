@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/badtiroides.png-5d220fae34efe948f029766cb29b0db0.stex"
+path="res://.import/badtiroides.png-cf5fde0a4025611c418390c1c22cd09a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/badtiroides.png"
-dest_files=[ "res://.import/badtiroides.png-5d220fae34efe948f029766cb29b0db0.stex" ]
+source_file="res://badtiroides.png"
+dest_files=[ "res://.import/badtiroides.png-cf5fde0a4025611c418390c1c22cd09a.stex" ]
 
 [params]
 

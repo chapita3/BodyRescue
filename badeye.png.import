@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/badeye.png-223f452badd62cd14b4274eed7e55a71.stex"
+path="res://.import/badeye.png-b672934c86254de7f13e0c705f8bba30.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://juego/badeye.png"
-dest_files=[ "res://.import/badeye.png-223f452badd62cd14b4274eed7e55a71.stex" ]
+source_file="res://badeye.png"
+dest_files=[ "res://.import/badeye.png-b672934c86254de7f13e0c705f8bba30.stex" ]
 
 [params]
 
