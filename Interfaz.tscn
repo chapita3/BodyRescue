@@ -34,3 +34,18 @@ text = "PLAY"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ScoreLabel" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 419.094
+margin_top = 6.88641
+margin_right = 539.094
+margin_bottom = 64.8864
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="iniciar_juego" from="." to="." method="nuevo_juego"]
+[connection signal="pressed" from="BotonPlay" to="." method="_on_BotonPlay_pressed"]
