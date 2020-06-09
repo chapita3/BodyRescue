@@ -1,19 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Mundo.gd" type="Script" id=1]
 [ext_resource path="res://Interfaz.tscn" type="PackedScene" id=2]
 [ext_resource path="res://body.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Nave.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Juego/fondo0.jpg" type="Texture" id=6]
 [ext_resource path="res://Juego/fondo1.jpg" type="Texture" id=7]
 [ext_resource path="res://Juego/fondo2.jpg" type="Texture" id=8]
 [ext_resource path="res://Juego/fondo3.jpg" type="Texture" id=9]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0.000488281, 5.00014, 0, 0, 0, 0, 501.001, 4.00014, 0, 0, 0, 0, 503.001, 796.001, 0, 0, 0, 0, -2.99951, 802.001, 0, 0, 0, 0, 0.000488281, 5.00014 )
-}
 
 [node name="Mundo" type="Node"]
 script = ExtResource( 1 )
@@ -21,18 +15,7 @@ __meta__ = {
 "_edit_horizontal_guides_": [ -351.481 ]
 }
 Bacteria = ExtResource( 4 )
-
-[node name="fondo0" type="TextureRect" parent="."]
-visible = false
-margin_left = -439.719
-margin_top = -35.2823
-margin_right = 72.2807
-margin_bottom = 252.718
-rect_scale = Vector2( 3.2, 3.2 )
-texture = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+Body = ExtResource( 3 )
 
 [node name="fondo1" type="TextureRect" parent="."]
 visible = false
@@ -108,40 +91,5 @@ __meta__ = {
 
 [node name="Interfaz" parent="." instance=ExtResource( 2 )]
 
-[node name="Area2D" parent="." instance=ExtResource( 3 )]
-
-[node name="Nave" parent="." instance=ExtResource( 5 )]
-
-[node name="Bacteria" parent="." instance=ExtResource( 4 )]
-position = Vector2( -44.5578, 14.7901 )
-
 [node name="eyes" type="Node" parent="."]
-
-[node name="PosicionDeInicio" type="Position2D" parent="."]
-position = Vector2( 250.42, 361.76 )
-
-[node name="BacteriaTimer" type="Timer" parent="."]
-
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="InicioTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Camino" type="Path2D" parent="."]
-curve = SubResource( 1 )
-
-[node name="BacteriaPosicion" type="PathFollow2D" parent="Camino"]
-position = Vector2( 0.000488281, 5.00014 )
-rotation = -0.00199606
-[connection signal="iniciar_juego" from="Interfaz" to="." method="nuevo_juego"]
-[connection signal="iniciar_juego_zona0" from="Area2D" to="." method="juego_zona0"]
-[connection signal="iniciar_juego_zona1" from="Area2D" to="." method="juego_zona1"]
-[connection signal="iniciar_juego_zona2" from="Area2D" to="." method="juego_zona2"]
-[connection signal="iniciar_juego_zona3" from="Area2D" to="." method="juego_zona3"]
-[connection signal="iniciar_juego_zona4" from="Area2D" to="." method="juego_zona4"]
-[connection signal="iniciar_juego_zona5" from="Area2D" to="." method="juego_zona5"]
-[connection signal="iniciar_juego_zona6" from="Area2D" to="." method="juego_zona6"]
-[connection signal="golpe" from="Nave" to="." method="game_over"]
-[connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
-[connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
+[connection signal="iniciar_juego" from="Interfaz" to="." method="_on_Interfaz_iniciar_juego"]

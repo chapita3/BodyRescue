@@ -1,24 +1,32 @@
 extends Node
 
 export (PackedScene) var Bacteria
-var Score 
+export (PackedScene) var Body
+var Score
+const SAVE_PATH = "res://debug/save/saves.sav"
+
+var player = {
+"score":0,
+"level":0,
+"lives":3
+}
 
 func _ready():
 	randomize()
-	$Area2D.hide()
-	$Bacteria.hide()
+
+func _on_Interfaz_iniciar_juego():
+	get_tree().change_scene_to(Body)
+	if(!load_game()):
+		save_game(0,0,3)
+	
 
 func iniciar_juego():
 	Score = 0
 	$Interfaz.update_score(Score)
-	$Nave.inicio($PosicionDeInicio.position) #posicion de inicio del jugador
-	$InicioTimer.start()
+	#$Nave.inicio($PosicionDeInicio.position) #posicion de inicio del jugador
+	#$InicioTimer.start()
 	$Area2D.hide()
 	$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
-
-func nuevo_juego():
-	$Area2D.show()
-	$Area2D.inicio()
 
 func game_over():
 	$ScoreTimer.stop()
@@ -26,7 +34,6 @@ func game_over():
 	#$Interfaz.game_over()
 	$Area2D.show()
 	$Area2D.inicio_level()
-	
 	
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
@@ -52,30 +59,21 @@ func _on_BacteriaTimer_timeout():
 	B.rotation = d
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
-func juego_zona0():
-	iniciar_juego()
-	$fondo0.show()
+func save_game(score,level,lives):
+	var save_game = File.new()
+	save_game.open(SAVE_PATH, File.WRITE)
+	player.score=score
+	#player.level=str(level)
+	#player.lives=str(lives)
+	save_game.store_line(to_json(player))
+	save_game.close()
 	
-func juego_zona1():
-	iniciar_juego()
-	$fondo1.show()
-	
-func juego_zona2():
-	iniciar_juego()
-	$fondo2.show()
-	
-func juego_zona3():
-	iniciar_juego()
-	$fondo3.show()
-
-func juego_zona4():
-	iniciar_juego()
-	$fondo4.show()
-	
-func juego_zona5():
-	iniciar_juego()
-	$fondo5.show()
-	
-func juego_zona6():
-	iniciar_juego()
-	$fondo6.show()
+func load_game():
+	var exist
+	var save_game = File.new()
+	if not save_game.file_exists(SAVE_PATH):
+		exist=false
+	save_game.open(SAVE_PATH, File.READ)
+	player = parse_json(save_game.get_line())
+	save_game.close()
+	return exist
