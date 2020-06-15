@@ -8,19 +8,39 @@ signal iniciar_juego_zona3
 signal iniciar_juego_zona4
 signal iniciar_juego_zona5
 signal iniciar_juego_zona6
+signal iniciar_juego_zona7
+
+export (PackedScene) var Scene1
+export (PackedScene) var Scene2
+export (PackedScene) var Scene3
+export (PackedScene) var Scene4
+export (PackedScene) var Scene5
+export (PackedScene) var Scene6
+export (PackedScene) var Scene7
+export (PackedScene) var Scene8
+
+const SAVE_PATH = "user://debug/save/saves.sav"
+
+var player = {
+#"username":"",
+"score":0,
+"level":0,
+"lives":3
+}
 
 var zone
 var pos={
-	P0=[-8.694,-251.453],
-	P1=[-8.154,-277.39],
-	P2=[7.754,-135.517],
-	P3=[-38.559,10.316],
-	P4=[-37.39,161.61],
-	P5=[-10.926,-192.611],
-	P6=[-2.997,-206.43],
+	P0=[-37.39,161.61],
+	P1=[-2.997,-206.43],
+	P2=[-8.694,-251.453],
+	P3=[-10.926,-192.611],
+	P5=[-38.559,10.316],
+	P6=[7.754,-135.517],
+	P7=[-8.154,-277.39],
 }
-var body_tipe_used ={}
-var body_type=["eyes","head","heart","intestine","skin","thyroid","tooth"]
+var body_type_used ={}
+#var body_type=["eyes","head","heart","intestine","skin","thyroid","tooth"]
+var body_type=["skin","tooth","eyes","thyroid","diaphragm","intestine","heart","head"]
 #var body_type={
 #	O0=[load("res://Sprites/Lights/eyes.gd")],
 #	O1=[load("res://Sprites/Lights/head.gd")],
@@ -31,13 +51,18 @@ var body_type=["eyes","head","heart","intestine","skin","thyroid","tooth"]
 #	O6=[load("res://Sprites/Lights/tooth.gd")],
 #}
 
-func inicio():
+func _ready():
+	load_game()
+	$vitamins.text=str(player.lives)
 	initialize()
 	zone=selectZone()
 	configure_zone()
 	$button_zone.show()
 	yield($Timer, "timeout")
 	$alarm.play()
+
+func inicio():
+	pass
 
 func inicio_level():
 	hide_lights()
@@ -48,26 +73,24 @@ func inicio_level():
 	yield($Timer, "timeout")
 	$alarm.play()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
 func selectZone():
-	var i
+	var i=0
 	randomize()
-	zone=int(rand_range(0,6))
-	if(body_tipe_used[zone]==1):
-		i=0
-		while(body_tipe_used[i]==1):
-			i=i+1
-		zone=i
+	#zone=int(rand_range(0,6))
+	
+	#if(body_type_used[zone]==1):
+	#	i=0
+	while(body_type_used[i]==1):
+		i=i+1
+	zone=i
 	return zone
-		
 
 func initialize(): #Esta funcion hay que usarla en un lugar donde solo se ejecute una unica vez
 	var i=0
+	for i in player.level:
+		body_type_used[i]=1
 	for i in body_type.size():
-		body_tipe_used[i]=0
+		body_type_used[i]=0
 
 func get_pos():
 	return pos["P"+str(zone)]
@@ -81,36 +104,36 @@ func configure_zone():
 	var exbody
 	$button_zone.set_position(Vector2(expos[0],expos[1]))
 	$button_zone.set_size(Vector2(41,39))
-	if(zone==0):
+	if(zone==2):
 		$body/eyes.enabled=true
 		$body/eyes.show()
 	else:
 		if(zone==1):
-			$body/head.enabled=true
-			$body/head.show()
+			$body/tooth.enabled=true
+			$button_zone.set_size(Vector2(29,20))
+			$body/tooth.show()
 		else:
-			if(zone==2):
+			if(zone==6):
 				$body/heart.enabled=true
 				$body/heart.show()
 			else:
-				if(zone==3):
+				if(zone==5):
 					$body/intestine.enabled=true
 					$button_zone.set_size(Vector2(97,75))
 					$body/intestine.show()
 				else:
-					if(zone==4):
+					if(zone==0):
 						$body/skin.enabled=true
 						$button_zone.set_size(Vector2(35,76))
 						$body/skin.show()
 					else:
-						if(zone==5):
+						if(zone==3):
 							$body/thyroid.enabled=true
 							$button_zone.set_size(Vector2(46,24))
 							$body/thyroid.show()
 						else:
-							$body/tooth.enabled=true
-							$button_zone.set_size(Vector2(29,20))
-							$body/tooth.show()
+							$body/head.enabled=true
+							$body/head.show()
 	#$body.animation="body_"+body_type[zone]
 	$body/light_animation.play(body_type[zone])
 
@@ -121,8 +144,9 @@ func _on_Button_pressed():
 	$body.hide()
 	$button_zone.hide()
 	$alarm.playing=false
-	body_tipe_used[zone]=1
+	body_type_used[zone]=1
 	$body/light_animation.stop(false)
+	#emit_signal("iniciar_juego_zona"+str(zone))
 	emit_signal("iniciar_juego_zona"+str(zone))
 
 func hide_lights():
@@ -133,3 +157,49 @@ func hide_lights():
 	$body/skin.hide()
 	$body/thyroid.hide()
 	$body/tooth.hide()
+
+func load_game():
+	var save_game = File.new()
+	if not save_game.file_exists(SAVE_PATH):
+		return # Error! No hay archivo que guardar
+	save_game.open(SAVE_PATH, File.READ)
+	player = parse_json(save_game.get_line())
+	save_game.close()
+
+func juego_zona0():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene1)
+	#$fondo0.show()
+	
+func juego_zona1():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene2)
+	#$fondo1.show()
+	
+func juego_zona2():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene3)
+	#$fondo2.show()
+	
+func juego_zona3():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene4)
+	#$fondo3.show()
+
+func juego_zona4():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene5)
+	#$fondo4.show()
+	
+func juego_zona5():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene6)
+	#$fondo5.show()
+	
+func juego_zona6():
+	#iniciar_juego()
+	get_tree().change_scene_to(Scene7)
+	#$fondo6.show()
+	
+func juego_zona7():
+	get_tree().change_scene_to(Scene8)

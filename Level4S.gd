@@ -1,11 +1,12 @@
 extends Node
 
 export (PackedScene) var Bacteria
-export (PackedScene) var Body
 var Score
+var maxScore=20
 const SAVE_PATH = "user://saves.sav"
 
 var player = {
+#"username":"",
 "score":0,
 "level":0,
 "lives":3
@@ -13,41 +14,48 @@ var player = {
 
 func _ready():
 	randomize()
-
-func _on_Interfaz_iniciar_juego():
-	if(!load_game()):
-		save_game(0,0,3)
-	get_tree().change_scene_to(Body)
-	
-
-func iniciar_juego():
 	Score = 0
-	$Interfaz.update_score(Score)
-	#$Nave.inicio($PosicionDeInicio.position) #posicion de inicio del jugador
-	#$InicioTimer.start()
-	$Area2D.hide()
-	$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
+	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
+	$InicioTimer.start()
+	#$Interfaz.update_score(Score)
+
+func nuevo_juego():
+	Score = 0
+	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
+	$InicioTimer.start()
+	#$Interfaz.update_score(Score)
 
 func game_over():
 	$ScoreTimer.stop()
 	$BacteriaTimer.stop()
-	#$Interfaz.game_over()
-	$Area2D.show()
-	$Area2D.inicio_level()
-	
+	load_game()
+	if(Score>=maxScore):
+		$LevelWin.visible=true
+		save_game(Score+player.score,player.level+1,player.lives)
+		$NextScene.start()
+	else:
+		if(player.lives==1):
+			get_tree().change_scene("res://Game_over.tscn")
+		else:
+			save_game(player.score,player.level,player.lives-1)
+			$LevelLoose.visible=true
+			$Prev_level.start()
+
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
 	$ScoreTimer.start()
-	
+
 func _on_ScoreTimer_timeout():
 	Score += 1
-	$Interfaz.update_score(Score)
+	#$Interfaz.update_score(Score)
 
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
 	$Camino/BacteriaPosicion.set_offset(randi())
 	
 	var B = Bacteria.instance()
+	B.change_bacteria_type(["grande4","chica4"])
+	B.select_animation(randi() % B.tipo_bacteria.size())
 	add_child(B)
 	
 	#Seleccionar una direccion
@@ -63,15 +71,18 @@ func save_game(score,level,lives):
 	var save_game = File.new()
 	save_game.open(SAVE_PATH, File.WRITE)
 	player.score=score
-	player.level=level
-	player.lives=lives
+	#player.level=str(level)
+	#player.lives=str(lives)
 	save_game.store_line(to_json(player))
 	save_game.close()
-	
+
 func load_game():
-	var exist=true
 	var save_game = File.new()
 	if not save_game.file_exists(SAVE_PATH):
-		exist=false
+		return # Error! No hay archivo que guardar
+	save_game.open(SAVE_PATH, File.READ)
+	player = parse_json(save_game.get_line())
 	save_game.close()
-	return exist
+	
+func _on_Prev_level_timeout():
+	get_tree().change_scene("res://Level4.tscn")
