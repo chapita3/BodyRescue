@@ -75,7 +75,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Next_Level" type="Button" parent="."]
+[node name="Again" type="Button" parent="."]
 margin_left = 210.0
 margin_top = 686.0
 margin_right = 324.0
@@ -94,5 +94,5 @@ one_shot = true
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
-[connection signal="pressed" from="Next_Level" to="." method="next_level"]
+[connection signal="pressed" from="Again" to="." method="play_again"]
 [connection signal="timeout" from="NextScene" to="." method="_on_NextScene_timeout"]

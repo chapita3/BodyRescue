@@ -5,19 +5,11 @@ signal iniciar_juego_zona0
 signal iniciar_juego_zona1
 signal iniciar_juego_zona2
 signal iniciar_juego_zona3
-signal iniciar_juego_zona4
-signal iniciar_juego_zona5
-signal iniciar_juego_zona6
-signal iniciar_juego_zona7
 
 export (PackedScene) var Scene1
 export (PackedScene) var Scene2
 export (PackedScene) var Scene3
 export (PackedScene) var Scene4
-export (PackedScene) var Scene5
-export (PackedScene) var Scene6
-export (PackedScene) var Scene7
-export (PackedScene) var Scene8
 
 const SAVE_PATH = "user://debug/save/saves.sav"
 
@@ -30,17 +22,22 @@ var player = {
 
 var zone
 var pos={
-	P0=[-37.39,161.61],
-	P1=[-2.997,-206.43],
-	P2=[-8.694,-251.453],
-	P3=[-10.926,-192.611],
-	P5=[-38.559,10.316],
-	P6=[7.754,-135.517],
-	P7=[-8.154,-277.39],
+	P0=[-8.694,-251.453],
+	P1=[5.612,-176.626],
+	P2=[5.453,-216.522],
+	P3=[16.074,-124.532],
+	#OLD-POS
+	#P0=[-37.39,161.61],
+	#P1=[-2.997,-206.43],
+	#P2=[-8.694,-251.453],
+	#P3=[-10.926,-192.611],
+	#P5=[-38.559,10.316],
+	#P6=[7.754,-135.517],
+	#P7=[-8.154,-277.39],
 }
 var body_type_used ={}
-#var body_type=["eyes","head","heart","intestine","skin","thyroid","tooth"]
-var body_type=["skin","tooth","eyes","thyroid","diaphragm","intestine","heart","head"]
+#var body_type=["skin","tooth","eyes","thyroid","diaphragm","intestine","heart","head"]
+var body_type=["eyes","tooth","head","heart"]
 #var body_type={
 #	O0=[load("res://Sprites/Lights/eyes.gd")],
 #	O1=[load("res://Sprites/Lights/head.gd")],
@@ -89,7 +86,7 @@ func initialize(): #Esta funcion hay que usarla en un lugar donde solo se ejecut
 	var i=0
 	for i in player.level:
 		body_type_used[i]=1
-	for i in body_type.size():
+	for i in (body_type.size()-1):
 		body_type_used[i]=0
 
 func get_pos():
@@ -104,7 +101,7 @@ func configure_zone():
 	var exbody
 	$button_zone.set_position(Vector2(expos[0],expos[1]))
 	$button_zone.set_size(Vector2(41,39))
-	if(zone==2):
+	if(zone==0):
 		$body/eyes.enabled=true
 		$body/eyes.show()
 	else:
@@ -113,27 +110,27 @@ func configure_zone():
 			$button_zone.set_size(Vector2(29,20))
 			$body/tooth.show()
 		else:
-			if(zone==6):
-				$body/heart.enabled=true
-				$body/heart.show()
+			if(zone==2):
+				$body/head.enabled=true
+				$body/head.show()
 			else:
-				if(zone==5):
-					$body/intestine.enabled=true
-					$button_zone.set_size(Vector2(97,75))
-					$body/intestine.show()
+				if(zone==3):
+					$body/heart.enabled=true
+					$body/heart.show()
 				else:
-					if(zone==0):
-						$body/skin.enabled=true
-						$button_zone.set_size(Vector2(35,76))
-						$body/skin.show()
+					if(zone==5):
+						$body/intestine.enabled=true
+						$button_zone.set_size(Vector2(97,75))
+						$body/intestine.show()
 					else:
-						if(zone==3):
+						if(zone==4):
 							$body/thyroid.enabled=true
 							$button_zone.set_size(Vector2(46,24))
 							$body/thyroid.show()
 						else:
-							$body/head.enabled=true
-							$body/head.show()
+							$body/skin.enabled=true
+							$button_zone.set_size(Vector2(35,76))
+							$body/skin.show()
 	#$body.animation="body_"+body_type[zone]
 	$body/light_animation.play(body_type[zone])
 
@@ -185,21 +182,3 @@ func juego_zona3():
 	#iniciar_juego()
 	get_tree().change_scene_to(Scene4)
 	#$fondo3.show()
-
-func juego_zona4():
-	#iniciar_juego()
-	get_tree().change_scene_to(Scene5)
-	#$fondo4.show()
-	
-func juego_zona5():
-	#iniciar_juego()
-	get_tree().change_scene_to(Scene6)
-	#$fondo5.show()
-	
-func juego_zona6():
-	#iniciar_juego()
-	get_tree().change_scene_to(Scene7)
-	#$fondo6.show()
-	
-func juego_zona7():
-	get_tree().change_scene_to(Scene8)

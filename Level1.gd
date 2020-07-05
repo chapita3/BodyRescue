@@ -30,8 +30,10 @@ func game_over():
 	$BacteriaTimer.stop()
 	#$Interfaz.game_over()
 	load_game()
+	var save=get_node("res://Saves.gd")
 	if(Score>=maxScore):
 		$LevelWin.visible=true
+		save.save_game(Score+player.score,player.level+1,player.lives)
 		save_game(Score+player.score,player.level+1,player.lives)
 		$NextScene.start()
 	else:

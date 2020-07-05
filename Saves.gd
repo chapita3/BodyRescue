@@ -5,12 +5,16 @@ const SAVE_PATH = "res://debug/save/saves.sav"
 var player = {
 #"username":"",
 "score":0,
-"level":0
+"level":0,
+"lives":3
 }
 
-func save_game():
+func save_game(score,level,lives):
 	var save_game = File.new()
 	save_game.open(SAVE_PATH, File.WRITE)
+	player.score=score
+	player.level=level
+	player.lives=lives
 	save_game.store_line(to_json(player))
 	save_game.close()
 	
