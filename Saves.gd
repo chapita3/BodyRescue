@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_PATH = "res://debug/save/saves.sav"
+const SAVE_PATH = "user://saves.sav"
 
 var player = {
 #"username":"",
@@ -21,8 +21,9 @@ func save_game(score,level,lives):
 
 func load_game():
 	var save_game = File.new()
-	if not save_game.file_exists(SAVE_PATH):
+	if (!save_game.file_exists(SAVE_PATH)):
 		return # Error! No hay archivo que guardar
 	save_game.open(SAVE_PATH, File.READ)
 	player = parse_json(save_game.get_line())
 	save_game.close()
+	return player

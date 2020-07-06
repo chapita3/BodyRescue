@@ -11,7 +11,7 @@ export (PackedScene) var Scene2
 export (PackedScene) var Scene3
 export (PackedScene) var Scene4
 
-const SAVE_PATH = "user://debug/save/saves.sav"
+onready var save = load("res://Saves.gd").new()
 
 var player = {
 #"username":"",
@@ -49,7 +49,7 @@ var body_type=["eyes","tooth","head","heart"]
 #}
 
 func _ready():
-	load_game()
+	player=save.load_game()
 	$vitamins.text=str(player.lives)
 	initialize()
 	zone=selectZone()
@@ -81,12 +81,16 @@ func selectZone():
 	zone=i
 	return zone
 
-func initialize(): #Esta funcion hay que usarla en un lugar donde solo se ejecute una unica vez
+func initialize():
 	var i=0
-	for i in player.level:
+	var aux=body_type.size()-1
+	while(i<=player.level):
 		body_type_used[i]=1  #[1,_,_,_]
-	for i in (body_type.size()-1):
+		i+=1
+	while(i<=(body_type.size()-1)):
 		body_type_used[i]=0    #[1,0,0,0]
+		i+=1
+	var lpm
 
 func get_pos():
 	return pos["P"+str(zone)]
@@ -151,14 +155,6 @@ func hide_lights():
 	$body/skin.hide()
 	$body/thyroid.hide()
 	$body/tooth.hide()
-
-func load_game():
-	var save_game = File.new()
-	if not save_game.file_exists(SAVE_PATH):
-		return # Error! No hay archivo que guardar
-	save_game.open(SAVE_PATH, File.READ)
-	player = parse_json(save_game.get_line())
-	save_game.close()
 
 func juego_zona0():
 	#iniciar_juego()
