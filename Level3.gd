@@ -1,9 +1,8 @@
 extends Node
 
 export (PackedScene) var Bacteria
-var Score
-const SAVE_PATH = "user://saves.sav"
-onready var save = get_node("res://Saves.gd")
+var Score=40
+onready var save = load("res://Saves.gd").new()
 
 var player = {
 #"username":"",
@@ -29,12 +28,12 @@ func game_over():
 	$BacteriaTimer.stop()
 	#$Interfaz.game_over()
 	$LevelLoose.visible=true
-	$Next_Level.disabled=false
-	$Next_Level.visible=true
+	$Again.disabled=false
+	$Again.visible=true
+	#if(player.lives==1):
+	#	get_tree().change_scene("res://Game_over.tscn")
+	#else:
 	save.save_game(player.score,player.level,player.lives-1)
-#if(player.lives==1):
-#	get_tree().change_scene("res://Game_over.tscn")
-#else:
 	
 func _on_NextScene_timeout():
 	get_tree().change_scene("res://body.tscn")
@@ -44,6 +43,7 @@ func _on_InicioTimer_timeout():
 	$ScoreTimer.start()
 	
 func _on_ScoreTimer_timeout():
+	$BacteriaTimer.stop()
 	$LevelWin.visible=true
 	save.save_game(Score+player.score,player.level+1,player.lives)
 	#save_game(Score+player.score,player.level+1,player.lives)

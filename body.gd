@@ -72,7 +72,6 @@ func inicio_level():
 
 func selectZone():
 	var i=0
-	randomize()
 	#zone=int(rand_range(0,6))
 	
 	#if(body_type_used[zone]==1):
@@ -85,9 +84,9 @@ func selectZone():
 func initialize(): #Esta funcion hay que usarla en un lugar donde solo se ejecute una unica vez
 	var i=0
 	for i in player.level:
-		body_type_used[i]=1
+		body_type_used[i]=1  #[1,_,_,_]
 	for i in (body_type.size()-1):
-		body_type_used[i]=0
+		body_type_used[i]=0    #[1,0,0,0]
 
 func get_pos():
 	return pos["P"+str(zone)]
@@ -95,10 +94,9 @@ func get_pos():
 #	return body_type["O"+str(zone)]
 
 func configure_zone():
-	var expos=get_pos()
+	var expos=get_pos() #Busca posicion de la luz
 	$button_zone.text=str(zone)
 	#var exbody_type=get_object()
-	var exbody
 	$button_zone.set_position(Vector2(expos[0],expos[1]))
 	$button_zone.set_size(Vector2(41,39))
 	if(zone==0):
@@ -141,7 +139,6 @@ func _on_Button_pressed():
 	$body.hide()
 	$button_zone.hide()
 	$alarm.playing=false
-	body_type_used[zone]=1
 	$body/light_animation.stop(false)
 	#emit_signal("iniciar_juego_zona"+str(zone))
 	emit_signal("iniciar_juego_zona"+str(zone))

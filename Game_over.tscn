@@ -26,7 +26,6 @@ font_data = ExtResource( 1 )
 script = ExtResource( 5 )
 
 [node name="Loose_prev" type="TextureRect" parent="."]
-visible = false
 margin_top = 2.10529
 margin_right = 1080.0
 margin_bottom = 1922.11
@@ -47,37 +46,35 @@ __meta__ = {
 }
 
 [node name="Watch_Ad" type="Button" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -232.597
-margin_top = -16.0
-margin_right = 234.403
-margin_bottom = 16.0
+margin_left = -167.468
+margin_top = 14.3176
+margin_right = 174.532
+margin_bottom = 46.3176
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Recargar vitaminas mirando una publicidad"
+text = "Comprar vitaminas"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Continue" type="Button" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -218.0
-margin_top = 36.5
+margin_top = 83.2075
 margin_right = 218.0
-margin_bottom = 65.5
+margin_bottom = 112.207
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Continuar sin publicidad y perder progreso"
+text = "Continuar y perder progreso"
 __meta__ = {
 "_edit_use_anchors_": false
 }

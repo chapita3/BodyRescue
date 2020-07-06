@@ -1,6 +1,5 @@
 extends Node
 
-export (PackedScene) var Bacteria
 export (PackedScene) var Body
 var Score
 const SAVE_PATH = "user://saves.sav"
@@ -16,48 +15,8 @@ func _ready():
 
 func _on_Interfaz_iniciar_juego():
 	if(!load_game()):
-		save_game(0,0,3)
+		save_game(0,-1,3)
 	get_tree().change_scene_to(Body)
-	
-
-func iniciar_juego():
-	Score = 0
-	$Interfaz.update_score(Score)
-	#$Nave.inicio($PosicionDeInicio.position) #posicion de inicio del jugador
-	#$InicioTimer.start()
-	$Area2D.hide()
-	$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
-
-func game_over():
-	$ScoreTimer.stop()
-	$BacteriaTimer.stop()
-	#$Interfaz.game_over()
-	$Area2D.show()
-	$Area2D.inicio_level()
-	
-func _on_InicioTimer_timeout():
-	$BacteriaTimer.start()
-	$ScoreTimer.start()
-	
-func _on_ScoreTimer_timeout():
-	Score += 1
-	$Interfaz.update_score(Score)
-
-func _on_BacteriaTimer_timeout():
-	#Seleccionar un lugar aleatorio en el camino
-	$Camino/BacteriaPosicion.set_offset(randi())
-	
-	var B = Bacteria.instance()
-	add_child(B)
-	
-	#Seleccionar una direccion
-	var d = $Camino/BacteriaPosicion.rotation + PI /2
-	
-	B.position = $Camino/BacteriaPosicion.position
-	
-	d += rand_range(-PI /4, PI /4)
-	B.rotation = d
-	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
 func save_game(score,level,lives):
 	var save_game = File.new()

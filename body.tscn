@@ -41,6 +41,11 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "body_tooth",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ) ],
 "loop": true,
 "name": "body_eyes",
@@ -49,11 +54,6 @@ animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "body_head",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "body_tooth",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
