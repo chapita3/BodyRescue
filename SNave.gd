@@ -35,14 +35,20 @@ func _process(delta):
 	if Movimiento.x != 0:   #posicionar al sprite depende de los movimientos
 		$AnimatedSprite.animation = "lado"
 		$AnimatedSprite.flip_h = Movimiento.x < 0
+		#$CollisionShapefrente.disabled = true
+		#$CollisionShapelado.disabled=false
 	elif Movimiento.y != 0:
 		$AnimatedSprite.animation = "frente"
 		$AnimatedSprite.flip_v = Movimiento.y > 0
+		#$CollisionShapefrente.disabled = true
+		#$CollisionShapelado.disabled=false
 	else:
 		$AnimatedSprite.animation = "frente"
+		#$CollisionShapefrente.disabled = true
+		#$CollisionShapelado.disabled=false
 
 
-func _on_Nave_body_entered(_body):  #cuando hay una colision con un cuerpo
+func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe
 	emit_signal("golpe")
 	#$CollisionShape2D.disabled = true

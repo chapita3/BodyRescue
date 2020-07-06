@@ -33,10 +33,10 @@
 [ext_resource path="res://Sprites/Lights/thyroid.gd" type="Script" id=31]
 [ext_resource path="res://Sprites/Lights/head.gd" type="Script" id=32]
 [ext_resource path="res://Sprites/Lights/skin.gd" type="Script" id=33]
-[ext_resource path="res://Level8S.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Level3.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Level2.tscn" type="PackedScene" id=35]
-[ext_resource path="res://Level7S.tscn" type="PackedScene" id=36]
-[ext_resource path="res://Level3.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Level4.tscn" type="PackedScene" id=36]
+[ext_resource path="res://Level1.tscn" type="PackedScene" id=41]
 [ext_resource path="res://Juego/vitamins.png" type="Texture" id=42]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -51,19 +51,9 @@ animations = [ {
 "name": "body_eyes",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "body_head",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "body_thyroid",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "body_heart",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 23 ), ExtResource( 16 ), ExtResource( 11 ) ],
@@ -71,9 +61,19 @@ animations = [ {
 "name": "body_intestine",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "body_head",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "body_skin",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "body_heart",
 "speed": 5.0
 } ]
 
@@ -199,9 +199,9 @@ Scene4 = ExtResource( 36 )
 
 [node name="fondo" type="TextureRect" parent="."]
 margin_left = -280.406
-margin_top = -351.073
+margin_top = -352.126
 margin_right = 1319.6
-margin_bottom = 548.927
+margin_bottom = 547.874
 texture = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false

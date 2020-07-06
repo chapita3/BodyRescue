@@ -10,8 +10,8 @@ var player = {
 "lives":3
 }
 
-func _ready():
-	randomize()
+#func _ready():
+#	randomize()
 
 func _on_Interfaz_iniciar_juego():
 	if(!load_game()):

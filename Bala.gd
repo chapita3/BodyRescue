@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-const SPEED = 5000
+const SPEED = 2000
 var velocity = Vector2()
 
 var destroyed = false
