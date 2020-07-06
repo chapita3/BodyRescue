@@ -1,6 +1,7 @@
 extends Node
 
 export (PackedScene) var Bacteria
+signal hide_bacteria
 var Score=40
 onready var save = load("res://Saves.gd").new()
 
@@ -26,14 +27,15 @@ func nuevo_juego():
 
 func game_over():
 	$BacteriaTimer.stop()
+	emit_signal("hide_bacteria")
 	#$Interfaz.game_over()
 	$LevelLoose.visible=true
 	$Again.disabled=false
 	$Again.visible=true
-	#if(player.lives==1):
-	#	get_tree().change_scene("res://Game_over.tscn")
-	#else:
-	save.save_game(player.score,player.level,player.lives-1)
+	if(player.lives<=1):
+		get_tree().change_scene("res://Game_over.tscn")
+	else:
+		save.save_game(player.score,player.level,player.lives-1)
 	
 func _on_NextScene_timeout():
 	get_tree().change_scene("res://body.tscn")

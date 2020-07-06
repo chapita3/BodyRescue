@@ -92,6 +92,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Change_bacteria" type="Timer" parent="."]
+[connection signal="hide_bacteria" from="." to="Bacteria" method="_hide_bacteria"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
