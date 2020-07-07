@@ -32,5 +32,3 @@ func _on_Level2_start_HUD2():
 	_ready()
 	$AnticuerposPic.visible=true
 	$Anticuerpos.visible=true
-
-	

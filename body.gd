@@ -79,7 +79,8 @@ func selectZone():
 	while(body_type_used[i]==1):
 		i=i+1
 	zone=i
-	return zone
+	#return zone
+	return 1
 
 func initialize():
 	var i=0

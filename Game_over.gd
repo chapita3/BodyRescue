@@ -16,9 +16,8 @@ func _ready():
 
 func _on_Compra_pressed():
 	save.save_game(player.score,player.level,3)
-	get_tree().change_scene("res://Level"+str(player.level)+".tscn")
+	get_tree().change_scene("res://Level"+str(player.level+1)+".tscn")
 
 func _on_Continue_pressed():
 	save.save_game(0,-1,3)
 	get_tree().change_scene("res://Mundo.tscn")
-

@@ -121,7 +121,6 @@ anims/show_up = SubResource( 2 )
 [node name="AntibodyTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
-
 [node name="HUD_game" parent="." instance=ExtResource( 8 )]
 [connection signal="start_HUD2" from="." to="HUD_game" method="_on_Level2_start_HUD2"]
 [connection signal="catch" from="Nave" to="." method="antibody_catch"]
