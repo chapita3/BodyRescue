@@ -23,9 +23,9 @@ var player = {
 var zone
 var pos={
 	P0=[-8.694,-251.453],
-	P1=[5.612,-176.626],
-	P2=[5.453,-216.522],
-	P3=[16.074,-124.532],
+	P1=[-2.997,-206.43],
+	P2=[-14.336,-279.058],
+	P3=[8,-136],
 	#OLD-POS
 	#P0=[-37.39,161.61],
 	#P1=[-2.997,-206.43],
@@ -56,7 +56,7 @@ func _ready():
 	configure_zone()
 	$button_zone.show()
 	yield($Timer, "timeout")
-	$alarm.play()
+	#$alarm.play()
 
 func inicio():
 	pass
@@ -68,7 +68,7 @@ func inicio_level():
 	$button_zone.show()
 	$body.show()
 	yield($Timer, "timeout")
-	$alarm.play()
+	#$alarm.play()
 
 func selectZone():
 	var i=0
@@ -142,7 +142,7 @@ func _process(delta):
 func _on_Button_pressed():
 	$body.hide()
 	$button_zone.hide()
-	$alarm.playing=false
+	#$alarm.playing=false
 	$body/light_animation.stop(false)
 	#emit_signal("iniciar_juego_zona"+str(zone))
 	emit_signal("iniciar_juego_zona"+str(zone))

@@ -3,7 +3,7 @@ extends Node
 export (PackedScene) var Bacteria
 signal hide_bacteria
 signal start_HUD1
-var Score=40
+#var Score=40
 onready var save = load("res://Saves.gd").new()
 
 var player = {
@@ -14,20 +14,25 @@ var player = {
 }
 
 func _ready():
-	Score = 0
+	#Score = 0
+	emit_signal("start_HUD1")
 	#$Interfaz.update_score(Score)
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
 	$InicioTimer.start()
 	$Nave.show()
 	$background.show()
-	emit_signal("start_HUD")
+	$HUD_game.actualizarScore(0)
 	player=save.load_game()
+	$HUD_game.actualizarVidas(player.lives)
+	
 	#$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
 
 func game_over():
 	$BacteriaTimer.stop()
 	emit_signal("hide_bacteria")
-	#$Interfaz.game_over()
+	$ScoreTimer.stop()
+	$HUD_game.queue_free()
+	player.score= 0
 	$LevelLoose.visible=true
 	$Again.disabled=false
 	$Again.visible=true
@@ -41,16 +46,16 @@ func _on_NextScene_timeout():
 
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
-	$LevelTimer.start()
 	$ScoreTimer.start()
+	$LevelTimer.start()
 	
-func _on_LevelTimer_timeout():
+func _on_LevelTimer_timeout():	#Gana el nivel
 	$BacteriaTimer.stop()
+	$ScoreTimer.stop()
+	$HUD_game.queue_free()
 	$LevelWin.visible=true
 	save.save_game(player.score,player.level+1,player.lives)
-	#save_game(Score+player.score,player.level+1,player.lives)
 	$NextScene.start()
-	#$Interfaz.update_score(Score)
 
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
