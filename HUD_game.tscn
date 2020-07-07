@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://HUD_game.gd" type="Script" id=1]
+[ext_resource path="res://Juego/vitamins.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Juego/reloj.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="HUD_game" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Vitamina" type="TextureRect" parent="."]
+margin_left = 431.424
+margin_top = 10.8792
+margin_right = 671.424
+margin_bottom = 124.879
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vidas" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 431.769
+margin_top = 10.7057
+margin_right = 468.769
+margin_bottom = 30.7057
+rect_scale = Vector2( 1.2, 1.2 )
+custom_fonts/font = SubResource( 2 )
+text = "3"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reloj" type="TextureRect" parent="."]
+margin_left = 378.24
+margin_top = -0.0533752
+margin_right = 1004.24
+margin_bottom = 625.947
+rect_scale = Vector2( 0.07, 0.07 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 351.1
+margin_top = 8.65839
+margin_right = 388.1
+margin_bottom = 28.6584
+rect_scale = Vector2( 1.2, 1.2 )
+custom_fonts/font = SubResource( 1 )
+text = "40"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Anticuerpos" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemigos" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

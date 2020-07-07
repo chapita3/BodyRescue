@@ -1,6 +1,8 @@
 extends Node
 
 export (PackedScene) var Bacteria
+signal hide_bacteria
+signal start_HUD1
 var Score=40
 onready var save = load("res://Saves.gd").new()
 
@@ -18,34 +20,34 @@ func _ready():
 	$InicioTimer.start()
 	$Nave.show()
 	$background.show()
+	emit_signal("start_HUD")
 	player=save.load_game()
 	#$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
 
-func nuevo_juego():
-	pass
-
 func game_over():
 	$BacteriaTimer.stop()
+	emit_signal("hide_bacteria")
 	#$Interfaz.game_over()
 	$LevelLoose.visible=true
 	$Again.disabled=false
 	$Again.visible=true
-	#if(player.lives==1):
-	#	get_tree().change_scene("res://Game_over.tscn")
-	#else:
-	save.save_game(player.score,player.level,player.lives-1)
+	if(player.lives<=1):
+		get_tree().change_scene("res://Game_over.tscn")
+	else:
+		save.save_game(player.score,player.level,player.lives-1)
 	
 func _on_NextScene_timeout():
 	get_tree().change_scene("res://body.tscn")
 
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
+	$LevelTimer.start()
 	$ScoreTimer.start()
 	
-func _on_ScoreTimer_timeout():
+func _on_LevelTimer_timeout():
 	$BacteriaTimer.stop()
 	$LevelWin.visible=true
-	save.save_game(Score+player.score,player.level+1,player.lives)
+	save.save_game(player.score,player.level+1,player.lives)
 	#save_game(Score+player.score,player.level+1,player.lives)
 	$NextScene.start()
 	#$Interfaz.update_score(Score)
@@ -72,3 +74,8 @@ func _on_BacteriaTimer_timeout():
 
 func play_again():
 	get_tree().change_scene("res://Level1.tscn")
+
+
+func _on_ScoreTimer_timeout():
+	player.score += 1
+	$HUD_game.actualizarScore(player.score)

@@ -51,6 +51,11 @@ animations = [ {
 "name": "body_eyes",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "body_head",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "body_thyroid",
@@ -59,11 +64,6 @@ animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 23 ), ExtResource( 16 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "body_intestine",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "body_head",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ) ],
