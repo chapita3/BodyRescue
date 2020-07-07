@@ -101,7 +101,7 @@ one_shot = true
 [connection signal="start_HUD1" from="." to="HUD_game" method="_on_Level1_start_HUD1"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
-[connection signal="timeout" from="LevelTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="LevelTimer" to="." method="_on_LevelTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
 [connection signal="pressed" from="Again" to="." method="play_again"]

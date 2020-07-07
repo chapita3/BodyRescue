@@ -2,7 +2,8 @@ extends Node
 
 export (PackedScene) var Bacteria
 export (PackedScene) var Antibody
-var Score
+signal start_HUD2
+#var Score
 var cantAntbody=0
 const cantAntbodyMax=10
 onready var save = load("res://Saves.gd").new()
@@ -14,50 +15,54 @@ var player = {
 "lives":3
 }
 
+var ScoreInicial
+
 func _ready():
-	Score = 0
-	#$Interfaz.update_score(Score)
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
 	$InicioTimer.start()
+	emit_signal("start_HUD2")
 	$Nave.show()
 	$background.show()
 	player=save.load_game()
-	#$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
+	ScoreInicial= player.score
+	$HUD_game.actualizarScore(ScoreInicial)
+	$HUD_game.actualizarVidas(player.lives)
+	$HUD_game.actualizarAnticuerpos(cantAntbody)
 
 func nuevo_juego():
 	pass
 
 func game_over():
 	$BacteriaTimer.stop()
-	#$Interfaz.game_over()
+	$ScoreTimer.stop()
+	$HUD_game.queue_free()
 	$LevelLoose.visible=true
 	$Again.disabled=false
 	$Again.visible=true
 	if(player.lives<=1):
 		get_tree().change_scene("res://Game_over.tscn")
 	else:
-		save.save_game(player.score,player.level,player.lives-1)
+		save.save_game(ScoreInicial,player.level,player.lives-1)
 
-func finish():
+func finish():		#Gana el nivel
 	$BacteriaTimer.stop()
+	$ScoreTimer.stop()
+	$HUD_game.queue_free()
 	$LevelWin.visible=true
-	save.save_game(Score+player.score,player.level+1,player.lives)
+	save.save_game(player.score,player.level+1,player.lives)
 	$NextScene.start()
 
 func _on_NextScene_timeout():
 	get_tree().change_scene("res://body.tscn")
 
 func _on_InicioTimer_timeout():
-	#$BacteriaTimer.start()
-	#$ScoreTimer.start()
+	$BacteriaTimer.start()
+	$ScoreTimer.start()
 	$AntibodyTimer.start()
 	
 func _on_ScoreTimer_timeout():
-	$LevelWin.visible=true
-	save.save_game(Score+player.score,player.level+1,player.lives)
-	#save_game(Score+player.score,player.level+1,player.lives)
-	$NextScene.start()
-	#$Interfaz.update_score(Score)
+	player.score += 1
+	$HUD_game.actualizarScore(player.score)
 
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
@@ -95,6 +100,7 @@ func _on_AntibodyTimer_timeout():
 
 func antibody_catch():
 	cantAntbody+=1
+	$HUD_game.actualizarAnticuerpos(cantAntbody)
 	if(cantAntbody>=cantAntbodyMax):
 		finish()
 	else:

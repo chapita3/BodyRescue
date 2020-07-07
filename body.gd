@@ -56,7 +56,7 @@ func _ready():
 	configure_zone()
 	$button_zone.show()
 	yield($Timer, "timeout")
-	$alarm.play()
+	#$alarm.play()
 
 func inicio():
 	pass
@@ -68,7 +68,7 @@ func inicio_level():
 	$button_zone.show()
 	$body.show()
 	yield($Timer, "timeout")
-	$alarm.play()
+	#$alarm.play()
 
 func selectZone():
 	var i=0
@@ -143,7 +143,7 @@ func _process(delta):
 func _on_Button_pressed():
 	$body.hide()
 	$button_zone.hide()
-	$alarm.playing=false
+	#$alarm.playing=false
 	$body/light_animation.stop(false)
 	#emit_signal("iniciar_juego_zona"+str(zone))
 	emit_signal("iniciar_juego_zona"+str(zone))

@@ -21,4 +21,3 @@ func _on_Compra_pressed():
 func _on_Continue_pressed():
 	save.save_game(0,-1,3)
 	get_tree().change_scene("res://Mundo.tscn")
-
