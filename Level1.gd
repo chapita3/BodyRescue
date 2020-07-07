@@ -22,9 +22,6 @@ func _ready():
 	player=save.load_game()
 	#$Interfaz/ScoreLabel.rect_position=Vector2(419.094,6.886)
 
-func nuevo_juego():
-	pass
-
 func game_over():
 	$BacteriaTimer.stop()
 	emit_signal("hide_bacteria")

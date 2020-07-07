@@ -23,9 +23,9 @@ var player = {
 var zone
 var pos={
 	P0=[-8.694,-251.453],
-	P1=[5.612,-176.626],
-	P2=[5.453,-216.522],
-	P3=[16.074,-124.532],
+	P1=[-2.997,-206.43],
+	P2=[-14.336,-279.058],
+	P3=[8,-136],
 	#OLD-POS
 	#P0=[-37.39,161.61],
 	#P1=[-2.997,-206.43],
@@ -79,7 +79,8 @@ func selectZone():
 	while(body_type_used[i]==1):
 		i=i+1
 	zone=i
-	return zone
+	#return zone
+	return 1
 
 func initialize():
 	var i=0

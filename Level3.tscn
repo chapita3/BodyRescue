@@ -12,7 +12,7 @@ script/source = "extends Node
 export (PackedScene) var Bacteria
 var Score
 var maxScore=20
-const SAVE_PATH = \"user://debug/save/saves.sav\"
+onready var save = load(\"res://Saves.gd\").new()
 
 var player = {
 #\"username\":\"\",
@@ -37,16 +37,16 @@ func nuevo_juego():
 func game_over():
 	$ScoreTimer.stop()
 	$BacteriaTimer.stop()
-	load_game()
+	player=save.load_game()
 	if(Score>=maxScore):
 		$LevelWin.visible=true
-		save_game(Score+player.score,1,player.lives)
+		save.save_game(Score+player.score,1,player.lives)
 		#tiene que ir a la pantalla de victoria
 	else:
 		if(player.lives==1):
 			get_tree().change_scene(\"res://Game_over.tscn\")
 		else:
-			save_game(player.score,0,player.lives-1)
+			save.save_game(player.score,0,player.lives-1)
 			$LevelLoose.visible=true
 			$Prev_level.start()
 
@@ -76,23 +76,6 @@ func _on_BacteriaTimer_timeout():
 	B.rotation = d
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
-func save_game(score,level,lives):
-	var save_game = File.new()
-	save_game.open(SAVE_PATH, File.WRITE)
-	player.score=score
-	#player.level=str(level)
-	#player.lives=str(lives)
-	save_game.store_line(to_json(player))
-	save_game.close()
-
-func load_game():
-	var save_game = File.new()
-	if not save_game.file_exists(SAVE_PATH):
-		return # Error! No hay archivo que guardar
-	save_game.open(SAVE_PATH, File.READ)
-	player = parse_json(save_game.get_line())
-	save_game.close()
-	
 func _on_Prev_level_timeout():
 	get_tree().change_scene(\"res://Level7.tscn\")
 "

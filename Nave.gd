@@ -4,6 +4,7 @@ export (int) var Velocidad
 var Movimiento = Vector2()
 var limite
 signal golpe
+signal catch
 
 func _ready():
 	hide()
@@ -56,3 +57,6 @@ func inicio(pos):
 	show()
 	$CollisionShapefrente.disabled =false
 	$CollisionShapelado.disabled=false
+
+func _on_Nave_area_entered(area):
+	emit_signal("catch")

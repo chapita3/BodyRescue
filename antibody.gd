@@ -9,17 +9,16 @@ signal catch
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$antibody.playing=true
+	antibody_show()
+	$antibodyCollision.disabled=false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func antibody_show():
-	$antibodyAnimation.play("show_up")
 	$antibodyAnimation.play("rotate")
 
-func body_entered(body):
+func area_entered(area):
 	hide()
-	emit_signal("catch")
-	$antibodyCollision.disabled=true
-	$antibody.disabled=true
+	queue_free()

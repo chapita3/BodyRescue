@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Nave.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=2]
@@ -6,15 +6,33 @@
 [ext_resource path="res://Level2.gd" type="Script" id=4]
 [ext_resource path="res://slides/2levelWin.png" type="Texture" id=5]
 [ext_resource path="res://slides/2levelLoose.png" type="Texture" id=6]
+[ext_resource path="res://antibody.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0.591694, -527.332, 0, 0, 0, 0, 520.271, -523.466, 0, 0, 0, 0, 517.86, 796.664, 0, 0, 0, 0, 3.00319, 798.597, 0, 0, 0, 0, 1.79748, -523.466, 0, 0, 0, 0, 0.591694, -527.332 )
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "show_up"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.2, 0.2 ), Vector2( 0.4, 0.4 ), Vector2( 0.6, 0.6 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
+}
+
 [node name="Level2" type="Node"]
 script = ExtResource( 4 )
 Bacteria = ExtResource( 2 )
+Antibody = ExtResource( 7 )
 
 [node name="background" type="TextureRect" parent="."]
 margin_left = -390.068
@@ -28,6 +46,7 @@ __meta__ = {
 }
 
 [node name="Nave" parent="." instance=ExtResource( 1 )]
+position = Vector2( 229.2, 294.586 )
 
 [node name="Bacteria" parent="." instance=ExtResource( 2 )]
 position = Vector2( -38.2424, -15.7367 )
@@ -90,9 +109,22 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Change_bacteria" type="Timer" parent="."]
+
+[node name="antibody2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 27.6591, 81.4619 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="antibody2D"]
+anims/show_up = SubResource( 2 )
+
+[node name="AntibodyTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+[connection signal="catch" from="Nave" to="." method="antibody_catch"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
 [connection signal="pressed" from="Again" to="." method="play_again"]
 [connection signal="timeout" from="NextScene" to="." method="_on_NextScene_timeout"]
+[connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]

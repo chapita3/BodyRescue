@@ -46,24 +46,24 @@ animations = [ {
 "name": "body_tooth",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ) ],
-"loop": true,
-"name": "body_eyes",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "body_thyroid",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 23 ), ExtResource( 16 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "body_intestine",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 1 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "body_eyes",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "body_head",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "body_thyroid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ) ],
@@ -297,10 +297,10 @@ anims/thyroid = SubResource( 7 )
 anims/tooth = SubResource( 8 )
 
 [node name="button_zone" type="Button" parent="."]
-margin_left = -2.99677
-margin_top = -206.43
-margin_right = 26.0032
-margin_bottom = -186.43
+margin_left = 8.0
+margin_top = -136.0
+margin_right = 47.0
+margin_bottom = -96.0
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
