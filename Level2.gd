@@ -3,6 +3,7 @@ extends Node
 export (PackedScene) var Bacteria
 export (PackedScene) var Antibody
 signal start_HUD2
+signal hide_HUD2
 #var Score
 var cantAntbody=0
 const cantAntbodyMax=10
@@ -18,9 +19,9 @@ var player = {
 var ScoreInicial
 
 func _ready():
+	emit_signal("start_HUD2")
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
 	$InicioTimer.start()
-	emit_signal("start_HUD2")
 	$Nave.show()
 	$background.show()
 	player=save.load_game()
@@ -35,7 +36,7 @@ func nuevo_juego():
 func game_over():
 	$BacteriaTimer.stop()
 	$ScoreTimer.stop()
-	$HUD_game.queue_free()
+	emit_signal("hide_HUD2")
 	$LevelLoose.visible=true
 	$Again.disabled=false
 	$Again.visible=true
@@ -47,7 +48,7 @@ func game_over():
 func finish():		#Gana el nivel
 	$BacteriaTimer.stop()
 	$ScoreTimer.stop()
-	$HUD_game.queue_free()
+	emit_signal("hide_HUD2")
 	$LevelWin.visible=true
 	save.save_game(player.score,player.level+1,player.lives)
 	$NextScene.start()
