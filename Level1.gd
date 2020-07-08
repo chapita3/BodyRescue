@@ -3,8 +3,11 @@ extends Node
 export (PackedScene) var Bacteria
 signal hide_bacteria
 signal start_HUD1
+signal hide_HUD1
 #var Score=40
 onready var save = load("res://Saves.gd").new()
+
+var deleteBacteria =false
 
 var player = {
 #"username":"",
@@ -29,9 +32,11 @@ func _ready():
 
 func game_over():
 	$BacteriaTimer.stop()
+	deleteBacteria=true
 	emit_signal("hide_bacteria")
 	$ScoreTimer.stop()
-	$HUD_game.queue_free()
+	emit_signal("hide_HUD1")
+	#$HUD_game.queue_free()
 	player.score= 0
 	$LevelLoose.visible=true
 	$Again.disabled=false
@@ -52,7 +57,7 @@ func _on_InicioTimer_timeout():
 func _on_LevelTimer_timeout():	#Gana el nivel
 	$BacteriaTimer.stop()
 	$ScoreTimer.stop()
-	$HUD_game.queue_free()
+	emit_signal("hide_HUD1")
 	$LevelWin.visible=true
 	save.save_game(player.score,player.level+1,player.lives)
 	$NextScene.start()
@@ -76,6 +81,7 @@ func _on_BacteriaTimer_timeout():
 	d += rand_range(-PI /4, PI /4)
 	B.rotation = d
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
+	
 
 func play_again():
 	get_tree().change_scene("res://Level1.tscn")

@@ -18,5 +18,6 @@ func change_bacteria_type(type):
 func select_animation(x):
 	$AnimatedSprite.animation=tipo_bacteria[x]
 
-func _hide_bacteria():
-	hide()
+
+func _on_Level1_hide_bacteria():
+	visible=false

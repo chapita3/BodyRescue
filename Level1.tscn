@@ -4,7 +4,7 @@
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=2]
 [ext_resource path="res://slides/3levelLoose.png" type="Texture" id=3]
 [ext_resource path="res://Level1.gd" type="Script" id=4]
-[ext_resource path="res://Juego/backgrounds/fondo3.jpg" type="Texture" id=5]
+[ext_resource path="res://Juego/backgrounds/fondo_Ojo.jpg" type="Texture" id=5]
 [ext_resource path="res://slides/3levelWin.png" type="Texture" id=6]
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=7]
 
@@ -18,11 +18,11 @@ script = ExtResource( 4 )
 Bacteria = ExtResource( 2 )
 
 [node name="background" type="TextureRect" parent="."]
-margin_left = -462.107
-margin_top = -41.0528
-margin_right = 49.8933
-margin_bottom = 246.947
-rect_scale = Vector2( 3.2, 3.2 )
+margin_left = -100.464
+margin_top = -3.70905
+margin_right = 746.536
+margin_bottom = 899.291
+rect_scale = Vector2( 0.85, 0.9 )
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -97,7 +97,8 @@ one_shot = true
 [node name="Change_bacteria" type="Timer" parent="."]
 
 [node name="HUD_game" parent="." instance=ExtResource( 7 )]
-[connection signal="hide_bacteria" from="." to="Bacteria" method="_hide_bacteria"]
+[connection signal="hide_HUD1" from="." to="HUD_game" method="_on_Level1_hide_HUD1"]
+[connection signal="hide_bacteria" from="." to="Bacteria" method="_on_Level1_hide_bacteria"]
 [connection signal="start_HUD1" from="." to="HUD_game" method="_on_Level1_start_HUD1"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]

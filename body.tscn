@@ -66,14 +66,14 @@ animations = [ {
 "name": "body_skin",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "body_thyroid",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "body_heart",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "body_head",
 "speed": 5.0
 } ]
 
