@@ -42,4 +42,5 @@ scale = Vector2( 0.782964, 1.69615 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -5.20883, -26.0443 )
 shape = SubResource( 3 )
+[connection signal="shooted" from="." to="." method="_on_Bala_shooted"]
 [connection signal="screen_exited" from="Visibilidad" to="." method="_on_Visibilidad_screen_exited"]

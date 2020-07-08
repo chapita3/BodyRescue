@@ -4,15 +4,18 @@ export (int) var Velocidad
 var Movimiento = Vector2()
 var limite
 signal golpe
+signal catch
+signal shooted
 const BALA = preload("res://Bala.tscn")
+var balas=[]
 
 func _ready():
-	hide()
+	#hide()
 	limite = get_viewport_rect().size
 
-
-
 func _process(delta):
+	var i
+	var aux
 	Movimiento = Vector2()  #reinciar el valor
 	
 	if Input.is_action_pressed("ui_right"):
@@ -35,29 +38,37 @@ func _process(delta):
 	if Movimiento.x != 0:   #posicionar al sprite depende de los movimientos
 		$AnimatedSprite.animation = "lado"
 		$AnimatedSprite.flip_h = Movimiento.x < 0
-		#$CollisionShapefrente.disabled = true
-		#$CollisionShapelado.disabled=false
+		$CollisionShapefrente.disabled = true
+		$CollisionShapelado.disabled=false
 	elif Movimiento.y != 0:
 		$AnimatedSprite.animation = "frente"
 		$AnimatedSprite.flip_v = Movimiento.y > 0
-		#$CollisionShapefrente.disabled = true
-		#$CollisionShapelado.disabled=false
+		$CollisionShapefrente.disabled = false
+		$CollisionShapelado.disabled=true
 	else:
 		$AnimatedSprite.animation = "frente"
-		#$CollisionShapefrente.disabled = true
-		#$CollisionShapelado.disabled=false
-
+		$CollisionShapefrente.disabled =false
+		$CollisionShapelado.disabled=true
+	if(!balas.empty()):
+		i=0
+		while(i<balas.size()):
+			aux=balas[i]
+			if(aux!=null):
+				if(aux!=null&&aux._on_Bala_shooted()):
+					emit_signal("shooted")
+					balas.erase(aux)
+				i+=1
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe
 	emit_signal("golpe")
 	#$CollisionShape2D.disabled = true
-	
+
 func inicio(pos):
 	position = pos   #mostrar el personaje
 	show()
-	$CollisionShape2D.disabled = false;
-	
+	$CollisionShapefrente.disabled = false
+	$CollisionShapelado.disabled = false
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -68,5 +79,6 @@ func _input(event):
 				get_parent().add_child(bala)
 				bala.global_position = global_position + (30*direction)
 				bala.set_bala_direction(direction)
+				balas.append(bala)
 	
 	
