@@ -13,10 +13,10 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 3 )
 
 [node name="HUD_game" type="CanvasLayer"]
@@ -78,7 +78,7 @@ margin_top = 7.33054
 margin_right = 44.887
 margin_bottom = 21.3305
 rect_scale = Vector2( 1.2, 1.2 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "500"
 align = 1
@@ -105,7 +105,7 @@ margin_top = 11.3445
 margin_right = 315.418
 margin_bottom = 31.3445
 rect_scale = Vector2( 1.2, 1.2 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "10"
 align = 1
 valign = 1

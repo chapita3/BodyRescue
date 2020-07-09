@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 const SPEED = 2000
 var velocity = Vector2()
-signal shooted
 var shot=false
 
 var destroyed = false
@@ -23,15 +22,24 @@ func kill_bala():
 
 func _on_Area2D_body_entered(body):
 	#if (body != self && body!=get_tree().get_root().get_node("Nave")&&body!=get_tree().get_root().get_node("antibody2D")):
-	if(body==get_tree().get_root().get_node("Bacteria")):
-		if ("Bala" in body.name):
-			body.kill_bala()
-			kill_bala()
-			emit_signal("shooted")
+	#if(body==get_tree().get_root().get_node("Bacteria")):
+	if(body!=self):
+		if ("Bacteria" in body.name):
+			#body.kill_bala()
+			body.elim()
 			shot=true
+			$Timer.start()
+			#kill_bala()
+		else:
+			if("Bala" in body.name):
+				body.kill_bala()
+				kill_bala()
 
 func _on_Visibilidad_screen_exited():
 	queue_free()  #elimina la bala si se sale de la pantalla
 
 func _on_Bala_shooted():
 	return shot
+
+func _on_Timer_timeout():
+	kill_bala()

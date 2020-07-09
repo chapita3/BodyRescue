@@ -22,6 +22,7 @@ var cantBact=0
 const cantBactMax=10
 onready var save = load(\"res://Saves.gd\").new()
 var ScoreInicial
+var balas=[]
 
 var player = {
 #\"username\":\"\",
@@ -41,6 +42,20 @@ func _ready():
 	$HUD_game.actualizarScore(ScoreInicial)
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
+	$HUD_game.actualizarEnemigos(0)
+
+func _process(delta):
+	var i=0
+	var aux
+	while(i<balas.size()):
+		aux=balas[i]
+		if(aux._on_Bala_shooted()):
+			bacteria_shoot()
+			balas.erase(aux)
+		else:
+			if(aux==null):
+				balas.erase(balas[i])
+		i+=1
 
 func nuevo_juego():
 	pass
@@ -122,6 +137,13 @@ func bacteria_shoot():
 	$HUD_game.actualizarEnemigos(cantBact)
 	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
 		finish()
+
+func _on_Nave_shoot(b):
+	balas.append(b)
+#	while(b!=null&&!aux):
+#		aux=b._on_Bala_shooted()
+#		if(aux):
+#			bacteria_shoot()
 "
 
 [sub_resource type="Curve2D" id=2]
@@ -217,5 +239,6 @@ wait_time = 10.0
 [connection signal="pressed" from="Again" to="." method="play_again"]
 [connection signal="catch" from="Nave" to="." method="antibody_catch"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
+[connection signal="shoot" from="Nave" to="." method="_on_Nave_shoot"]
 [connection signal="shooted" from="Nave" to="." method="bacteria_shoot"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]

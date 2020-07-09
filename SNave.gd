@@ -6,6 +6,7 @@ var limite
 signal golpe
 signal catch
 signal shooted
+signal shoot
 const BALA = preload("res://Bala.tscn")
 var balas=[]
 
@@ -49,15 +50,7 @@ func _process(delta):
 		$AnimatedSprite.animation = "frente"
 		$CollisionShapefrente.disabled =false
 		$CollisionShapelado.disabled=true
-	if(!balas.empty()):
-		i=0
-		while(i<balas.size()):
-			aux=balas[i]
-			if(aux!=null):
-				if(aux!=null&&aux._on_Bala_shooted()):
-					emit_signal("shooted")
-					balas.erase(aux)
-				i+=1
+	#shooted()
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe
@@ -76,9 +69,8 @@ func _input(event):
 			if(event.position != position):
 				var direction = (event.global_position - global_position).normalized()
 				var bala = BALA.instance()
-				get_parent().add_child(bala)
 				bala.global_position = global_position + (30*direction)
 				bala.set_bala_direction(direction)
-				balas.append(bala)
-	
-	
+				get_parent().add_child(bala)
+				#balas.append(bala.get_index())
+				emit_signal("shoot",bala)
