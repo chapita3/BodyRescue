@@ -19,6 +19,8 @@ height = 16.3691
 
 [node name="Bala" type="KinematicBody2D"]
 position = Vector2( 183.817, 271.011 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -38,14 +40,16 @@ position = Vector2( -4.68502, -26.316 )
 scale = Vector2( 0.782964, 1.69615 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -5.20883, -26.0443 )
 shape = SubResource( 3 )
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 0.05
 one_shot = true
 [connection signal="screen_exited" from="Visibilidad" to="." method="_on_Visibilidad_screen_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_KillTimer_timeout"]

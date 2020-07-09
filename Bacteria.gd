@@ -18,3 +18,6 @@ func select_animation(x):
 
 func _on_Level1_hide_bacteria():
 	visible=false
+
+func elim():
+	queue_free()

@@ -5,7 +5,7 @@
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Juego/reloj.png" type="Texture" id=4]
 [ext_resource path="res://Juego/antibodie.png" type="Texture" id=5]
-[ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://Juego/bacterias_kills.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -13,8 +13,8 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 6 )
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 3 )
@@ -73,16 +73,15 @@ __meta__ = {
 }
 
 [node name="Enemigos" type="Label" parent="."]
-margin_left = 4.88702
-margin_top = 7.33054
-margin_right = 44.887
-margin_bottom = 21.3305
+margin_left = 195.516
+margin_top = 9.55649
+margin_right = 228.516
+margin_bottom = 52.5565
 rect_scale = Vector2( 1.2, 1.2 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "500"
+text = "10"
 align = 1
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -109,6 +108,17 @@ custom_fonts/font = SubResource( 4 )
 text = "10"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemigosPic" type="TextureRect" parent="."]
+margin_left = 238.649
+margin_top = 3.25801
+margin_right = 750.649
+margin_bottom = 515.258
+rect_scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

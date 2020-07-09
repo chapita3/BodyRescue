@@ -4,7 +4,7 @@
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SNave.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Juego/backgrounds/fondo8.jpg" type="Texture" id=5]
+[ext_resource path="res://Juego/backgrounds/cerebroFond.jpg" type="Texture" id=5]
 [ext_resource path="res://slides/8levelSWin.png" type="Texture" id=6]
 [ext_resource path="res://antibody.tscn" type="PackedScene" id=7]
 
@@ -22,7 +22,6 @@ var cantBact=0
 const cantBactMax=10
 onready var save = load(\"res://Saves.gd\").new()
 var ScoreInicial
-var balas=[]
 
 var player = {
 #\"username\":\"\",
@@ -42,20 +41,7 @@ func _ready():
 	$HUD_game.actualizarScore(ScoreInicial)
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
-	$HUD_game.actualizarEnemigos(0)
-
-func _process(delta):
-	var i=0
-	var aux
-	while(i<balas.size()):
-		aux=balas[i]
-		if(aux._on_Bala_shooted()):
-			bacteria_shoot()
-			balas.erase(aux)
-		else:
-			if(aux==null):
-				balas.erase(balas[i])
-		i+=1
+	$HUD_game.actualizarEnemigos(cantBact)
 
 func nuevo_juego():
 	pass
@@ -123,27 +109,29 @@ func _on_AntibodyTimer_timeout():
 	add_child(A)
 	#A.play(\"show_up\")
 	A.position=Vector2(xPos,yPos)
+	
 
-func antibody_catch():
+#func bacteria_shoot():
+#	cantBact+=1
+#	$HUD_game.actualizarEnemigos(cantBact)
+#	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
+#		finish()
+	
+
+func _on_Nave_add_kill():
+	cantBact+=1
+	$HUD_game.actualizarEnemigos(cantBact)
+	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
+		finish()
+
+
+func _on_Nave_catch():
 	cantAntbody+=1
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
 	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
 		finish()
 	else:
 		$AntibodyTimer.start()
-
-func bacteria_shoot():
-	cantBact+=1
-	$HUD_game.actualizarEnemigos(cantBact)
-	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
-		finish()
-
-func _on_Nave_shoot(b):
-	balas.append(b)
-#	while(b!=null&&!aux):
-#		aux=b._on_Bala_shooted()
-#		if(aux):
-#			bacteria_shoot()
 "
 
 [sub_resource type="Curve2D" id=2]
@@ -157,11 +145,11 @@ Bacteria = ExtResource( 4 )
 Antibody = ExtResource( 7 )
 
 [node name="background" type="TextureRect" parent="."]
-margin_left = -547.251
-margin_top = -74.877
-margin_right = 304.749
-margin_bottom = 405.123
-rect_scale = Vector2( 2, 2 )
+margin_left = -72.7799
+margin_top = -47.3975
+margin_right = 779.22
+margin_bottom = 592.603
+rect_scale = Vector2( 1, 1.5 )
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -237,8 +225,7 @@ wait_time = 10.0
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
 [connection signal="pressed" from="Again" to="." method="play_again"]
-[connection signal="catch" from="Nave" to="." method="antibody_catch"]
+[connection signal="add_kill" from="Nave" to="." method="_on_Nave_add_kill"]
+[connection signal="catch" from="Nave" to="." method="_on_Nave_catch"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
-[connection signal="shoot" from="Nave" to="." method="_on_Nave_shoot"]
-[connection signal="shooted" from="Nave" to="." method="bacteria_shoot"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]
