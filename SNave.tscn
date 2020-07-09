@@ -1,20 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://juego/micronave.png" type="Texture" id=1]
 [ext_resource path="res://juego/micronave-side.png" type="Texture" id=2]
 [ext_resource path="res://SNave.gd" type="Script" id=3]
-[ext_resource path="res://Bala.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "lado",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "frente",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "lado",
 "speed": 5.0
 } ]
 
@@ -45,9 +44,5 @@ shape = SubResource( 2 )
 position = Vector2( 8.7323, -1.61395 )
 rotation = 1.5708
 shape = SubResource( 3 )
-
-[node name="Bala" parent="." instance=ExtResource( 4 )]
-visible = false
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Nave_body_entered"]
-[connection signal="bacteria_Kill" from="Bala" to="." method="_on_Bala_bacteria_Kill"]

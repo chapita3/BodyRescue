@@ -35,9 +35,9 @@ animations = [ {
 "name": "grande5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "chica5",
+"name": "grande4",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ) ],
@@ -50,11 +50,6 @@ animations = [ {
 "name": "chica3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "grande4",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "grande1",
@@ -63,6 +58,11 @@ animations = [ {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "chica6",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "chica5",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -80,14 +80,14 @@ animations = [ {
 "name": "chica8",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "chica2",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "grande2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 17 ) ],
-"loop": true,
-"name": "grande7",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -95,9 +95,9 @@ animations = [ {
 "name": "grande3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 17 ) ],
 "loop": true,
-"name": "chica2",
+"name": "grande7",
 "speed": 5.0
 } ]
 

@@ -5,8 +5,8 @@ var Movimiento = Vector2()
 var limite
 signal golpe
 signal catch
-#signal shooted
 signal add_kill
+var balas=[]
 const BALA = preload("res://Bala.tscn")
 
 func _ready():
@@ -49,7 +49,19 @@ func _process(delta):
 		$AnimatedSprite.animation = "frente"
 		$CollisionShapefrente.disabled =false
 		$CollisionShapelado.disabled=true
-	
+
+	if(!balas.empty()):
+		i=0
+		while(i<balas.size()):
+			aux=balas[i]
+		#	if(aux!=null):
+			if(aux!=null && aux._on_Bala_shooted()):
+				bacteria_kill()
+				balas.erase(aux)
+			else:
+				if(aux==null):
+					balas.erase(balas[i])
+			i+=1
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe
@@ -72,13 +84,11 @@ func _input(event):
 			if(event.position != position):
 				var direction = (event.global_position - global_position).normalized()
 				var bala = BALA.instance()
-				get_parent().add_child(bala)
+				add_child(bala)
 				bala.global_position = global_position + (30*direction)
 				bala.set_bala_direction(direction)
+				balas.append(bala)
 				
-	
 
-
-func _on_Bala_bacteria_Kill():
-	visible=false
+func bacteria_kill():
 	emit_signal("add_kill")
