@@ -3,7 +3,6 @@ extends KinematicBody2D
 const SPEED = 1000
 var velocity = Vector2()
 #signal shooted
-#signal bacteria_Kill
 var shot=false
 
 var destroyed = false
@@ -16,7 +15,6 @@ func _physics_process(delta):
 
 func set_bala_direction(direction):
 	velocity = direction * SPEED
-	
 
 func kill_bala():
 	if (!destroyed):
@@ -44,7 +42,5 @@ func _on_Visibilidad_screen_exited():
 func _on_Bala_shooted():
 	return shot
 
-
 func _on_KillTimer_timeout():
 	kill_bala()
-

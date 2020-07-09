@@ -8,6 +8,7 @@ signal catch
 signal add_kill
 var balas=[]
 const BALA = preload("res://Bala.tscn")
+var balas=[]
 
 func _ready():
 	#hide()
@@ -66,11 +67,9 @@ func _process(delta):
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe
 	emit_signal("golpe")
-
-
+  
 func _on_Nave_area_entered(area):
 	emit_signal("catch")
-
 
 func inicio(pos):
 	position = pos   #mostrar el personaje
@@ -88,7 +87,6 @@ func _input(event):
 				bala.global_position = global_position + (30*direction)
 				bala.set_bala_direction(direction)
 				balas.append(bala)
-				
 
 func bacteria_kill():
 	emit_signal("add_kill")
