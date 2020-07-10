@@ -116,4 +116,7 @@ func _on_Nave_catch():
 	if(cantAntbody>=cantAntbodyMax && Global.bactKill>=cantBactMax):
 		finish()
 	else:
-		$AntibodyTimer.start()
+		if(cantAntbody>=cantAntbodyMax):
+			$AntibodyTimer.stop()
+		else:
+			$AntibodyTimer.start()
