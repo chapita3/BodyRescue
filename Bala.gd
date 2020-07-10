@@ -33,5 +33,3 @@ func _on_Area2D_body_entered(body):
 
 func _on_Visibilidad_screen_exited():
 	queue_free() 
-	
-

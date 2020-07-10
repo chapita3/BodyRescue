@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Body Rescue (1).png-f9ea11709a351a153ba86361dad0ae4f.stex"
+path="res://.import/1levelSWin.png-0eb43ba4038b2c1cf6623d229f4cb9e0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Body Rescue (1).png"
-dest_files=[ "res://.import/Body Rescue (1).png-f9ea11709a351a153ba86361dad0ae4f.stex" ]
+source_file="res://slides/descartados/1levelSWin.png"
+dest_files=[ "res://.import/1levelSWin.png-0eb43ba4038b2c1cf6623d229f4cb9e0.stex" ]
 
 [params]
 
