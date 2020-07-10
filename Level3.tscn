@@ -11,12 +11,12 @@
 [ext_resource path="res://slides/3levelStart.png" type="Texture" id=9]
 [ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=10]
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -0.555359, 0.113968, 0, 0, 0, 0, 502.144, 1.28033, 0, 0, 0, 0, 500.977, 797.901, 0, 0, 0, 0, -1.72168, 799.067, 0, 0, 0, 0, -0.555359, 4.77939, 0, 0, 0, 0, -0.555359, 0.113968 )
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 26
 font_data = ExtResource( 10 )
 
@@ -48,32 +48,11 @@ one_shot = true
 position = Vector2( 260.097, 396.561 )
 
 [node name="Camino" type="Path2D" parent="."]
-curve = SubResource( 2 )
+curve = SubResource( 1 )
 
 [node name="BacteriaPosicion" type="PathFollow2D" parent="Camino"]
 position = Vector2( -0.555359, 0.113968 )
 rotation = 0.00232019
-
-[node name="Again" type="Button" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -133.0
-margin_top = -48.0
-margin_right = 133.0
-margin_bottom = -13.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-disabled = true
-text = "Intentarlo de nuevo"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Nave" parent="." instance=ExtResource( 3 )]
 
@@ -86,12 +65,13 @@ wait_time = 2.0
 position = Vector2( 273.793, 296.652 )
 
 [node name="AntibodyTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 6.0
+one_shot = true
 
 [node name="HUD_game" parent="." instance=ExtResource( 2 )]
 
 [node name="TimerStart" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.5
 one_shot = true
 
 [node name="LevelWin" type="TextureRect" parent="."]
@@ -118,6 +98,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Again" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -133.0
+margin_top = -48.0
+margin_right = 133.0
+margin_bottom = -13.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+disabled = true
+text = "Intentarlo de nuevo"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Start" type="TextureRect" parent="."]
 visible = false
 margin_left = -22.5626
@@ -134,8 +136,9 @@ __meta__ = {
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
-[connection signal="pressed" from="Again" to="." method="play_again"]
 [connection signal="catch" from="Nave" to="." method="_on_Nave_catch"]
+[connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="killed" from="Nave" to="." method="_on_Nave_add_kill"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_TimerStart_timeout"]
+[connection signal="pressed" from="Again" to="." method="play_again"]

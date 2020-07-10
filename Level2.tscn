@@ -16,13 +16,12 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0.591694, -527.332, 0, 0, 0, 0, 520.271, -523.466, 0, 0, 0, 0, 517.86, 796.664, 0, 0, 0, 0, 3.00319, 798.597, 0, 0, 0, 0, 1.79748, -523.466, 0, 0, 0, 0, 0.591694, -527.332 )
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 26
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 10 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "show_up"
+[sub_resource type="Animation" id=3]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -112,7 +111,8 @@ margin_left = -133.0
 margin_top = -62.0
 margin_right = 133.0
 margin_bottom = 2.0
-custom_fonts/font = SubResource( 3 )
+
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
@@ -134,7 +134,7 @@ position = Vector2( 27.6591, 81.4619 )
 scale = Vector2( 0.2, 0.2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="antibody2D"]
-anims/show_up = SubResource( 2 )
+anims/show_up = SubResource( 3 )
 
 [node name="AntibodyTimer" type="Timer" parent="."]
 wait_time = 6.0
@@ -143,7 +143,7 @@ one_shot = true
 [node name="HUD_game" parent="." instance=ExtResource( 8 )]
 
 [node name="TimerStart" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.5
 one_shot = true
 
 [node name="Start" type="TextureRect" parent="."]

@@ -6,7 +6,7 @@ signal start_HUD3
 signal hide_HUD
 #var Score
 var cantAntbody=0
-const cantAntbodyMax=20
+const cantAntbodyMax=2
 const cantBactMax=10
 #onready var save = load("res://Saves.gd").new()
 var ScoreInicial
@@ -41,6 +41,7 @@ func _on_TimerStart_timeout():
 
 func game_over():
 	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
 	$LevelLoose.visible=true
@@ -53,6 +54,7 @@ func game_over():
 
 func finish():		#Gana el nivel
 	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
 	$LevelWin.visible=true

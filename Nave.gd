@@ -48,9 +48,9 @@ func _process(delta):
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe
-	emit_signal("golpe")
 	$CollisionShapefrente.disabled = true
 	$CollisionShapelado.disabled=true
+	emit_signal("golpe")
 	
 func inicio(pos):
 	position = pos   #mostrar el personaje

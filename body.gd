@@ -11,7 +11,7 @@ export (PackedScene) var Scene2
 export (PackedScene) var Scene3
 export (PackedScene) var Scene4
 
-onready var save = load("res://Saves.gd").new()
+#onready var save = load("res://Saves.gd").new()
 
 var player = {
 #"username":"",
@@ -49,7 +49,8 @@ var body_type=["eyes","tooth","head","heart"]
 #}
 
 func _ready():
-	player=save.load_game()
+	Global.load_game()
+	player=Global.player
 	$vitamins.text=str(player.lives)
 	initialize()
 	zone=selectZone()
@@ -79,8 +80,8 @@ func selectZone():
 	while(body_type_used[i]==1):
 		i=i+1
 	zone=i
-	#return zone
-	return 1
+	return zone
+	#return 2
 
 func initialize():
 	var i=0

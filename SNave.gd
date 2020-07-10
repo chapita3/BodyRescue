@@ -74,5 +74,3 @@ func _input(event):
 				bala.global_position = global_position + (30*direction)
 				bala.set_bala_direction(direction)
 
-func bacteria_kill():
-	emit_signal("add_kill")

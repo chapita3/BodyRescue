@@ -39,6 +39,7 @@ func _on_TimerStart_timeout():
 
 func game_over():
 	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
 	$LevelLoose.visible=true
@@ -51,6 +52,7 @@ func game_over():
 
 func finish():		#Gana el nivel
 	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
 	$LevelWin.visible=true

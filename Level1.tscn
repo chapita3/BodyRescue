@@ -116,7 +116,7 @@ one_shot = true
 [node name="HUD_game" parent="." instance=ExtResource( 7 )]
 
 [node name="TimerReady" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.5
 one_shot = true
 
 [node name="Start" type="TextureRect" parent="."]

@@ -112,6 +112,7 @@ __meta__ = {
 }
 
 [node name="EnemigosPic" type="TextureRect" parent="."]
+visible = false
 margin_left = 238.649
 margin_top = 3.25801
 margin_right = 750.649
