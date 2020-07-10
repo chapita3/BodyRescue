@@ -19,6 +19,10 @@ config/name="Body Rescue"
 run/main_scene="res://Mundo.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.gd"
+
 [display]
 
 window/size/width=500

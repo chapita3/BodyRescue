@@ -46,10 +46,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -5.20883, -26.0443 )
 shape = SubResource( 3 )
-
-[node name="KillTimer" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
 [connection signal="screen_exited" from="Visibilidad" to="." method="_on_Visibilidad_screen_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="timeout" from="KillTimer" to="." method="_on_KillTimer_timeout"]

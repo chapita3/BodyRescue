@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 const SPEED = 1000
 var velocity = Vector2()
-#signal shooted
-var shot=false
 
 var destroyed = false
 
@@ -22,13 +20,11 @@ func kill_bala():
 		call_deferred("free")
 
 func _on_Area2D_body_entered(body):
-	#if (body != self && body!=get_tree().get_root().get_node("Nave")&&body!=get_tree().get_root().get_node("antibody2D")):
 	if body != self:
 		if "Bacteria" in body.name:
-			shot=true
-			#kill_bala()	
 			body.elim()
-			$KillTimer.start()
+			Global.new_bacteria_kill()
+			kill_bala()
 		else:
 			if "Bala" in body.name:
 				body.kill_bala()
@@ -36,11 +32,6 @@ func _on_Area2D_body_entered(body):
 		
 
 func _on_Visibilidad_screen_exited():
-	#queue_free() #SE ROMPE
-	pass
+	queue_free() 
+	
 
-func _on_Bala_shooted():
-	return shot
-
-func _on_KillTimer_timeout():
-	kill_bala()

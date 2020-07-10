@@ -3,11 +3,11 @@ extends Node
 export (PackedScene) var Bacteria
 export (PackedScene) var Antibody
 signal start_HUD2
-signal hide_HUD2
+signal hide_HUD
 #var Score
 var cantAntbody=0
 const cantAntbodyMax=10
-onready var save = load("res://Saves.gd").new()
+#onready var save = load("res://Saves.gd").new()
 
 var player = {
 #"username":"",
@@ -19,38 +19,44 @@ var player = {
 var ScoreInicial
 
 func _ready():
+	$Start.show()
+	$TimerStart.start()
+	emit_signal("hide_HUD")
+
+func _on_TimerStart_timeout():
+	$Start.hide()
 	emit_signal("start_HUD2")
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
 	$InicioTimer.start()
 	$Nave.show()
 	$background.show()
-	player=save.load_game()
+	Global.load_game()
+	player=Global.player
 	ScoreInicial= player.score
 	$HUD_game.actualizarScore(ScoreInicial)
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
 
-func nuevo_juego():
-	pass
-
 func game_over():
 	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
 	$ScoreTimer.stop()
-	emit_signal("hide_HUD2")
+	emit_signal("hide_HUD")
 	$LevelLoose.visible=true
 	$Again.disabled=false
 	$Again.visible=true
 	if(player.lives<=1):
 		get_tree().change_scene("res://Game_over.tscn")
 	else:
-		save.save_game(ScoreInicial,player.level,player.lives-1)
+		Global.save_game(ScoreInicial,player.level,player.lives-1)
 
 func finish():		#Gana el nivel
 	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
 	$ScoreTimer.stop()
-	emit_signal("hide_HUD2")
+	emit_signal("hide_HUD")
 	$LevelWin.visible=true
-	save.save_game(player.score,player.level+1,player.lives)
+	Global.save_game(player.score,player.level+1,player.lives)
 	$NextScene.start()
 
 func _on_NextScene_timeout():

@@ -1,9 +1,15 @@
 extends Node
 
 export (PackedScene) var Bacteria
-var Score
-var maxScore=20
-const SAVE_PATH = "user://saves.sav"
+export (PackedScene) var Antibody
+signal start_HUD3
+signal hide_HUD
+#var Score
+var cantAntbody=0
+const cantAntbodyMax=2
+const cantBactMax=10
+#onready var save = load("res://Saves.gd").new()
+var ScoreInicial
 
 var player = {
 #"username":"",
@@ -13,48 +19,66 @@ var player = {
 }
 
 func _ready():
-	randomize()
-	Score = 0
-	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
-	$InicioTimer.start()
-	#$Interfaz.update_score(Score)
+	$Start.show()
+	$TimerStart.start()
+	emit_signal("hide_HUD")
 
-func nuevo_juego():
-	Score = 0
+func _on_TimerStart_timeout():
+	$Start.hide()
+	emit_signal("start_HUD3")
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
 	$InicioTimer.start()
-	#$Interfaz.update_score(Score)
+	$Nave.show()
+	$background.show()
+	Global.load_game()
+	player=Global.player
+	ScoreInicial= player.score
+	Global.new_game()
+	$HUD_game.actualizarScore(ScoreInicial)
+	$HUD_game.actualizarVidas(player.lives)
+	$HUD_game.actualizarAnticuerpos(cantAntbody)
+	$HUD_game.actualizarEnemigos(0)
 
 func game_over():
-	$ScoreTimer.stop()
 	$BacteriaTimer.stop()
-	load_game()
-	if(Score>=maxScore):
-		$LevelWin.visible=true
-		save_game(Score+player.score,8,player.lives)
-		$NextScene.start()
+	$AntibodyTimer.stop()
+	$ScoreTimer.stop()
+	emit_signal("hide_HUD")
+	$LevelLoose.visible=true
+	$Again.disabled=false
+	$Again.visible=true
+	if(player.lives<=1):
+		get_tree().change_scene("res://Game_over.tscn")
 	else:
-		if(player.lives==1):
-			get_tree().change_scene("res://Game_over.tscn")
-		else:
-			save_game(player.score,0,player.lives-1)
-			$LevelLoose.visible=true
-			$Prev_level.start()
+		Global.save_game(ScoreInicial,player.level,player.lives-1)
+
+func finish():		#Gana el nivel
+	$BacteriaTimer.stop()
+	$AntibodyTimer.stop()
+	$ScoreTimer.stop()
+	emit_signal("hide_HUD")
+	$LevelWin.visible=true
+	Global.save_game(player.score,player.level+1,player.lives)
+	$NextScene.start()
+	
+func _on_NextScene_timeout():
+	get_tree().change_scene("res://body.tscn")
 
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
 	$ScoreTimer.start()
+	$AntibodyTimer.start()
 
 func _on_ScoreTimer_timeout():
-	Score += 1
-	#$Interfaz.update_score(Score)
+	player.score += 1
+	$HUD_game.actualizarScore(player.score)
 
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
 	$Camino/BacteriaPosicion.set_offset(randi())
 	
 	var B = Bacteria.instance()
-	B.change_bacteria_type(["grande8","chica8"])
+	B.change_bacteria_type(["grande7","chica7"])
 	B.select_animation(randi() % B.tipo_bacteria.size())
 	add_child(B)
 	
@@ -67,22 +91,29 @@ func _on_BacteriaTimer_timeout():
 	B.rotation = d
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
-func save_game(score,level,lives):
-	var save_game = File.new()
-	save_game.open(SAVE_PATH, File.WRITE)
-	player.score=score
-	#player.level=str(level)
-	#player.lives=str(lives)
-	save_game.store_line(to_json(player))
-	save_game.close()
+func play_again():
+	get_tree().change_scene("res://Level3.tscn")
 
-func load_game():
-	var save_game = File.new()
-	if not save_game.file_exists(SAVE_PATH):
-		return # Error! No hay archivo que guardar
-	save_game.open(SAVE_PATH, File.READ)
-	player = parse_json(save_game.get_line())
-	save_game.close()
-	
-func _on_Prev_level_timeout():
-	get_tree().change_scene("res://Level8.tscn")
+func _on_AntibodyTimer_timeout():
+	var xPos
+	var yPos
+	var A=Antibody.instance()
+	randomize()
+	xPos=rand_range(328.479,802.522)
+	yPos=rand_range(276.944,1031.992)
+	add_child(A)
+	#A.play("show_up")
+	A.position=Vector2(xPos,yPos)
+
+func _on_Nave_add_kill(x):
+	$HUD_game.actualizarEnemigos(x)
+	if(cantAntbody>=cantAntbodyMax && x>=cantBactMax):
+		finish()
+
+func _on_Nave_catch():
+	cantAntbody+=1
+	$HUD_game.actualizarAnticuerpos(cantAntbody)
+	if(cantAntbody>=cantAntbodyMax && Global.bactKill>=cantBactMax):
+		finish()
+	else:
+		$AntibodyTimer.start()
