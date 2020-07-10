@@ -26,8 +26,9 @@ func _on_Area2D_body_entered(body):
 	if body != self:
 		if "Bacteria" in body.name:
 			shot=true
-			#kill_bala()	
+			#kill_bala()
 			body.elim()
+			Global.new_bacteria_kill()
 			$KillTimer.start()
 		else:
 			if "Bala" in body.name:

@@ -1,147 +1,28 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://slides/8levelSLoose.png" type="Texture" id=1]
+[ext_resource path="res://slides/3levelLoose.png" type="Texture" id=1]
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SNave.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Bacteria.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Level3.gd" type="Script" id=4]
 [ext_resource path="res://Juego/backgrounds/cerebroFond.jpg" type="Texture" id=5]
-[ext_resource path="res://slides/8levelSWin.png" type="Texture" id=6]
+[ext_resource path="res://slides/3levelWin.png" type="Texture" id=6]
 [ext_resource path="res://antibody.tscn" type="PackedScene" id=7]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node
-
-export (PackedScene) var Bacteria
-export (PackedScene) var Antibody
-signal start_HUD3
-signal hide_HUD3
-#var Score
-var cantAntbody=0
-const cantAntbodyMax=20
-var cantBact=0
-const cantBactMax=10
-onready var save = load(\"res://Saves.gd\").new()
-var ScoreInicial
-
-var player = {
-#\"username\":\"\",
-\"score\":0,
-\"level\":0,
-\"lives\":3
-}
-
-func _ready():
-	emit_signal(\"start_HUD3\")
-	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
-	$InicioTimer.start()
-	$Nave.show()
-	$background.show()
-	player=save.load_game()
-	ScoreInicial= player.score
-	$HUD_game.actualizarScore(ScoreInicial)
-	$HUD_game.actualizarVidas(player.lives)
-	$HUD_game.actualizarAnticuerpos(cantAntbody)
-	$HUD_game.actualizarEnemigos(cantBact)
-
-func nuevo_juego():
-	pass
-
-func game_over():
-	$BacteriaTimer.stop()
-	$ScoreTimer.stop()
-	emit_signal(\"hide_HUD3\")
-	$LevelLoose.visible=true
-	$Again.disabled=false
-	$Again.visible=true
-	if(player.lives<=1):
-		get_tree().change_scene(\"res://Game_over.tscn\")
-	else:
-		save.save_game(ScoreInicial,player.level,player.lives-1)
-
-func finish():		#Gana el nivel
-	$BacteriaTimer.stop()
-	$ScoreTimer.stop()
-	emit_signal(\"hide_HUD3\")
-	$LevelWin.visible=true
-	save.save_game(player.score,player.level+1,player.lives)
-	$NextScene.start()
-	
-func _on_NextScene_timeout():
-	get_tree().change_scene(\"res://body.tscn\")
-
-func _on_InicioTimer_timeout():
-	$BacteriaTimer.start()
-	$ScoreTimer.start()
-	$AntibodyTimer.start()
-
-func _on_ScoreTimer_timeout():
-	player.score += 1
-	$HUD_game.actualizarScore(player.score)
-
-func _on_BacteriaTimer_timeout():
-	#Seleccionar un lugar aleatorio en el camino
-	$Camino/BacteriaPosicion.set_offset(randi())
-	
-	var B = Bacteria.instance()
-	B.change_bacteria_type([\"grande7\",\"chica7\"])
-	B.select_animation(randi() % B.tipo_bacteria.size())
-	add_child(B)
-	
-	#Seleccionar una direccion
-	var d = $Camino/BacteriaPosicion.rotation + PI /2
-	
-	B.position = $Camino/BacteriaPosicion.position
-	
-	d += rand_range(-PI /4, PI /4)
-	B.rotation = d
-	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
-
-func play_again():
-	get_tree().change_scene(\"res://Level3.tscn\")
-
-func _on_AntibodyTimer_timeout():
-	var xPos
-	var yPos
-	var A=Antibody.instance()
-	randomize()
-	xPos=rand_range(328.479,802.522)
-	yPos=rand_range(276.944,1031.992)
-	add_child(A)
-	#A.play(\"show_up\")
-	A.position=Vector2(xPos,yPos)
-	
-
-#func bacteria_shoot():
-#	cantBact+=1
-#	$HUD_game.actualizarEnemigos(cantBact)
-#	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
-#		finish()
-	
-
-func _on_Nave_add_kill():
-	cantBact+=1
-	$HUD_game.actualizarEnemigos(cantBact)
-	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
-		finish()
-
-
-func _on_Nave_catch():
-	cantAntbody+=1
-	$HUD_game.actualizarAnticuerpos(cantAntbody)
-	if(cantAntbody>=cantAntbodyMax && cantBact>=cantBactMax):
-		finish()
-	else:
-		$AntibodyTimer.start()
-"
+[ext_resource path="res://Bacteria.tscn" type="PackedScene" id=8]
+[ext_resource path="res://slides/3levelStart.png" type="Texture" id=9]
+[ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=10]
 
 [sub_resource type="Curve2D" id=2]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -0.555359, 0.113968, 0, 0, 0, 0, 502.144, 1.28033, 0, 0, 0, 0, 500.977, 797.901, 0, 0, 0, 0, -1.72168, 799.067, 0, 0, 0, 0, -0.555359, 4.77939, 0, 0, 0, 0, -0.555359, 0.113968 )
 }
 
+[sub_resource type="DynamicFont" id=3]
+size = 26
+font_data = ExtResource( 10 )
+
 [node name="Level3" type="Node"]
-script = SubResource( 1 )
-Bacteria = ExtResource( 4 )
+script = ExtResource( 4 )
+Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
 
 [node name="background" type="TextureRect" parent="."]
@@ -154,6 +35,64 @@ texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BacteriaTimer" type="Timer" parent="."]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="InicioTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="InitialPosition" type="Position2D" parent="."]
+position = Vector2( 260.097, 396.561 )
+
+[node name="Camino" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="BacteriaPosicion" type="PathFollow2D" parent="Camino"]
+position = Vector2( -0.555359, 0.113968 )
+rotation = 0.00232019
+
+[node name="Again" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -133.0
+margin_top = -48.0
+margin_right = 133.0
+margin_bottom = -13.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+disabled = true
+text = "Intentarlo de nuevo"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nave" parent="." instance=ExtResource( 3 )]
+
+[node name="NextScene" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Change_bacteria" type="Timer" parent="."]
+
+[node name="antibody2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 273.793, 296.652 )
+
+[node name="AntibodyTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="HUD_game" parent="." instance=ExtResource( 2 )]
+
+[node name="TimerStart" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="LevelWin" type="TextureRect" parent="."]
 visible = false
@@ -179,53 +118,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BacteriaTimer" type="Timer" parent="."]
-
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="InicioTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="InitialPosition" type="Position2D" parent="."]
-position = Vector2( 260.097, 396.561 )
-
-[node name="Camino" type="Path2D" parent="."]
-curve = SubResource( 2 )
-
-[node name="BacteriaPosicion" type="PathFollow2D" parent="Camino"]
-position = Vector2( -0.555359, 0.113968 )
-rotation = 0.00232019
-
-[node name="Again" type="Button" parent="."]
-margin_left = -61.0
-margin_right = -49.0
-margin_bottom = 20.0
+[node name="Start" type="TextureRect" parent="."]
+visible = false
+margin_left = -22.5626
+margin_top = -97.4704
+margin_right = 1057.44
+margin_bottom = 1822.53
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Nave" parent="." instance=ExtResource( 3 )]
-
-[node name="NextScene" type="Timer" parent="."]
-wait_time = 2.0
-
-[node name="Change_bacteria" type="Timer" parent="."]
-
-[node name="antibody2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 273.793, 296.652 )
-
-[node name="AntibodyTimer" type="Timer" parent="."]
-wait_time = 10.0
-
-[node name="HUD_game" parent="." instance=ExtResource( 2 )]
-[connection signal="hide_HUD3" from="." to="HUD_game" method="_on_Level3_hide_HUD3"]
+[connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD3" from="." to="HUD_game" method="_on_Level3_start_HUD3"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
 [connection signal="pressed" from="Again" to="." method="play_again"]
-[connection signal="add_kill" from="Nave" to="." method="_on_Nave_add_kill"]
 [connection signal="catch" from="Nave" to="." method="_on_Nave_catch"]
-[connection signal="golpe" from="Nave" to="." method="game_over"]
+[connection signal="killed" from="Nave" to="." method="_on_Nave_add_kill"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]
+[connection signal="timeout" from="TimerStart" to="." method="_on_TimerStart_timeout"]
