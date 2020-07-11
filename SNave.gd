@@ -50,6 +50,7 @@ func _process(delta):
 		$CollisionShapelado.disabled=true
 	cantBact=Global.bactKill
 	emit_signal("killed",cantBact)
+	Global.setNave(self)
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	hide()   #se oculta cuando recibe un golpe

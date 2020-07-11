@@ -24,12 +24,11 @@ func _on_Area2D_body_entered(body):
 		if "Bacteria" in body.name:
 			body.elim()
 			Global.new_bacteria_kill()
-			kill_bala()
 		else:
 			if "Bala" in body.name:
 				body.kill_bala()
-				kill_bala()
-		
+					
+		kill_bala()
 
 func _on_Visibilidad_screen_exited():
 	queue_free() 

@@ -119,3 +119,17 @@ texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VidaBoss" type="Label" parent="."]
+margin_left = 252.418
+margin_top = 11.3445
+margin_right = 292.418
+margin_bottom = 31.3445
+rect_scale = Vector2( 1.2, 1.2 )
+custom_fonts/font = SubResource( 4 )
+text = "10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

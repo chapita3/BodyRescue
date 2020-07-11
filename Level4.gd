@@ -3,8 +3,9 @@ extends Node
 export (PackedScene) var Bacteria
 signal start_HUD4
 signal hide_HUD
+signal start_boss
 
-var ScoreInicial
+var ScoreInicial=0
 
 var player = {
 #"username":"",
@@ -21,8 +22,9 @@ func _ready():
 func _on_TimerStart_timeout():
 	$Start.hide()
 	emit_signal("start_HUD4")
+	#emit_signal("start_boss",true)
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
-	$InicioTimer.start()
+	#$InicioTimer.start()
 	$Nave.show()
 	$background.show()
 	Global.load_game()
@@ -31,6 +33,7 @@ func _on_TimerStart_timeout():
 	Global.new_game()
 	$HUD_game.actualizarScore(ScoreInicial)
 	$HUD_game.actualizarVidas(player.lives)
+	$HUD_game.actualizarVidaBoss($Paths/PathBoss/PathFollowBoss/Boss.life)
 
 func game_over():
 	$BacteriaTimer.stop()
@@ -63,10 +66,13 @@ func _on_ScoreTimer_timeout():
 	player.score += 1
 	$HUD_game.actualizarScore(player.score)
 
+func life_modify(life):
+	$HUD_game.actualizarVidaBoss(life)
+
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
 	$Camino/BacteriaPosicion.set_offset(randi())
-	
+
 	var B = Bacteria.instance()
 	B.change_bacteria_type(["grande7","chica7"])
 	B.select_animation(randi() % B.tipo_bacteria.size())
@@ -83,4 +89,3 @@ func _on_BacteriaTimer_timeout():
 
 func play_again():
 	get_tree().change_scene("res://Level4.tscn")
-

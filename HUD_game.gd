@@ -15,6 +15,9 @@ func actualizarAnticuerpos(a):
 func actualizarEnemigos(e):
 	$Enemigos.text = str(e)
 
+func actualizarVidaBoss(vida):
+	$VidaBoss.text=str(vida)
+
 func _on_Level1_start_HUD1():
 	$Vidas.visible=true
 	$Vitamina.visible=true
@@ -50,6 +53,7 @@ func _on_Level4_start_HUD4():
 	$Vitamina.visible=true
 	$Reloj.visible=true
 	$Score.visible=true
+	$VidaBoss.visible=true
 	$AnticuerposPic.visible=false
 	$Anticuerpos.visible=false
 	$Enemigos.visible=false
