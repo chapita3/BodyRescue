@@ -1,9 +1,10 @@
 extends Node
 
 export (PackedScene) var Bacteria
-var Score
-var maxScore=20
-const SAVE_PATH = "user://saves.sav"
+signal start_HUD4
+signal hide_HUD
+
+var ScoreInicial
 
 var player = {
 #"username":"",
@@ -13,41 +14,54 @@ var player = {
 }
 
 func _ready():
-	randomize()
-	Score = 0
-	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
-	$InicioTimer.start()
-	#$Interfaz.update_score(Score)
+	$Start.show()
+	$TimerStart.start()
+	emit_signal("hide_HUD")
 
-func nuevo_juego():
-	Score = 0
+func _on_TimerStart_timeout():
+	$Start.hide()
+	emit_signal("start_HUD4")
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
 	$InicioTimer.start()
-	#$Interfaz.update_score(Score)
+	$Nave.show()
+	$background.show()
+	Global.load_game()
+	player=Global.player
+	ScoreInicial= player.score
+	Global.new_game()
+	$HUD_game.actualizarScore(ScoreInicial)
+	$HUD_game.actualizarVidas(player.lives)
 
 func game_over():
-	$ScoreTimer.stop()
 	$BacteriaTimer.stop()
-	load_game()
-	if(Score>=maxScore):
-		$LevelWin.visible=true
-		save_game(Score+player.score,player.level+1,player.lives)
-		$NextScene.start()
+	$ScoreTimer.stop()
+	emit_signal("hide_HUD")
+	$LevelLoose.visible=true
+	$Again.disabled=false
+	$Again.visible=true
+	if(player.lives<=1):
+		get_tree().change_scene("res://Game_over.tscn")
 	else:
-		if(player.lives==1):
-			get_tree().change_scene("res://Game_over.tscn")
-		else:
-			save_game(player.score,player.level,player.lives-1)
-			$LevelLoose.visible=true
-			$Prev_level.start()
+		Global.save_game(ScoreInicial,player.level,player.lives-1)
+
+func finish():		#Gana el nivel
+	$BacteriaTimer.stop()
+	$ScoreTimer.stop()
+	emit_signal("hide_HUD")
+	$LevelWin.visible=true
+	Global.save_game(player.score,player.level+1,player.lives)
+	$NextScene.start()
+	
+func _on_NextScene_timeout():
+	get_tree().change_scene("res://body.tscn")
 
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
 	$ScoreTimer.start()
 
 func _on_ScoreTimer_timeout():
-	Score += 1
-	#$Interfaz.update_score(Score)
+	player.score += 1
+	$HUD_game.actualizarScore(player.score)
 
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
@@ -67,22 +81,6 @@ func _on_BacteriaTimer_timeout():
 	B.rotation = d
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
-func save_game(score,level,lives):
-	var save_game = File.new()
-	save_game.open(SAVE_PATH, File.WRITE)
-	player.score=score
-	#player.level=str(level)
-	#player.lives=str(lives)
-	save_game.store_line(to_json(player))
-	save_game.close()
+func play_again():
+	get_tree().change_scene("res://Level4.tscn")
 
-func load_game():
-	var save_game = File.new()
-	if not save_game.file_exists(SAVE_PATH):
-		return # Error! No hay archivo que guardar
-	save_game.open(SAVE_PATH, File.READ)
-	player = parse_json(save_game.get_line())
-	save_game.close()
-	
-func _on_Prev_level_timeout():
-	get_tree().change_scene("res://Level7.tscn")

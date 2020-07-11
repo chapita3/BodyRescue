@@ -4,7 +4,7 @@
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SNave.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level3.gd" type="Script" id=4]
-[ext_resource path="res://Juego/backgrounds/cerebroFond.jpg" type="Texture" id=5]
+[ext_resource path="res://Juego/backgrounds/neuronas.jpg" type="Texture" id=5]
 [ext_resource path="res://slides/3levelWin.png" type="Texture" id=6]
 [ext_resource path="res://antibody.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=8]
@@ -26,11 +26,11 @@ Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
 
 [node name="background" type="TextureRect" parent="."]
-margin_left = -72.7799
-margin_top = -47.3975
-margin_right = 779.22
-margin_bottom = 592.603
-rect_scale = Vector2( 1, 1.5 )
+margin_left = -175.419
+margin_top = -6.57527
+margin_right = 676.581
+margin_bottom = 633.425
+rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false

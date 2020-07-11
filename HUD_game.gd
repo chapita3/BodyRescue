@@ -23,7 +23,7 @@ func _on_Level1_start_HUD1():
 	$AnticuerposPic.visible=false
 	$Anticuerpos.visible=false
 	$Enemigos.visible=false
-	#$EnemigosPic.visible=false
+	$EnemigosPic.visible=false
 
 func _on_Level2_start_HUD2():
 	$Vidas.visible=true
@@ -33,7 +33,7 @@ func _on_Level2_start_HUD2():
 	$AnticuerposPic.visible=true
 	$Anticuerpos.visible=true
 	$Enemigos.visible=false
-	#$EnemigosPic.visible=false
+	$EnemigosPic.visible=false
 
 func _on_Level3_start_HUD3():
 	$Vidas.visible=true
@@ -44,6 +44,16 @@ func _on_Level3_start_HUD3():
 	$Anticuerpos.visible=true
 	$Enemigos.visible=true
 	$EnemigosPic.visible=true
+	
+func _on_Level4_start_HUD4():
+	$Vidas.visible=true
+	$Vitamina.visible=true
+	$Reloj.visible=true
+	$Score.visible=true
+	$AnticuerposPic.visible=false
+	$Anticuerpos.visible=false
+	$Enemigos.visible=false
+	$EnemigosPic.visible=false
   
 func hide_HUD():
 	$Vidas.visible=false
@@ -53,4 +63,7 @@ func hide_HUD():
 	$AnticuerposPic.visible=false
 	$Anticuerpos.visible=false
 	$Enemigos.visible=false
-	#$EnemigosPic.visible=false
+	$EnemigosPic.visible=false
+
+
+
