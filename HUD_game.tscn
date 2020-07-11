@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://HUD_game.gd" type="Script" id=1]
 [ext_resource path="res://Juego/vitamins.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Juego/reloj.png" type="Texture" id=4]
 [ext_resource path="res://Juego/antibodie.png" type="Texture" id=5]
+[ext_resource path="res://Juego/bacterias_kills.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -57,7 +58,6 @@ __meta__ = {
 }
 
 [node name="Score" type="Label" parent="."]
-modulate = Color( 0, 0, 0, 1 )
 margin_left = 347.318
 margin_top = 9.91889
 margin_right = 384.318
@@ -78,7 +78,6 @@ margin_right = 228.516
 margin_bottom = 52.5565
 rect_scale = Vector2( 1.2, 1.2 )
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "10"
 align = 1
 __meta__ = {
@@ -97,7 +96,6 @@ __meta__ = {
 }
 
 [node name="Anticuerpos" type="Label" parent="."]
-modulate = Color( 0, 0, 0, 1 )
 margin_left = 275.418
 margin_top = 11.3445
 margin_right = 315.418
@@ -112,12 +110,12 @@ __meta__ = {
 }
 
 [node name="EnemigosPic" type="TextureRect" parent="."]
-visible = false
 margin_left = 238.649
 margin_top = 3.25801
 margin_right = 750.649
 margin_bottom = 515.258
 rect_scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
