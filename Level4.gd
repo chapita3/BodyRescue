@@ -22,9 +22,9 @@ func _ready():
 func _on_TimerStart_timeout():
 	$Start.hide()
 	emit_signal("start_HUD4")
-	#emit_signal("start_boss",true)
+	emit_signal("start_boss",true)
 	$Nave.inicio($InitialPosition.position) #posicion de inicio del jugador
-	#$InicioTimer.start()
+	$InicioTimer.start()
 	$Nave.show()
 	$background.show()
 	Global.load_game()
@@ -59,7 +59,7 @@ func _on_NextScene_timeout():
 	get_tree().change_scene("res://body.tscn")
 
 func _on_InicioTimer_timeout():
-	$BacteriaTimer.start()
+	#$BacteriaTimer.start()
 	$ScoreTimer.start()
 
 func _on_ScoreTimer_timeout():
@@ -67,6 +67,7 @@ func _on_ScoreTimer_timeout():
 	$HUD_game.actualizarScore(player.score)
 
 func life_modify(life):
+	if()
 	$HUD_game.actualizarVidaBoss(life)
 
 func _on_BacteriaTimer_timeout():
@@ -89,3 +90,9 @@ func _on_BacteriaTimer_timeout():
 
 func play_again():
 	get_tree().change_scene("res://Level4.tscn")
+
+func _on_Boss_Attack(attack,pos,dir,target):
+	var a=attack.instance()
+	add_child(a)
+	a.start(pos,dir,target)
+	

@@ -1,7 +1,7 @@
 extends Area2D #Tutorial_Part4 ==> UKfzBnfh4Ak
 
-var speed=50
-var steer_force=0
+var speed=300
+var steer_force=100
 var velocity = Vector2()
 var acceleration = Vector2()
 var target = null
@@ -25,15 +25,12 @@ func _process(delta):
 		rotation = velocity.angle()
 	position += velocity * delta
 
-func explode():
-	set_process(false)
-	velocity = Vector2()
-	$Sprite.hide()
-	$Explosion.show()
-	$Explosion.play("smoke")
+func _on_Ataque_body_entered(body):
+	if ("Nave" in body.name):
+		body._on_Nave_body_entered(self)
+	else:
+		if("Bala" in body.name):
+			queue_free()
 
-func _on_Lifetime_timeout():
-	explode()
-
-func _on_Explosion_animation_finished():
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()

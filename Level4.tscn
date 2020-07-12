@@ -31,6 +31,9 @@ script = ExtResource( 2 )
 Bacteria = ExtResource( 4 )
 
 [node name="background" type="TextureRect" parent="."]
+anchor_left = -6.10352e-08
+anchor_right = -6.10352e-08
+anchor_bottom = 3.8147e-08
 margin_left = -625.051
 margin_top = -587.014
 margin_right = 344.949
@@ -115,6 +118,19 @@ one_shot = true
 wait_time = 4.5
 one_shot = true
 
+[node name="Paths" type="Node2D" parent="."]
+
+[node name="PathBoss" type="Path2D" parent="Paths"]
+curve = SubResource( 3 )
+
+[node name="PathFollowBoss" type="PathFollow2D" parent="Paths/PathBoss"]
+position = Vector2( 56.4304, 72.5265 )
+rotation = 0.00558577
+
+[node name="Boss" parent="Paths/PathBoss/PathFollowBoss" instance=ExtResource( 10 )]
+position = Vector2( 191.692, 69.6012 )
+rotation = -0.00558383
+
 [node name="Start" type="TextureRect" parent="."]
 visible = false
 margin_left = -23.7008
@@ -128,19 +144,6 @@ __meta__ = {
 }
 
 [node name="HUD_game" parent="." instance=ExtResource( 8 )]
-
-[node name="Paths" type="Node2D" parent="."]
-
-[node name="PathBoss" type="Path2D" parent="Paths"]
-curve = SubResource( 3 )
-
-[node name="PathFollowBoss" type="PathFollow2D" parent="Paths/PathBoss"]
-position = Vector2( 56.4304, 72.5265 )
-rotation = 0.00558577
-
-[node name="Boss" parent="Paths/PathBoss/PathFollowBoss" instance=ExtResource( 10 )]
-position = Vector2( 191.692, 69.6012 )
-rotation = -0.00558383
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD4" from="." to="HUD_game" method="_on_Level4_start_HUD4"]
 [connection signal="start_boss" from="." to="Paths/PathBoss/PathFollowBoss/Boss" method="set_alive"]
@@ -151,4 +154,5 @@ rotation = -0.00558383
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="timeout" from="Prev_level" to="." method="_on_Prev_level_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_TimerStart_timeout"]
+[connection signal="Attack" from="Paths/PathBoss/PathFollowBoss/Boss" to="." method="_on_Boss_Attack"]
 [connection signal="life_modify" from="Paths/PathBoss/PathFollowBoss/Boss" to="." method="life_modify"]
