@@ -25,13 +25,9 @@ func _process(delta):
 		rotation = velocity.angle()
 	position += velocity * delta
 
-	
 func _on_Ataque_area_entered(area):
 	if("Area2D_Bala" in area.name):
 		queue_free()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
-
-
-

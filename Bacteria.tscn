@@ -55,9 +55,9 @@ animations = [ {
 "name": "chica7",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "chica1",
+"name": "chica7",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -82,7 +82,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "grande2",
+"name": "chica5",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ) ],

@@ -38,6 +38,11 @@ font_data = ExtResource( 9 )
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 9 )
 
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 56.4304, 72.5265, 0, 0, 0, 0, 453.107, 74.7426, 0, 0, 0, 0, 58.6465, 184.438, 0, 0, 0, 0, 448.675, 254.244, 0, 0, 0, 0, 250.336, 295.241, 0, 0, 0, 0, 56.4304, 72.5265 )
+}
+
 [node name="Level4" type="Node"]
 script = ExtResource( 2 )
 Bacteria = ExtResource( 4 )

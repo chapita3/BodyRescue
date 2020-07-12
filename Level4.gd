@@ -67,7 +67,7 @@ func finish():		#Gana el juego
 #	get_tree().change_scene("res://body.tscn")
 
 func _on_InicioTimer_timeout():
-	$BacteriaTimer.start()
+	#$BacteriaTimer.start()
 	$ScoreTimer.start()
 
 func _on_ScoreTimer_timeout():
@@ -76,7 +76,7 @@ func _on_ScoreTimer_timeout():
 
 func life_modify(life):
 	$HUD_game.actualizarVidaBoss(life)
-	if (life==0):
+	if (life<=0):
 		finish()
 
 func _on_BacteriaTimer_timeout():
@@ -105,8 +105,6 @@ func _on_Boss_Attack(attack,pos,dir,target):
 	add_child(a)
 	a.start(pos,dir,target)
 	
-
-
 func _on_Restart_pressed():
 	Global.save_game(0,-1,3)
 	get_tree().change_scene("res://body.tscn")

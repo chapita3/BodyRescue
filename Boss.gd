@@ -63,8 +63,7 @@ func _on_Area2D_area_entered(area):
 			alive=false
 			velocity=0
 		emit_signal("life_modify",life)
-
-
+    
 func shoot():
 	var dir=Vector2(1,0).rotated(self.global_rotation)
 	var aux=Global.getNave()
@@ -88,4 +87,3 @@ func _on_TimerAnimation_timeout():
 
 func detener():
 	$TimerAttack.stop()
-
