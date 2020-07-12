@@ -21,15 +21,20 @@ func kill_bala():
 
 func _on_Area2D_body_entered(body):
 	if body != self:
-		if "Bacteria" in body.name:
+		if("Bacteria" in body.name):
 			body.elim()
 			Global.new_bacteria_kill()
-			kill_bala()
 		else:
-			if "Bala" in body.name:
+			if("Bala" in body.name):
 				body.kill_bala()
-				kill_bala()
+		kill_bala()
 		
+func _on_Area2D_Bala_area_entered(area):
+	if ("Ataque" in area.name):
+		kill_bala()
 
 func _on_Visibilidad_screen_exited():
 	queue_free() 
+
+
+

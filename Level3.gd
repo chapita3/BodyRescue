@@ -6,8 +6,8 @@ signal start_HUD3
 signal hide_HUD
 #var Score
 var cantAntbody=0
-const cantAntbodyMax=2
-const cantBactMax=10
+const cantAntbodyMax=20
+const cantBactMax=20
 #onready var save = load("res://Saves.gd").new()
 var ScoreInicial
 

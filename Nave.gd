@@ -3,6 +3,7 @@ extends Area2D
 export (int) var Velocidad
 var Movimiento = Vector2()
 var limite
+var alive=true
 signal golpe
 signal catch
 
@@ -47,12 +48,15 @@ func _process(delta):
 
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
-	hide()   #se oculta cuando recibe un golpe
 	$CollisionShapefrente.disabled = true
 	$CollisionShapelado.disabled=true
-	emit_signal("golpe")
+	hide()   #se oculta cuando recibe un golpe
+	if (alive):
+		alive=false
+		emit_signal("golpe")
 	
 func inicio(pos):
+	alive=true
 	position = pos   #mostrar el personaje
 	show()
 	$CollisionShapefrente.disabled =false

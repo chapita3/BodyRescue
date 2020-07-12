@@ -2,6 +2,8 @@ extends Node
 
 const SAVE_PATH = "user://saves.sav"
 var bactKill=0
+var nave
+var record=0
 
 var player = {
 #"username":"",
@@ -16,6 +18,9 @@ func new_bacteria_kill():
 func new_game():
 	bactKill=0
 
+func actualizarRecord(r):
+	record=r
+
 func save_game(score,level,lives):
 	var save_game = File.new()
 	save_game.open(SAVE_PATH, File.WRITE)
@@ -24,7 +29,6 @@ func save_game(score,level,lives):
 	player.lives=lives
 	save_game.store_line(to_json(player))
 	save_game.close()
-	
 
 func load_game():
 	var save_game = File.new()
@@ -34,3 +38,9 @@ func load_game():
 	player = parse_json(save_game.get_line())
 	save_game.close()
 	#return player
+
+func setNave(n):
+	nave=n
+
+func getNave():
+	return nave

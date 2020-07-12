@@ -3,6 +3,7 @@ extends Area2D
 export (int) var Velocidad
 var Movimiento = Vector2()
 var limite
+var alive=true
 signal golpe
 signal catch
 signal killed
@@ -50,15 +51,27 @@ func _process(delta):
 		$CollisionShapelado.disabled=true
 	cantBact=Global.bactKill
 	emit_signal("killed",cantBact)
+	Global.setNave(self)
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
+	$CollisionShapefrente.disabled=true
+	$CollisionShapelado.disabled=true
 	hide()   #se oculta cuando recibe un golpe
-	emit_signal("golpe")
+	if (alive):
+		alive=false
+		emit_signal("golpe")
+	
+		
   
 func _on_Nave_area_entered(area):
-	emit_signal("catch")
+	if ("Ataque" in area.name):		#Ataque del boss
+		alive=false
+		emit_signal("golpe")
+	else:
+		emit_signal("catch")	#Es un anticuerpo
 
 func inicio(pos):
+	alive=true
 	position = pos   #mostrar el personaje
 	show()
 	$CollisionShapefrente.disabled = false

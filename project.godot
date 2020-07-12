@@ -28,6 +28,15 @@ Global="*res://Global.gd"
 window/size/width=500
 window/size/height=800
 
+[layer_names]
+
+2d_physics/layer_1="Nave - Bacteria"
+2d_physics/layer_2="Bala - Bacteria"
+2d_physics/layer_3="Ataque -  Nave"
+2d_physics/layer_4="Boss - Bala"
+2d_physics/layer_5="Boss - Nave"
+2d_physics/layer_13="Ataque - Bala"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

@@ -5,6 +5,8 @@ signal iniciar_juego_zona0
 signal iniciar_juego_zona1
 signal iniciar_juego_zona2
 signal iniciar_juego_zona3
+signal start_HUD0
+signal hide_HUD
 
 export (PackedScene) var Scene1
 export (PackedScene) var Scene2
@@ -17,7 +19,8 @@ var player = {
 #"username":"",
 "score":0,
 "level":0,
-"lives":3
+"lives":3,
+"record":0
 }
 
 var zone
@@ -51,6 +54,8 @@ var body_type=["eyes","tooth","head","heart"]
 func _ready():
 	Global.load_game()
 	player=Global.player
+	$HUD_game.actualizarRecord(Global.record)
+	emit_signal("start_HUD0")
 	$vitamins.text=str(player.lives)
 	initialize()
 	zone=selectZone()
@@ -148,6 +153,7 @@ func _on_Button_pressed():
 	$body/light_animation.stop(false)
 	#emit_signal("iniciar_juego_zona"+str(zone))
 	emit_signal("iniciar_juego_zona"+str(zone))
+	emit_signal("hide_HUD")
 
 func hide_lights():
 	$body/eyes.hide()
