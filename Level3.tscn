@@ -58,6 +58,7 @@ rotation = 0.00232019
 
 [node name="NextScene" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
 
 [node name="Change_bacteria" type="Timer" parent="."]
 

@@ -5,9 +5,9 @@ signal Attack
 
 export (PackedScene) var Attack_thing
 onready var parent=get_parent()
-var speed=1000
+var speed=500
 var alive=false
-var life=5000
+var life=50
 var velocity=Vector2(1000,0)
 var attack=false
 var target
@@ -30,9 +30,9 @@ func _physics_process(delta):
 		#self.global_rotation=current_dir.linear_interpolate(target_dir,self.speed*delta).angle()
 	#pass
 
-func _process(delta):
-	if(attack):
-		shoot()
+#func _process(delta):
+#	if(attack):
+#		shoot()
 
 func control(delta):
 	if parent is PathFollow2D:
@@ -42,19 +42,28 @@ func control(delta):
 func set_alive(x):
 	alive=x
 
-func change_health():
-	life-=10
-	emit_signal("life_modify",life)
+#func change_health():
+#	life-=10
+#	emit_signal("life_modify",life)
 
-func _on_Area2D_body_entered(body):
-	var aux=body.name
-	if ("Bala" in body.name):
-		if(life<=10):
+#func _on_Area2D_body_entered(body):
+#	if ("Bala" in body.name):
+#		if(life>10):
+#			life-=10
+#		else:
+#			$AnimatedSprite.animation="dead"
+#		emit_signal("life_modify",life)
+
+func _on_Area2D_area_entered(area):
+	if ("Area2D_Bala" in area.name):
+		life-=10
+		if(life==0):
 			$AnimatedSprite.animation="dead"
-		else:
-			life-=10
+			$TimerAttack.stop()
+			alive=false
+			velocity=0
 		emit_signal("life_modify",life)
-
+    
 func shoot():
 	var dir=Vector2(1,0).rotated(self.global_rotation)
 	var aux=Global.getNave()
@@ -62,14 +71,19 @@ func shoot():
 	#A.start(self.global_position,dir,aux)
 
 func _on_TimerAttack_timeout():
-	attack=true
+	#attack=true
+	shoot()
 	$AnimatedSprite.animation="angry"
 	$TimerAnimation.start()
-	$TimerAttackStop.start()
+	#$TimerAttackStop.start()
 
-func _on_TimerAttackStop_timeout():
-	attack=false
-	$TimerAttack.start()
+#func _on_TimerAttackStop_timeout():
+#	attack=false
+#	$TimerAttack.start()
 
 func _on_TimerAnimation_timeout():
 	$AnimatedSprite.animation="normal"
+
+
+func detener():
+	$TimerAttack.stop()

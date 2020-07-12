@@ -27,11 +27,14 @@ func _on_Area2D_body_entered(body):
 		else:
 			if("Bala" in body.name):
 				body.kill_bala()
-			else:
-				if("Ataque" in body.name):
-					queue_free()
-					
+		kill_bala()
+		
+func _on_Area2D_Bala_area_entered(area):
+	if ("Ataque" in area.name):
 		kill_bala()
 
 func _on_Visibilidad_screen_exited():
 	queue_free() 
+
+
+
