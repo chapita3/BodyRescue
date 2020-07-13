@@ -19,7 +19,8 @@ func new_game():
 	bactKill=0
 
 func actualizarRecord(r):
-	record=r
+	if (r > record):
+		record=r
 
 func save_game(score,level,lives):
 	var save_game = File.new()

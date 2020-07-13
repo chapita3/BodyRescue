@@ -9,17 +9,12 @@
 [ext_resource path="res://antibody.tscn" type="PackedScene" id=7]
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=8]
 [ext_resource path="res://slides/2levelStart.png" type="Texture" id=9]
-[ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0.591694, -527.332, 0, 0, 0, 0, 520.271, -523.466, 0, 0, 0, 0, 517.86, 796.664, 0, 0, 0, 0, 3.00319, 798.597, 0, 0, 0, 0, 1.79748, -523.466, 0, 0, 0, 0, 0.591694, -527.332 )
 }
-
-[sub_resource type="DynamicFont" id=2]
-size = 26
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 10 )
 
 [sub_resource type="Animation" id=3]
 length = 2.0
@@ -35,6 +30,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0.2, 0.2 ), Vector2( 0.4, 0.4 ), Vector2( 0.6, 0.6 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
 }
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 10 )
 
 [node name="Level2" type="Node"]
 script = ExtResource( 4 )
@@ -91,7 +89,6 @@ __meta__ = {
 }
 
 [node name="LevelLoose" type="TextureRect" parent="."]
-visible = false
 margin_left = -1.51965
 margin_top = -95.8449
 margin_right = 1078.48
@@ -102,29 +99,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Again" type="Button" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -133.0
-margin_top = -62.0
-margin_right = 133.0
-margin_bottom = 2.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-disabled = true
-text = "Intentarlo de nuevo"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="NextScene" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="Change_bacteria" type="Timer" parent="."]
@@ -157,6 +133,32 @@ texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Again" type="ColorPickerButton" parent="."]
+margin_left = 118.0
+margin_top = 686.0
+margin_right = 377.0
+margin_bottom = 738.0
+disabled = true
+color = Color( 0.905882, 0.870588, 0.713726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Contenido" type="Label" parent="Again"]
+margin_left = 7.0
+margin_top = 5.0
+margin_right = 161.0
+margin_bottom = 33.0
+rect_scale = Vector2( 1.6, 1.6 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.00392157, 0, 0, 1 )
+text = "Reintentar"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD2" from="." to="HUD_game" method="_on_Level2_start_HUD2"]
 [connection signal="catch" from="Nave" to="." method="antibody_catch"]
@@ -164,7 +166,7 @@ __meta__ = {
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
-[connection signal="pressed" from="Again" to="." method="play_again"]
 [connection signal="timeout" from="NextScene" to="." method="_on_NextScene_timeout"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_TimerStart_timeout"]
+[connection signal="pressed" from="Again" to="." method="play_again"]

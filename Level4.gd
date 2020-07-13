@@ -60,7 +60,9 @@ func game_over():
 func finish():		#Gana el juego
 	$BacteriaTimer.stop()
 	$ScoreTimer.stop()
-	#$NextScene.start()
+	emit_signal("hide_HUD")
+	$LevelWin.visible=true
+	$WinTimer.start()
 
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
@@ -73,7 +75,7 @@ func _on_ScoreTimer_timeout():
 
 func life_modify(life):
 	$HUD_game.actualizarVidaBoss(life)
-	if (life<=0):
+	if (life==0):
 		finish()
 		$AnimBossDeath.play("Death_Boss")
 
@@ -132,7 +134,6 @@ func _on_Restart_pressed():
 	Global.save_game(0,-1,3)
 	get_tree().change_scene("res://body.tscn")
 
-
 func _on_AnimBossDeath_animation_finished(anim_name):
 	emit_signal("hide_HUD")
 	$LevelWin.visible=true
@@ -144,7 +145,6 @@ func _on_AnimBossDeath_animation_finished(anim_name):
 	$Restart.disabled=false
 	$Restart/Contenido.visible=true
 	Global.save_game(player.score,player.level+1,player.lives)
-
 
 func _on_TimerInicioBoss_timeout():
 	$Paths/PathBoss/PathFollowBoss/Boss.set_alive(true)
