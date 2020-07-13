@@ -17,7 +17,7 @@ var current_dir
 func _ready():
 	$AnimatedSprite.animation= "normal"
 	$Area2D/CollisionShapeBoos.disabled=false
-	$TimerAttack.start()
+	#$TimerAttack.start()
 
 func _physics_process(delta):
 	if not alive:
@@ -39,8 +39,8 @@ func control(delta):
 		parent.set_offset(parent.get_offset() + speed * delta)
 		position=Vector2()
 
-func set_alive(x):
-	alive=x
+func set_alive(a):
+	alive=a
 
 #func change_health():
 #	life-=10
@@ -62,8 +62,9 @@ func _on_Area2D_area_entered(area):
 			$TimerAttack.stop()
 			alive=false
 			velocity=0
+			$Area2D/CollisionShapeBoos.disabled=true
 		emit_signal("life_modify",life)
-    
+	
 func shoot():
 	var dir=Vector2(1,0).rotated(self.global_rotation)
 	var aux=Global.getNave()
@@ -83,7 +84,6 @@ func _on_TimerAttack_timeout():
 
 func _on_TimerAnimation_timeout():
 	$AnimatedSprite.animation="normal"
-
 
 func detener():
 	$TimerAttack.stop()

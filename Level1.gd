@@ -72,7 +72,7 @@ func _on_BacteriaTimer_timeout():
 	$Camino/BacteriaPosicion.set_offset(randi())
 	var B = Bacteria.instance()
 	#var aux=get_node(B)
-	B.change_bacteria_type(["grande3","chica3"])
+	B.change_bacteria_type(["grande1","chica1"])
 	B.select_animation(randi() % B.tipo_bacteria.size())
 	#aux.select_animation(randi() % tipo_bacteria.size())
 	#$AnimatedSprite.animation= tipo_bacteria[randi() % tipo_bacteria.size()]

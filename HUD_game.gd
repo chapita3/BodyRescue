@@ -20,7 +20,10 @@ func actualizarVidaBoss(vida):
 	
 func actualizarRecord(r):
 	$Record/Valor.text=str(r)
-	
+
+func actualizarBalas(b):
+	$Balascant.text=str(b)
+
 func _on_Area2D_start_HUD0():
 	$Record.visible=true
 	$Record/Valor.visible=true
@@ -61,6 +64,8 @@ func _on_Level3_start_HUD3():
 	$EnemigosPic.visible=true
 	$VidaBoss.visible=false
 	$BossPic.visible=false
+	$BalasPic.visible=true
+	$Balascant.visible=true
 	
 func _on_Level4_start_HUD4():
 	$Vidas.visible=true
@@ -73,6 +78,8 @@ func _on_Level4_start_HUD4():
 	$Anticuerpos.visible=false
 	$Enemigos.visible=false
 	$EnemigosPic.visible=false
+	$BalasPic.visible=true
+	$Balascant.visible=true
   
 func hide_HUD():
 	$Vidas.visible=false
@@ -85,6 +92,8 @@ func hide_HUD():
 	$EnemigosPic.visible=false
 	$VidaBoss.visible=false
 	$BossPic.visible=false
+	$BalasPic.visible=false
+	$Balascant.visible=false
 	$Record.visible=false
 	$Record/Valor.visible=false
 	$RecordPic.visible=false

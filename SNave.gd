@@ -4,9 +4,12 @@ export (int) var Velocidad
 var Movimiento = Vector2()
 var limite
 var alive=true
+var can_shot=true
 signal golpe
 signal catch
 signal killed
+signal shot
+signal bala_plus
 var cantBact
 const BALA = preload("res://Bala.tscn")
 
@@ -54,15 +57,17 @@ func _process(delta):
 	Global.setNave(self)
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
-	$CollisionShapefrente.disabled=true
-	$CollisionShapelado.disabled=true
-	hide()   #se oculta cuando recibe un golpe
-	if (alive):
-		alive=false
-		emit_signal("golpe")
-	
-		
-  
+	var aux=body.name
+	if("Bala" in body.name):
+		emit_signal("bala_plus")
+	else:
+		$CollisionShapefrente.disabled=true
+		$CollisionShapelado.disabled=true
+		hide()   #se oculta cuando recibe un golpe
+		if (alive):
+			alive=false
+			emit_signal("golpe")
+
 func _on_Nave_area_entered(area):
 	if ("Ataque" in area.name):		#Ataque del boss
 		alive=false
@@ -78,7 +83,7 @@ func inicio(pos):
 	$CollisionShapelado.disabled = false
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if(can_shot && event is InputEventMouseButton):
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			if(event.position != position):
 				var direction = (event.global_position - global_position).normalized()
@@ -86,4 +91,7 @@ func _input(event):
 				add_child(bala)
 				bala.global_position = global_position + (30*direction)
 				bala.set_bala_direction(direction)
+				emit_signal("shot")
 
+func change_shot(cond):
+	can_shot=cond

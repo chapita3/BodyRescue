@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://slides/3levelLoose.png" type="Texture" id=1]
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=8]
 [ext_resource path="res://slides/3levelStart.png" type="Texture" id=9]
 [ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://Bala_plus.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -24,6 +25,11 @@ font_data = ExtResource( 10 )
 script = ExtResource( 4 )
 Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
+Bala_plus = ExtResource( 11 )
+cantAntbodyMax = 20
+cantBactMax = 20
+cantBalasMax = 35
+maxPlus = 8
 
 [node name="background" type="TextureRect" parent="."]
 margin_left = -175.419
@@ -132,14 +138,20 @@ texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TimerBalaPlus" type="Timer" parent="."]
+wait_time = 8.0
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD3" from="." to="HUD_game" method="_on_Level3_start_HUD3"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 [connection signal="timeout" from="InicioTimer" to="." method="_on_InicioTimer_timeout"]
+[connection signal="bala_plus" from="Nave" to="." method="_on_Nave_bala_plus"]
 [connection signal="catch" from="Nave" to="." method="_on_Nave_catch"]
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="killed" from="Nave" to="." method="_on_Nave_add_kill"]
+[connection signal="shot" from="Nave" to="." method="_on_Nave_shot"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_TimerStart_timeout"]
 [connection signal="pressed" from="Again" to="." method="play_again"]
+[connection signal="timeout" from="TimerBalaPlus" to="." method="_on_TimerBalaPlus_timeout"]
