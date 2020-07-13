@@ -6,8 +6,7 @@ signal start_HUD2
 signal hide_HUD
 #var Score
 var cantAntbody=0
-const cantAntbodyMax=10
-#onready var save = load("res://Saves.gd").new()
+export (int) var cantAntbodyMax
 
 var player = {
 #"username":"",
@@ -76,7 +75,7 @@ func _on_BacteriaTimer_timeout():
 	$Camino/BacteriaPosicion.set_offset(randi())
 	var B = Bacteria.instance()
 	#var aux=get_node(B)
-	B.change_bacteria_type(["grande3","chica3"])
+	B.change_bacteria_type(["grande2","chica2"])
 	B.select_animation(randi() % B.tipo_bacteria.size())
 	#aux.select_animation(randi() % tipo_bacteria.size())
 	#$AnimatedSprite.animation= tipo_bacteria[randi() % tipo_bacteria.size()]
@@ -89,6 +88,7 @@ func _on_BacteriaTimer_timeout():
 	
 	d += rand_range(-PI /4, PI /4)
 	B.rotation = d
+	B.level_call()
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
 func play_again():

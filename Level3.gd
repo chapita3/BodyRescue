@@ -2,13 +2,17 @@ extends Node
 
 export (PackedScene) var Bacteria
 export (PackedScene) var Antibody
+export (PackedScene) var Bala_plus
+export (int) var cantAntbodyMax
+export (int) var cantBactMax
+export (int) var cantBalasMax
+export (int) var maxPlus
 signal start_HUD3
 signal hide_HUD
 #var Score
+var cantBalas
 var cantAntbody=0
-const cantAntbodyMax=20
-const cantBactMax=20
-#onready var save = load("res://Saves.gd").new()
+var cantPlus=0
 var ScoreInicial
 
 var player = {
@@ -21,6 +25,7 @@ var player = {
 func _ready():
 	$Start.show()
 	$TimerStart.start()
+	cantBalas=cantBalasMax
 	emit_signal("hide_HUD")
 
 func _on_TimerStart_timeout():
@@ -38,6 +43,7 @@ func _on_TimerStart_timeout():
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
 	$HUD_game.actualizarEnemigos(0)
+	$HUD_game.actualizarBalas(cantBalasMax)
 
 func game_over():
 	$BacteriaTimer.stop()
@@ -78,7 +84,7 @@ func _on_BacteriaTimer_timeout():
 	$Camino/BacteriaPosicion.set_offset(randi())
 	
 	var B = Bacteria.instance()
-	B.change_bacteria_type(["grande7","chica7"])
+	B.change_bacteria_type(["grande3","chica3"])
 	B.select_animation(randi() % B.tipo_bacteria.size())
 	add_child(B)
 	
@@ -89,6 +95,7 @@ func _on_BacteriaTimer_timeout():
 	
 	d += rand_range(-PI /4, PI /4)
 	B.rotation = d
+	B.level_call()
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
 func play_again():
@@ -120,3 +127,27 @@ func _on_Nave_catch():
 			$AntibodyTimer.stop()
 		else:
 			$AntibodyTimer.start()
+
+func _on_Nave_shot():
+	cantBalas-=1
+	$HUD_game.actualizarBalas(cantBalas)
+	if(cantBalas<=0):
+		$Nave.change_shot(false)
+		$TimerBalaPlus.start()
+
+func _on_TimerBalaPlus_timeout():
+	var b=Bala_plus.instance()
+	var size=get_viewport().get_visible_rect().size
+	randomize()
+	var xPos=rand_range(-202.518,258.386)
+	var yPos=rand_range(-253.497,461.749)
+	#b.global_position=Vector2(xPos,yPos)
+	b.position=Vector2(xPos,yPos)
+	add_child(b)
+
+func _on_Nave_bala_plus():
+	cantBalas+=1
+	$HUD_game.actualizarBalas(cantBalas)
+	$Nave.change_shot(true)
+	if(cantBalas>=maxPlus):
+		$TimerBalaPlus.stop()

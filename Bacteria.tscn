@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://juego/bicho1.png" type="Texture" id=1]
 [ext_resource path="res://Bacteria.gd" type="Script" id=2]
-[ext_resource path="res://juego/bicho1 chico.png" type="Texture" id=3]
+[ext_resource path="res://Juego/bicho1 chico.png" type="Texture" id=3]
 [ext_resource path="res://Juego/bicho2.png" type="Texture" id=4]
 [ext_resource path="res://Juego/bicho2 chico.png" type="Texture" id=5]
 [ext_resource path="res://Juego/bicho7 chico.png" type="Texture" id=6]
@@ -35,11 +35,6 @@ animations = [ {
 "name": "chica5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "grande3",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "chica2",
@@ -55,16 +50,6 @@ animations = [ {
 "name": "chica7",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "chica7",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "chica4",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 17 ) ],
 "loop": true,
 "name": "grande7",
@@ -75,19 +60,14 @@ animations = [ {
 "name": "chica6",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "grande4",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "chica5",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 16 ) ],
 "loop": true,
 "name": "grande6",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "grande3",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -99,20 +79,52 @@ animations = [ {
 "loop": true,
 "name": "chica8",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "grande4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "chica4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "chica1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "grande2",
+"speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 35.0838
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 14.3106
+height = 34.3341
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 15.0026
+height = 51.7168
+
+[sub_resource type="CapsuleShape2D" id=3]
+height = 27.9595
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 12.6595
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 12.0379
+height = 57.1638
 
 [node name="Bacteria" type="RigidBody2D"]
-position = Vector2( 124.916, 204.264 )
+position = Vector2( 152.416, 217.529 )
 collision_layer = 0
 collision_mask = 3
 gravity_scale = 0.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 velocidad_min = 150
 velocidad_max = 250
 
@@ -120,12 +132,33 @@ velocidad_max = 250
 position = Vector2( -0.110626, -32.4432 )
 scale = Vector2( 0.187121, 0.20087 )
 frames = SubResource( 1 )
-animation = "grande7"
+animation = "chica4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.68707, -23.6528 )
-shape = SubResource( 2 )
+position = Vector2( 0.888611, -24.726 )
+rotation = -0.383972
+shape = SubResource( 5 )
+
+[node name="CollisionShape2" type="CollisionShape2D" parent="."]
+position = Vector2( 1.52588e-05, -33.0134 )
+rotation = -0.314159
+shape = SubResource( 6 )
+
+[node name="CollisionShape3down" type="CollisionShape2D" parent="."]
+position = Vector2( -14.8998, -18.825 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape3up" type="CollisionShape2D" parent="."]
+position = Vector2( 4.07814, -57.094 )
+rotation = 0.907571
+shape = SubResource( 4 )
+
+[node name="CollisionShape4" type="CollisionShape2D" parent="."]
+position = Vector2( -0.203903, -28.9548 )
+rotation = 0.314159
+shape = SubResource( 7 )
 
 [node name="Visibilidad" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -3.81686, -23.2227 )
+position = Vector2( -2.80757, -34.5621 )
+scale = Vector2( 1.26301, 1.27903 )
 [connection signal="screen_exited" from="Visibilidad" to="." method="_on_Visibilidad_screen_exited"]

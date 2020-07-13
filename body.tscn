@@ -244,6 +244,7 @@ mode = 2
 script = ExtResource( 29 )
 
 [node name="intestine" type="Light2D" parent="body"]
+visible = false
 position = Vector2( 5.07532, -20.0725 )
 scale = Vector2( 0.24347, 0.182546 )
 enabled = false
@@ -254,6 +255,7 @@ mode = 2
 script = ExtResource( 30 )
 
 [node name="skin" type="Light2D" parent="body"]
+visible = false
 position = Vector2( -14.9791, 77.2627 )
 scale = Vector2( 0.0777277, 0.167169 )
 enabled = false
@@ -264,6 +266,7 @@ mode = 2
 script = ExtResource( 33 )
 
 [node name="thyroid" type="Light2D" parent="body"]
+visible = false
 position = Vector2( 5.95474, -166.919 )
 scale = Vector2( 0.120035, 0.0640833 )
 enabled = false

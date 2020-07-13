@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://HUD_game.gd" type="Script" id=1]
 [ext_resource path="res://Juego/vitamins.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Juego/antibodie.png" type="Texture" id=5]
 [ext_resource path="res://Juego/bacterias_kills.png" type="Texture" id=6]
 [ext_resource path="res://Juego/boss_Normal.png" type="Texture" id=7]
+[ext_resource path="res://Juego/bala.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -82,20 +83,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Enemigos" type="Label" parent="."]
-visible = false
-margin_left = 195.516
-margin_top = 9.55649
-margin_right = 228.516
-margin_bottom = 52.5565
-rect_scale = Vector2( 1.2, 1.2 )
-custom_fonts/font = SubResource( 3 )
-text = "10"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AnticuerposPic" type="TextureRect" parent="."]
 visible = false
 margin_left = 311.973
@@ -115,7 +102,7 @@ margin_top = 11.3445
 margin_right = 315.418
 margin_bottom = 31.3445
 rect_scale = Vector2( 1.2, 1.2 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "10"
 align = 1
 valign = 1
@@ -135,6 +122,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Enemigos" type="Label" parent="."]
+visible = false
+margin_left = 195.516
+margin_top = 9.55649
+margin_right = 228.516
+margin_bottom = 52.5565
+rect_scale = Vector2( 1.2, 1.2 )
+custom_fonts/font = SubResource( 4 )
+text = "10"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VidaBoss" type="Label" parent="."]
 visible = false
 margin_left = 236.128
@@ -142,7 +143,7 @@ margin_top = 9.7155
 margin_right = 276.128
 margin_bottom = 29.7155
 rect_scale = Vector2( 1.2, 1.2 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "500"
 align = 1
 valign = 1
@@ -195,6 +196,32 @@ margin_right = 696.756
 margin_bottom = 627.629
 rect_scale = Vector2( 0.07, 0.07 )
 texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BalasPic" type="TextureRect" parent="."]
+visible = false
+margin_left = 181.707
+margin_top = 4.07253
+margin_right = 570.707
+margin_bottom = 1038.07
+rect_scale = Vector2( 0.035, 0.035 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Balascant" type="Label" parent="."]
+visible = false
+margin_left = 143.0
+margin_top = 10.0
+margin_right = 176.0
+margin_bottom = 37.0
+rect_scale = Vector2( 1.2, 1.2 )
+custom_fonts/font = SubResource( 4 )
+text = "35"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
