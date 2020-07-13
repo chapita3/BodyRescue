@@ -9,7 +9,7 @@
 [ext_resource path="res://antibody.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Bacteria.tscn" type="PackedScene" id=8]
 [ext_resource path="res://slides/3levelStart.png" type="Texture" id=9]
-[ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -17,7 +17,6 @@ _data = {
 }
 
 [sub_resource type="DynamicFont" id=2]
-size = 26
 font_data = ExtResource( 10 )
 
 [node name="Level3" type="Node"]
@@ -57,7 +56,7 @@ rotation = 0.00232019
 [node name="Nave" parent="." instance=ExtResource( 3 )]
 
 [node name="NextScene" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="Change_bacteria" type="Timer" parent="."]
@@ -88,35 +87,12 @@ __meta__ = {
 }
 
 [node name="LevelLoose" type="TextureRect" parent="."]
-visible = false
 margin_left = -0.353618
 margin_top = -95.845
 margin_right = 1079.65
 margin_bottom = 1824.16
 rect_scale = Vector2( 0.47, 0.47 )
 texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Again" type="Button" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -133.0
-margin_top = -48.0
-margin_right = 133.0
-margin_bottom = -13.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-disabled = true
-text = "Intentarlo de nuevo"
-flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -132,6 +108,27 @@ texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Again" type="ColorPickerButton" parent="."]
+margin_left = 118.0
+margin_top = 686.0
+margin_right = 377.0
+margin_bottom = 738.0
+disabled = true
+color = Color( 0.905882, 0.870588, 0.713726, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Contenido" type="Label" parent="Again"]
+margin_right = 162.0
+margin_bottom = 33.0
+rect_scale = Vector2( 1.6, 1.6 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Reintentar"
+align = 1
+valign = 1
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD3" from="." to="HUD_game" method="_on_Level3_start_HUD3"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
