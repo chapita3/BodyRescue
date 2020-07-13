@@ -26,7 +26,6 @@ font_data = ExtResource( 1 )
 script = ExtResource( 5 )
 
 [node name="Loose_prev" type="TextureRect" parent="."]
-visible = false
 margin_top = 2.10529
 margin_right = 1080.0
 margin_bottom = 1922.11
@@ -58,7 +57,7 @@ margin_bottom = 46.3176
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Comprar vitaminas"
+text = "Mirar una publicidad"
 __meta__ = {
 "_edit_use_anchors_": false
 }
