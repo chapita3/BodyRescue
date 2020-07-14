@@ -4,6 +4,7 @@ const SAVE_PATH = "user://saves.sav"
 var bactKill=0
 var nave
 var record=0
+var activo=true
 
 var player = {
 #"username":"",
@@ -42,6 +43,9 @@ func load_game():
 
 func setNave(n):
 	nave=n
+
+func set_activo(cond):
+	activo=cond
 
 func getNave():
 	return nave

@@ -25,10 +25,9 @@ script = ExtResource( 4 )
 Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
 Bala_plus = ExtResource( 11 )
-cantAntbodyMax = 20
-cantBactMax = 20
-cantBalasMax = 35
-maxPlus = 8
+cantAntbodyMax = 2
+cantBactMax = 2
+cantBalasMax = 10
 
 [node name="background" type="TextureRect" parent="."]
 margin_left = -175.419
@@ -135,8 +134,12 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Reintentar"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TimerBalaPlus" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 5.0
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD3" from="." to="HUD_game" method="_on_Level3_start_HUD3"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]

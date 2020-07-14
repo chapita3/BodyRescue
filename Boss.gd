@@ -5,9 +5,9 @@ signal Attack
 
 export (PackedScene) var Attack_thing
 onready var parent=get_parent()
-var speed=500
+var speed=400
 var alive=false
-var life=50
+var life=10
 var velocity=Vector2(1000,0)
 var attack=false
 var target

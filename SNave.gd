@@ -58,22 +58,22 @@ func _process(delta):
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	var aux=body.name
-	if("Bala" in body.name):
-		emit_signal("bala_plus")
-	else:
-		$CollisionShapefrente.disabled=true
-		$CollisionShapelado.disabled=true
+	$CollisionShapefrente.disabled=true
+	$CollisionShapelado.disabled=true
+	if (alive):
 		hide()   #se oculta cuando recibe un golpe
-		if (alive):
-			alive=false
-			emit_signal("golpe")
+		alive=false
+		emit_signal("golpe")
 
 func _on_Nave_area_entered(area):
 	if ("Ataque" in area.name):		#Ataque del boss
 		alive=false
 		emit_signal("golpe")
 	else:
-		emit_signal("catch")	#Es un anticuerpo
+		if ("Bala_plus" in area.name):
+			emit_signal("bala_plus")
+		else:
+			emit_signal("catch")	#Es un anticuerpo
 
 func inicio(pos):
 	alive=true
@@ -95,3 +95,6 @@ func _input(event):
 
 func change_shot(cond):
 	can_shot=cond
+	
+func set_alive(cond):
+	alive=cond
