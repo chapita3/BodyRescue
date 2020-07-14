@@ -79,11 +79,13 @@ func _on_ScoreTimer_timeout():
 	player.score += 1
 	$HUD_game.actualizarScore(player.score)
 
-func life_modify(life):
+func life_modify(life):		#Se actualiza la vida del boss
 	$HUD_game.actualizarVidaBoss(life)
 	if (life==0):
-		finish()
+		Global.set_activo(false)
+		$Nave.set_alive(false)
 		$AnimBossDeath.play("Death_Boss")
+		#finish()
 
 func _on_BacteriaTimer_timeout():
 	#Seleccionar un lugar aleatorio en el camino
@@ -103,7 +105,7 @@ func _on_BacteriaTimer_timeout():
 	B.level_call()
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
 
-func _on_Nave_shot():
+func _on_Nave_shot():	#Se actualizan las balas al disparar
 	cantBalas-=1
 	$HUD_game.actualizarBalas(cantBalas)
 	if(cantBalas<=0):
@@ -119,7 +121,7 @@ func _on_TimerBalaPlus_timeout():
 	b.position=Vector2(xPos,yPos)
 	add_child(b)
 
-func _on_Nave_bala_plus():
+func _on_Nave_bala_plus():		#Se actualizan las balas
 	cantBalas+=1
 	$HUD_game.actualizarBalas(cantBalas)
 	if (cantBalas==1):
@@ -138,11 +140,15 @@ func _on_Restart_pressed():
 	get_tree().change_scene("res://Mundo.tscn")
 
 func _on_AnimBossDeath_animation_finished(anim_name):
+	finish()
+
+
+func _on_WinTimer_timeout():
 	emit_signal("hide_HUD")
 	$LevelWin.visible=true
-	$Win.visible=true
-	$Win/Tiempo.text=str(player.score)
-	$Win/Tiempo.visible=true
+	$WinGame.visible=true
+	$WinGame/Tiempo.text=str(player.score)
+	$WinGame.visible=true
 	Global.actualizarRecord(player.score)
 	$Restart.visible=true
 	$Restart.disabled=false

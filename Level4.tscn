@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Juego/backgrounds/fondo7.jpg" type="Texture" id=1]
 [ext_resource path="res://Level4.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Bala_plus.tscn" type="PackedScene" id=11]
 [ext_resource path="res://reloj.png" type="Texture" id=12]
 [ext_resource path="res://slides/Win.png" type="Texture" id=13]
+[ext_resource path="res://slides/4levelWin.png" type="Texture" id=14]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -43,7 +44,7 @@ font_data = ExtResource( 9 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Death_Boss"
-length = 10.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Paths/PathBoss/PathFollowBoss/Boss:position")
 tracks/0/interp = 1
@@ -51,10 +52,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 10 ),
+"times": PoolRealArray( 0, 1.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 198.498, 78.6672 ), Vector2( 191.692, 890 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Paths/PathBoss/PathFollowBoss/Boss:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [node name="Level4" type="Node"]
@@ -68,9 +81,9 @@ anchor_left = -6.10352e-08
 anchor_right = -6.10352e-08
 anchor_bottom = 3.8147e-08
 margin_left = -463.943
-margin_top = -103.341
+margin_top = -104.848
 margin_right = 661.057
-margin_bottom = 866.659
+margin_bottom = 865.152
 rect_scale = Vector2( 2.2, 2.2 )
 texture = ExtResource( 1 )
 __meta__ = {
@@ -123,7 +136,6 @@ rotation = -5.83386e-06
 
 [node name="Boss" parent="Paths/PathBoss/PathFollowBoss" instance=ExtResource( 10 )]
 position = Vector2( 198.498, 78.6672 )
-rotation = -0.00558383
 
 [node name="LevelWin" type="TextureRect" parent="."]
 visible = false
@@ -132,6 +144,7 @@ margin_top = -94.2583
 margin_right = 1078.48
 margin_bottom = 1825.75
 rect_scale = Vector2( 0.47, 0.47 )
+texture = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
