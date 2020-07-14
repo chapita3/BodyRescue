@@ -9,6 +9,10 @@ func _ready():
 	$CollisionShape3up.disabled=true
 	$CollisionShape2.disabled=true
 	$CollisionShape4.disabled=true
+	
+func _process(delta):
+	if (Global.activo==false):
+		queue_free()
 
 func _on_Visibilidad_screen_exited():
 	queue_free()  #elimina la bacteria si se sale de la pantalla

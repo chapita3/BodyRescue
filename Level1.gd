@@ -18,6 +18,7 @@ var player = {
 
 func _ready():
 	#Score = 0
+	Global.set_activo(true)
 	$Start.show()
 	$TimerReady.start()
 	emit_signal("hide_HUD")
@@ -36,6 +37,7 @@ func _on_TimerReady_timeout():
 	$HUD_game.actualizarVidas(player.lives)
 
 func game_over():
+	Global.set_activo(false)
 	$BacteriaTimer.stop()
 	deleteBacteria=true
 	emit_signal("hide_bacteria")
@@ -60,6 +62,7 @@ func _on_InicioTimer_timeout():
 	$LevelTimer.start()
 	
 func _on_LevelTimer_timeout():	#Gana el nivel
+	Global.set_activo(false)
 	$BacteriaTimer.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")

@@ -3,7 +3,6 @@ extends Node
 export (PackedScene) var Bacteria
 export (PackedScene) var Bala_plus
 export (int) var cantBalasMax
-export (int) var maxPlus
 signal start_HUD4
 signal hide_HUD
 signal start_boss
@@ -21,6 +20,7 @@ var player = {
 }
 
 func _ready():
+	Global.set_activo(true)
 	$Start.show()
 	$TimerStart.start()
 	cantBalas=cantBalasMax
@@ -45,8 +45,11 @@ func _on_TimerStart_timeout():
 	$HUD_game.actualizarVidaBoss($Paths/PathBoss/PathFollowBoss/Boss.life)
 
 func game_over():
+	Global.set_activo(false)
 	$BacteriaTimer.stop()
+	$TimerBalaPlus.stop()
 	$ScoreTimer.stop()
+	Global.set_activo(false)
 	$Paths/PathBoss/PathFollowBoss/Boss.detener()
 	emit_signal("hide_HUD")
 	$LevelLoose.visible=true
@@ -58,6 +61,7 @@ func game_over():
 		Global.save_game(ScoreInicial,player.level,player.lives-1)
 
 func finish():		#Gana el juego
+	Global.set_activo(false)
 	$BacteriaTimer.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
@@ -67,7 +71,9 @@ func finish():		#Gana el juego
 func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
 	$ScoreTimer.start()
-	$TimerInicioBoss.start()
+	$TimerBalaPlus.start()
+	$Paths/PathBoss/PathFollowBoss/Boss.set_alive(true)
+	$Nave.change_shot(true)
 
 func _on_ScoreTimer_timeout():
 	player.score += 1
@@ -87,10 +93,9 @@ func _on_BacteriaTimer_timeout():
 	B.change_bacteria_type(["grande4","chica4"])
 	B.select_animation(randi() % B.tipo_bacteria.size())
 	add_child(B)
-	
 	#Seleccionar una direccion
 	var d = $Camino/BacteriaPosicion.rotation + PI /2
-	
+
 	B.position = $Camino/BacteriaPosicion.position
 	
 	d += rand_range(-PI /4, PI /4)
@@ -103,7 +108,6 @@ func _on_Nave_shot():
 	$HUD_game.actualizarBalas(cantBalas)
 	if(cantBalas<=0):
 		$Nave.change_shot(false)
-		$TimerBalaPlus.start()
 
 func _on_TimerBalaPlus_timeout():
 	var b=Bala_plus.instance()
@@ -118,9 +122,8 @@ func _on_TimerBalaPlus_timeout():
 func _on_Nave_bala_plus():
 	cantBalas+=1
 	$HUD_game.actualizarBalas(cantBalas)
-	$Nave.change_shot(true)
-	if(cantBalas>=maxPlus):
-		$TimerBalaPlus.stop()
+	if (cantBalas==1):
+		$Nave.change_shot(true)
 
 func play_again():
 	get_tree().change_scene("res://Level4.tscn")
@@ -132,7 +135,7 @@ func _on_Boss_Attack(attack,pos,dir,target):
 	
 func _on_Restart_pressed():
 	Global.save_game(0,-1,3)
-	get_tree().change_scene("res://body.tscn")
+	get_tree().change_scene("res://Mundo.tscn")
 
 func _on_AnimBossDeath_animation_finished(anim_name):
 	emit_signal("hide_HUD")
@@ -145,7 +148,3 @@ func _on_AnimBossDeath_animation_finished(anim_name):
 	$Restart.disabled=false
 	$Restart/Contenido.visible=true
 	Global.save_game(player.score,player.level+1,player.lives)
-
-func _on_TimerInicioBoss_timeout():
-	$Paths/PathBoss/PathFollowBoss/Boss.set_alive(true)
-	$Nave.change_shot(true)

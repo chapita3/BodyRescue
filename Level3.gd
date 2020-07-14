@@ -6,7 +6,7 @@ export (PackedScene) var Bala_plus
 export (int) var cantAntbodyMax
 export (int) var cantBactMax
 export (int) var cantBalasMax
-export (int) var maxPlus
+#export (int) var maxPlus
 signal start_HUD3
 signal hide_HUD
 #var Score
@@ -23,10 +23,12 @@ var player = {
 }
 
 func _ready():
+	Global.set_activo(true)
 	$Start.show()
 	$TimerStart.start()
 	cantBalas=cantBalasMax
 	emit_signal("hide_HUD")
+	$Nave.change_shot(false)
 
 func _on_TimerStart_timeout():
 	$Start.hide()
@@ -48,7 +50,9 @@ func _on_TimerStart_timeout():
 func game_over():
 	$BacteriaTimer.stop()
 	$AntibodyTimer.stop()
+	$TimerBalaPlus.stop()
 	$ScoreTimer.stop()
+	Global.set_activo(false)
 	emit_signal("hide_HUD")
 	$LevelLoose.visible=true
 	$Again.disabled=false
@@ -59,8 +63,10 @@ func game_over():
 		Global.save_game(ScoreInicial,player.level,player.lives-1)
 
 func finish():		#Gana el nivel
+	Global.set_activo(false)
 	$BacteriaTimer.stop()
 	$AntibodyTimer.stop()
+	$TimerBalaPlus.stop()
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
 	$LevelWin.visible=true
@@ -74,6 +80,8 @@ func _on_InicioTimer_timeout():
 	$BacteriaTimer.start()
 	$ScoreTimer.start()
 	$AntibodyTimer.start()
+	$TimerBalaPlus.start()
+	$Nave.change_shot(true)
 
 func _on_ScoreTimer_timeout():
 	player.score += 1
@@ -133,7 +141,6 @@ func _on_Nave_shot():
 	$HUD_game.actualizarBalas(cantBalas)
 	if(cantBalas<=0):
 		$Nave.change_shot(false)
-		$TimerBalaPlus.start()
 
 func _on_TimerBalaPlus_timeout():
 	var b=Bala_plus.instance()
@@ -148,6 +155,5 @@ func _on_TimerBalaPlus_timeout():
 func _on_Nave_bala_plus():
 	cantBalas+=1
 	$HUD_game.actualizarBalas(cantBalas)
-	$Nave.change_shot(true)
-	if(cantBalas>=maxPlus):
-		$TimerBalaPlus.stop()
+	if (cantBalas==1):
+		$Nave.change_shot(true)
