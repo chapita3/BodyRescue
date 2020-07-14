@@ -4,11 +4,13 @@ export (int) var Velocidad
 var Movimiento = Vector2()
 var limite
 var alive=true
+var aux
 signal golpe
 signal catch
 
 func _ready():
-	hide()
+	#hide()
+	$ImpulseArriba.emitting=true
 	limite = get_viewport_rect().size
 
 func _process(delta):
@@ -32,19 +34,37 @@ func _process(delta):
 	position.y = clamp(position.y, 0, limite.y)
 	
 	if Movimiento.x != 0:   #posicionar al sprite depende de los movimientos
+		$ImpulseAbajo.emitting=false
+		$ImpulseArriba.emitting=false
 		$AnimatedSprite.animation = "lado"
-		$AnimatedSprite.flip_h = Movimiento.x < 0
+		aux=Movimiento.x < 0
+		$AnimatedSprite.flip_h = aux
+		if(aux):
+			$ImpulseLadoDer.emitting=false
+			$ImpulseLadoIzq.emitting=true
+		else:
+			$ImpulseLadoDer.emitting=true
+			$ImpulseLadoIzq.emitting=false
 		$CollisionShapefrente.disabled = true
 		$CollisionShapelado.disabled=false
 	elif Movimiento.y != 0:
+		$ImpulseLadoDer.emitting=false
+		$ImpulseLadoIzq.emitting=false
 		$AnimatedSprite.animation = "frente"
-		$AnimatedSprite.flip_v = Movimiento.y > 0
+		aux=Movimiento.y > 0
+		$AnimatedSprite.flip_v = aux
+		if(aux):
+			$ImpulseAbajo.emitting=true
+			$ImpulseArriba.emitting=false
+		else:
+			$ImpulseAbajo.emitting=false
+			$ImpulseArriba.emitting=true
 		$CollisionShapefrente.disabled =false
 		$CollisionShapelado.disabled=true
-	else:
-		$AnimatedSprite.animation = "frente"
-		$CollisionShapefrente.disabled =false
-		$CollisionShapelado.disabled=true
+	#else:
+	#	$AnimatedSprite.animation = "frente"
+	#	$CollisionShapefrente.disabled =false
+	#	$CollisionShapelado.disabled=true
 
 
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo

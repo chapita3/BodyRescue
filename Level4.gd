@@ -142,7 +142,6 @@ func _on_Restart_pressed():
 func _on_AnimBossDeath_animation_finished(anim_name):
 	finish()
 
-
 func _on_WinTimer_timeout():
 	emit_signal("hide_HUD")
 	$LevelWin.visible=true

@@ -74,6 +74,7 @@ __meta__ = {
 }
 
 [node name="LevelLoose" type="TextureRect" parent="."]
+visible = false
 margin_left = -1.51965
 margin_top = -96.8449
 margin_right = 1078.48
@@ -109,6 +110,7 @@ __meta__ = {
 }
 
 [node name="Again" type="ColorPickerButton" parent="."]
+visible = false
 margin_left = 118.0
 margin_top = 686.0
 margin_right = 377.0

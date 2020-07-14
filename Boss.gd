@@ -57,12 +57,16 @@ func set_alive(a):
 func _on_Area2D_area_entered(area):
 	if ("Area2D_Bala" in area.name):
 		life-=10
-		if(life==0):
+		if(life<=0):
+			print(rotation_degrees)
+			print(rotation)
 			$AnimatedSprite.animation="dead"
 			$TimerAttack.stop()
 			alive=false
 			velocity=0
 			$Area2D/CollisionShapeBoos.disabled=true
+			rotation=0
+			rotation_degrees=0
 		emit_signal("life_modify",life)
 	
 func shoot():
