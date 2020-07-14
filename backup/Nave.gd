@@ -1,19 +1,19 @@
-extends "res://Nave.gd"
+extends Area2D
 
-var can_shot=true
-signal killed
-signal shot
-signal bala_plus
-var cantBact
-const BALA = preload("res://Bala.tscn")
+export (int) var Velocidad
+var Movimiento = Vector2()
+var limite
+var alive=true
+var aux
+signal golpe
+signal catch
 
 func _ready():
 	#hide()
+	$ImpulseArriba.emitting=true
 	limite = get_viewport_rect().size
 
 func _process(delta):
-	var i
-	var aux
 	Movimiento = Vector2()  #reinciar el valor
 	
 	if Input.is_action_pressed("ui_right"):
@@ -24,7 +24,8 @@ func _process(delta):
 		Movimiento.y += 1
 	if Input.is_action_pressed("ui_up"):
 		Movimiento.y -= 1
-
+	
+	
 	if Movimiento.length() > 0:   #Verificar si se esta moviendo
 		Movimiento = Movimiento.normalized() * Velocidad  #NOrmalizar la velocidad
 	
@@ -64,33 +65,22 @@ func _process(delta):
 	#	$AnimatedSprite.animation = "frente"
 	#	$CollisionShapefrente.disabled =false
 	#	$CollisionShapelado.disabled=true
-	cantBact=Global.bactKill
-	emit_signal("killed",cantBact)
-	Global.setNave(self)
 
-func _input(event):
-	if(can_shot && event is InputEventMouseButton):
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			if(event.position != position):
-				var direction = (event.global_position - global_position).normalized()
-				var bala = BALA.instance()
-				add_child(bala)
-				bala.global_position = global_position + (30*direction)
-				bala.set_bala_direction(direction)
-				emit_signal("shot")
 
-func _on_Nave_area_entered(area):
-	if ("Ataque" in area.name):		#Ataque del boss
+func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
+	$CollisionShapefrente.disabled = true
+	$CollisionShapelado.disabled=true
+	hide()   #se oculta cuando recibe un golpe
+	if (alive):
 		alive=false
 		emit_signal("golpe")
-	else:
-		if ("Bala_plus" in area.name):
-			emit_signal("bala_plus")
-		else:
-			emit_signal("catch")
-
-func change_shot(cond):
-	can_shot=cond
 	
-func set_alive(cond):
-	alive=cond
+func inicio(pos):
+	alive=true
+	position = pos   #mostrar el personaje
+	show()
+	$CollisionShapefrente.disabled =false
+	$CollisionShapelado.disabled=false
+
+func _on_Nave_area_entered(area):
+	emit_signal("catch")
