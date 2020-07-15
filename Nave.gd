@@ -70,8 +70,8 @@ func _process(delta):
 func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	$CollisionShapefrente.disabled = true
 	$CollisionShapelado.disabled=true
-	hide()   #se oculta cuando recibe un golpe
 	if (alive):
+		hide()   #se oculta cuando recibe un golpe
 		alive=false
 		emit_signal("golpe")
 	
