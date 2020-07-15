@@ -153,7 +153,8 @@ func _on_TimerBalaPlus_timeout():
 	add_child(b)
 
 func _on_Nave_bala_plus():
-	cantBalas+=1
+	if (cantBalas < cantBalasMax):
+		cantBalas+=1
 	$HUD_game.actualizarBalas(cantBalas)
 	if (cantBalas==1):
 		$Nave.change_shot(true)
