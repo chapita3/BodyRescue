@@ -11,10 +11,12 @@ func _ready():
 	$antibody.playing=true
 	antibody_show()
 	$antibodyCollision.disabled=false
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if (Global.activo==false):
+		queue_free()
 
 func antibody_show():
 	$antibodyAnimation.play("rotate")

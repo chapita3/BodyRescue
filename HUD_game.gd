@@ -28,6 +28,8 @@ func _on_Area2D_start_HUD0():
 	$Record.visible=true
 	$Record/Valor.visible=true
 	$RecordPic.visible=true
+	$Vidas.visible=true
+	$Vitamina.visible=true
 
 func _on_Level1_start_HUD1():
 	$Vidas.visible=true

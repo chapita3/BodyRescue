@@ -52,6 +52,7 @@ script = ExtResource( 3 )
 position = Vector2( -315.102, -254.933 )
 scale = Vector2( 0.23, 0.23 )
 frames = SubResource( 1 )
+frame = 1
 playing = true
 
 [node name="antibodyCollision" type="CollisionShape2D" parent="."]

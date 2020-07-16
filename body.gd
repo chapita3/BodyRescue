@@ -55,8 +55,8 @@ func _ready():
 	Global.load_game()
 	player=Global.player
 	$HUD_game.actualizarRecord(Global.record)
+	$HUD_game.actualizarVidas(player.lives)
 	emit_signal("start_HUD0")
-	$vitamins.text=str(player.lives)
 	initialize()
 	zone=selectZone()
 	configure_zone()

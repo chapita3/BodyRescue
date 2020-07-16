@@ -26,7 +26,7 @@ func _process(delta):
 	position += velocity * delta
 
 func _on_Ataque_area_entered(area):
-	if("Area2D_Bala" in area.name):
+	if("Bala" in area.name):
 		queue_free()
 
 func _on_VisibilityNotifier2D_screen_exited():

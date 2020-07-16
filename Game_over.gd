@@ -20,5 +20,5 @@ func _on_Continue_pressed():
 
 
 func _on_Publicidad_pressed():
-	Global.save_game(player.score,player.level,3)
+	Global.save_game(player.score,player.level,1)
 	get_tree().change_scene("res://Level"+str(player.level+1)+".tscn")
