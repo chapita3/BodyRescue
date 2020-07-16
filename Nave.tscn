@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://juego/micronave.png" type="Texture" id=1]
 [ext_resource path="res://juego/micronave-side.png" type="Texture" id=2]
@@ -7,17 +7,23 @@
 [ext_resource path="res://ImpulseLadoDer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ImpulseLadoIzq.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ImpulseAbajo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Juego/micronave-diag.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "frente",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "lado",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "frente",
+"name": "diag",
 "speed": 5.0
 } ]
 
@@ -41,22 +47,37 @@ frames = SubResource( 1 )
 animation = "frente"
 
 [node name="CollisionShapefrente" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 1.33023, -3.43573 )
 shape = SubResource( 2 )
 
+[node name="CollisionShapediagder" type="CollisionShape2D" parent="."]
+position = Vector2( 1.33023, -3.43573 )
+rotation = 0.785398
+shape = SubResource( 2 )
+disabled = true
+
+[node name="CollisionShapediagizq" type="CollisionShape2D" parent="."]
+position = Vector2( 1.33023, -3.43573 )
+rotation = -0.785398
+shape = SubResource( 2 )
+disabled = true
+
 [node name="CollisionShapelado" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 6.65216, -1.15668 )
 rotation = 1.5708
 shape = SubResource( 3 )
+disabled = true
 
 [node name="ImpulseLadoDer" parent="." instance=ExtResource( 5 )]
-
-[node name="ImpulseArriba" parent="." instance=ExtResource( 4 )]
+position = Vector2( -27.7607, -1.80615 )
 
 [node name="ImpulseAbajo" parent="." instance=ExtResource( 7 )]
+position = Vector2( 0.92746, -27.6656 )
+
+[node name="ImpulseArriba" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1.13138, 26.1659 )
 
 [node name="ImpulseLadoIzq" parent="." instance=ExtResource( 6 )]
+position = Vector2( 31.1276, -2.54224 )
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Nave_body_entered"]

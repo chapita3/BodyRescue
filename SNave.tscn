@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://juego/micronave.png" type="Texture" id=1]
 [ext_resource path="res://juego/micronave-side.png" type="Texture" id=2]
@@ -7,17 +7,23 @@
 [ext_resource path="res://ImpulseLadoDer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ImpulseLadoIzq.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ImpulseAbajo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Juego/micronave-diag.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "frente",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "lado",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "frente",
+"name": "diag",
 "speed": 5.0
 } ]
 
@@ -40,16 +46,30 @@ Velocidad = 300
 position = Vector2( 1.87991, -0.681519 )
 scale = Vector2( 0.218507, 0.191478 )
 frames = SubResource( 1 )
-animation = "frente"
+animation = "diag"
 
 [node name="CollisionShapefrente" type="CollisionShape2D" parent="."]
 position = Vector2( 2.04346, -5.69153 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="CollisionShapelado" type="CollisionShape2D" parent="."]
 position = Vector2( 8.7323, -1.61395 )
 rotation = 1.5708
 shape = SubResource( 3 )
+disabled = true
+
+[node name="CollisionShapediagizq" type="CollisionShape2D" parent="."]
+position = Vector2( 8.7323, -1.61395 )
+rotation = -0.785398
+shape = SubResource( 3 )
+disabled = true
+
+[node name="CollisionShapediagder" type="CollisionShape2D" parent="."]
+position = Vector2( 8.7323, -1.61395 )
+rotation = 0.785398
+shape = SubResource( 3 )
+disabled = true
 
 [node name="ImpulseLadoDer" parent="." instance=ExtResource( 5 )]
 
