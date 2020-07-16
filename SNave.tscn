@@ -80,5 +80,13 @@ position = Vector2( 30.7284, -1.9834 )
 scale = Vector2( 0.429708, 0.0366638 )
 
 [node name="ImpulseAbajo" parent="." instance=ExtResource( 7 )]
+
+[node name="PosicionDisparo" type="Position2D" parent="."]
+position = Vector2( 1.90262, -2.85391 )
+
+[node name="mira" type="RayCast2D" parent="."]
+position = Vector2( 1.94174, -2.21918 )
+enabled = true
+cast_to = Vector2( 70, 0 )
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Nave_body_entered"]

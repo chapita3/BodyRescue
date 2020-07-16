@@ -25,8 +25,8 @@ script = ExtResource( 4 )
 Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
 Bala_plus = ExtResource( 11 )
-cantAntbodyMax = 2
-cantBactMax = 2
+cantAntbodyMax = 20
+cantBactMax = 20
 cantBalasMax = 10
 
 [node name="background" type="TextureRect" parent="."]

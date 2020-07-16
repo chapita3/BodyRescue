@@ -5,6 +5,7 @@ signal killed
 signal shot
 signal bala_plus
 var cantBact
+var mousePosition
 const BALA = preload("res://Bala.tscn")
 
 func _ready():
@@ -15,16 +16,22 @@ func _process(delta):
 	cantBact=Global.bactKill
 	emit_signal("killed",cantBact)
 	Global.setNave(self)
+	mousePosition=get_global_mouse_position()
+	$mira.look_at(mousePosition)
 
 func _input(event):
-	if(can_shot && event is InputEventMouseButton):
+	if(Global.activo && can_shot && event is InputEventMouseButton):
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			if(event.position != position):
 				var direction = (event.global_position - global_position).normalized()
 				var bala = BALA.instance()
-				add_child(bala)
-				bala.global_position = global_position + (30*direction)
-				bala.set_bala_direction(direction)
+				#add_child(bala)
+				bala.global_position = global_position + direction
+				#bala.set_bala_direction(direction)
+				
+				bala.rotation= $mira.get_rotation()
+				bala._ready()
+				get_parent().add_child(bala)
 				emit_signal("shot")
 
 func _on_Nave_area_entered(area):
