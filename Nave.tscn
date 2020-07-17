@@ -69,15 +69,14 @@ shape = SubResource( 3 )
 disabled = true
 
 [node name="ImpulseLadoDer" parent="." instance=ExtResource( 5 )]
-position = Vector2( -27.7607, -1.80615 )
+visible = false
 
 [node name="ImpulseAbajo" parent="." instance=ExtResource( 7 )]
-position = Vector2( 0.92746, -27.6656 )
+visible = false
 
 [node name="ImpulseArriba" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1.13138, 26.1659 )
 
 [node name="ImpulseLadoIzq" parent="." instance=ExtResource( 6 )]
-position = Vector2( 31.1276, -2.54224 )
+visible = false
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Nave_body_entered"]

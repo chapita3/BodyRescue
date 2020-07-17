@@ -32,6 +32,7 @@ func _on_Area2D_start_HUD0():
 	$Vitamina.visible=true
 
 func _on_Level1_start_HUD1():
+	$Analog.visible=true
 	$Vidas.visible=true
 	$Vitamina.visible=true
 	$Reloj.visible=true
@@ -44,6 +45,7 @@ func _on_Level1_start_HUD1():
 	$BossPic.visible=false
 
 func _on_Level2_start_HUD2():
+	$Analog.visible=true
 	$Vidas.visible=true
 	$Vitamina.visible=true
 	$Reloj.visible=true
@@ -56,6 +58,7 @@ func _on_Level2_start_HUD2():
 	$BossPic.visible=false
 
 func _on_Level3_start_HUD3():
+	$Analog.visible=true
 	$Vidas.visible=true
 	$Vitamina.visible=true
 	$Reloj.visible=true
@@ -70,6 +73,7 @@ func _on_Level3_start_HUD3():
 	$Balascant.visible=true
 	
 func _on_Level4_start_HUD4():
+	$Analog.visible=true
 	$Vidas.visible=true
 	$Vitamina.visible=true
 	$Reloj.visible=true
@@ -84,6 +88,7 @@ func _on_Level4_start_HUD4():
 	$Balascant.visible=true
   
 func hide_HUD():
+	$Analog.visible=false
 	$Vidas.visible=false
 	$Vitamina.visible=false
 	$Reloj.visible=false

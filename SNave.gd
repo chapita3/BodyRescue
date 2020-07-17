@@ -20,8 +20,10 @@ func _process(delta):
 	$mira.look_at(mousePosition)
 
 func _input(event):
-	if(Global.activo && can_shot && event is InputEventMouseButton):
-		if event.button_index == BUTTON_LEFT and event.pressed:
+	var istouch = event is InputEventScreenTouch
+	var ismouse= event is InputEventMouseButton
+	if(Global.activo && can_shot && (istouch or ismouse)):
+		if ((event.button_index == BUTTON_LEFT or istouch) and event.pressed):
 			if(event.position != position):
 				var direction = (event.global_position - global_position).normalized()
 				var bala = BALA.instance()

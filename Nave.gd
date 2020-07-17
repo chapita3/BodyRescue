@@ -21,6 +21,17 @@ func _process(delta):
 	#print(position)
 	Movimiento = Vector2()  #reinciar el valor
 	posAnt=position
+	
+	#Para mover la nave con BOTONES ##################################
+	#if Input.is_action_pressed("ui_right"):
+	#	Movimiento.x += 1
+	#if Input.is_action_pressed("ui_left"):
+	#	Movimiento.x -= 1
+	#if Input.is_action_pressed("ui_down"):
+	#	Movimiento.y += 1
+	#if Input.is_action_pressed("ui_up"):
+	#	Movimiento.y -= 1
+
 	if Input.is_action_pressed("ui_right"):
 		Movimiento.x += 1
 	if Input.is_action_pressed("ui_left"):
@@ -30,13 +41,71 @@ func _process(delta):
 	if Input.is_action_pressed("ui_up"):
 		Movimiento.y -= 1
 	
+	#if Movimiento.length() > 0:   #Verificar si se esta moviendo
+	#	Movimiento = Movimiento.normalized() * Velocidad  #NOrmalizar la velocidad
 	
-	if Movimiento.length() > 0:   #Verificar si se esta moviendo
-		Movimiento = Movimiento.normalized() * Velocidad  #NOrmalizar la velocidad
+	#position += Movimiento * delta	#actualizar los movimientos
 	
-	position += Movimiento * delta	#actualizar los movimientos
+#	if(Movimiento.x!=0&&Movimiento.y!=0):
+#		$CollisionShapefrente.disabled =true
+#		$CollisionShapelado.disabled=true
+#		$AnimatedSprite.animation="diag"
+#		auxx=Movimiento.x < 0
+#		auxy=Movimiento.y > 0
+#		$AnimatedSprite.flip_h = auxx
+#		$AnimatedSprite.flip_v = auxy
+#		enable_dig_collisionShapes(auxx,auxy)
+#		stop_emitions()
+#	elif (Movimiento.x != 0):   #posicionar al sprite depende de los movimientos
+#		#$AnimatedSprite.rotation=0
+#		$ImpulseAbajo.emitting=false
+#		$ImpulseArriba.emitting=false
+#		$AnimatedSprite.animation = "lado"
+#		aux=Movimiento.x < 0
+#		$AnimatedSprite.flip_h = aux
+#		if(aux):
+#			$ImpulseLadoDer.emitting=false
+#			$ImpulseLadoIzq.emitting=true
+#		else:
+#			$ImpulseLadoDer.emitting=true
+#			$ImpulseLadoIzq.emitting=false
+#		$CollisionShapediagder.disabled=true
+#		$CollisionShapediagizq.disabled=true
+#		$CollisionShapefrente.disabled = true
+#		$CollisionShapelado.disabled=false
+#	elif Movimiento.y != 0:
+#		#$AnimatedSprite.rotation=0
+#		$ImpulseLadoDer.emitting=false
+#		$ImpulseLadoIzq.emitting=false
+#		$AnimatedSprite.animation = "frente"
+#		aux=Movimiento.y > 0
+#		$AnimatedSprite.flip_v = aux
+#		if(aux):
+#			$ImpulseAbajo.emitting=true
+#			$ImpulseArriba.emitting=false
+#		else:
+#			$ImpulseAbajo.emitting=false
+#			$ImpulseArriba.emitting=true
+#		$CollisionShapediagder.disabled=true
+#		$CollisionShapediagizq.disabled=true
+#		$CollisionShapefrente.disabled =false
+#		$CollisionShapelado.disabled=true
+	
+	#Para mover la nave con el ANALOGICO #####################
+	position.x+=Global.analogico.x *Velocidad*delta
+	position.y-=Global.analogico.y *Velocidad*delta
+	
+	$ImpulseArriba.emitting=true
+	$CollisionShapefrente.disabled =false
+	
 	position.x = clamp(position.x, 0, limite.x)
 	position.y = clamp(position.y, 0, limite.y)
+	
+	var dir=Vector2(Global.analogico.y,Global.analogico.x)
+	
+	look_at(get_transform().origin+dir)
+	
+	
 	if(Movimiento.x!=0&&Movimiento.y!=0):
 		$CollisionShapefrente.disabled =true
 		$CollisionShapelado.disabled=true
@@ -114,8 +183,6 @@ func inicio(pos):
 	alive=true
 	position = pos   #mostrar el personaje
 	show()
-	$CollisionShapefrente.disabled =false
-	$CollisionShapelado.disabled=false
 
 func _on_Nave_area_entered(area):
 	emit_signal("catch")

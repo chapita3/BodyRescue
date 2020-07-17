@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://HUD_game.gd" type="Script" id=1]
 [ext_resource path="res://Juego/vitamins.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Juego/bacterias_kills.png" type="Texture" id=6]
 [ext_resource path="res://Juego/boss_Normal.png" type="Texture" id=7]
 [ext_resource path="res://Juego/bala.png" type="Texture" id=8]
+[ext_resource path="res://analog/analog.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
@@ -203,11 +204,10 @@ __meta__ = {
 
 [node name="BalasPic" type="TextureRect" parent="."]
 visible = false
-margin_left = 49.371
-margin_top = 39.0237
-margin_right = 1083.37
-margin_bottom = 514.024
-rect_rotation = 270.0
+margin_left = 49.0
+margin_top = 5.0
+margin_right = 548.0
+margin_bottom = 1039.0
 rect_scale = Vector2( 0.035, 0.035 )
 texture = ExtResource( 8 )
 __meta__ = {
@@ -227,3 +227,6 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Analog" parent="." instance=ExtResource( 9 )]
+visible = false
