@@ -27,7 +27,13 @@ func _on_Level1_hide_bacteria():
 	visible=false
 
 func elim():
-	queue_free()
+	$AnimatedSprite.visible=false
+	$punch.play()
+	$CollisionShape2.disabled=true
+	$CollisionShape2D.disabled=true
+	$CollisionShape3down.disabled=true
+	$CollisionShape3up.disabled=true
+	$CollisionShape4.disabled=true
 
 func level_call():
 	var aux=$AnimatedSprite.animation
@@ -51,4 +57,6 @@ func level_call():
 			if("grande" in $AnimatedSprite.animation):
 				$CollisionShape4.rotation=150
 				$CollisionShape4.position=Vector2(-4.078,-31.606)
-		
+
+func _on_punch_finished():
+	queue_free()

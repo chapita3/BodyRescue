@@ -46,6 +46,7 @@ func _on_TimerStart_timeout():
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
 	$HUD_game.actualizarEnemigos(0)
 	$HUD_game.actualizarBalas(cantBalasMax)
+	$sound.play()
 
 func game_over():
 	$BacteriaTimer.stop()

@@ -36,6 +36,7 @@ func _on_TimerStart_timeout():
 	$HUD_game.actualizarScore(ScoreInicial)
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarAnticuerpos(cantAntbody)
+	$sound.play()
 
 func game_over():
 	Global.set_activo(false)

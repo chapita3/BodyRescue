@@ -4,10 +4,10 @@ signal life_modify
 signal Attack
 
 export (PackedScene) var Attack_thing
+export (int) var life
 onready var parent=get_parent()
 var speed=400
 var alive=false
-var life=10
 var velocity=Vector2(1000,0)
 var attack=false
 var target
@@ -17,10 +17,7 @@ var current_dir
 func _ready():
 	$AnimatedSprite.animation= "normal"
 	$Area2D/CollisionShapeBoos.disabled=false
-	$TimerInicio.start()
-	
-func _on_TimerInicio_timeout():
-	$TimerAttack.start()
+	#$TimerAttack.start()
 
 func _physics_process(delta):
 	if not alive:
@@ -45,6 +42,10 @@ func control(delta):
 func set_alive(a):
 	alive=a
 
+#func change_health():
+#	life-=10
+#	emit_signal("life_modify",life)
+
 #func _on_Area2D_body_entered(body):
 #	if ("Bala" in body.name):
 #		if(life>10):
@@ -54,8 +55,10 @@ func set_alive(a):
 #		emit_signal("life_modify",life)
 
 func _on_Area2D_area_entered(area):
-	if ("Bala" in area.name):
+	if ("Area2D_Bala" in area.name):
 		life-=10
+		$AnimationPlayer.play("damage")
+		$punch.play()
 		if(life<=0):
 			print(rotation_degrees)
 			print(rotation)
@@ -72,19 +75,21 @@ func shoot():
 	var dir=Vector2(1,0).rotated(self.global_rotation)
 	var aux=Global.getNave()
 	emit_signal("Attack",Attack_thing,self.global_position,dir,aux)
-
+	#A.start(self.global_position,dir,aux)
 
 func _on_TimerAttack_timeout():
+	#attack=true
 	shoot()
 	$AnimatedSprite.animation="angry"
 	$TimerAnimation.start()
+	#$TimerAttackStop.start()
 
+#func _on_TimerAttackStop_timeout():
+#	attack=false
+#	$TimerAttack.start()
 
 func _on_TimerAnimation_timeout():
 	$AnimatedSprite.animation="normal"
 
 func detener():
 	$TimerAttack.stop()
-
-
-
