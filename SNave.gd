@@ -39,6 +39,7 @@ func _input(event):
 func _on_Nave_area_entered(area):
 	if ("Ataque" in area.name):		#Ataque del boss
 		alive=false
+		$explode.play()
 		emit_signal("golpe")
 	else:
 		if ("Bala_plus" in area.name):
