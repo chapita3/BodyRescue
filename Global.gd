@@ -5,6 +5,7 @@ var bactKill=0
 var nave
 var record=0
 var activo=true
+var analogico = Vector2(0,0)
 
 var player = {
 #"username":"",
