@@ -177,6 +177,7 @@ func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
 	if (alive):
 		hide()   #se oculta cuando recibe un golpe
 		alive=false
+		$explode.play()
 		emit_signal("golpe")
 	
 func inicio(pos):
