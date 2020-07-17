@@ -46,7 +46,7 @@ Velocidad = 300
 position = Vector2( 1.87991, -0.681519 )
 scale = Vector2( 0.218507, 0.191478 )
 frames = SubResource( 1 )
-animation = "frente"
+animation = "diag"
 
 [node name="CollisionShapefrente" type="CollisionShape2D" parent="."]
 position = Vector2( 2.04346, -5.69153 )
