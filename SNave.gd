@@ -16,25 +16,23 @@ func _process(delta):
 	cantBact=Global.bactKill
 	emit_signal("killed",cantBact)
 	Global.setNave(self)
-	mousePosition=get_global_mouse_position()
-	$mira.look_at(mousePosition)
 
 func _input(event):
 	var istouch = event is InputEventScreenTouch
 	var ismouse= event is InputEventMouseButton
 	if(Global.activo && can_shot && (istouch or ismouse)):
+		$mira.look_at(event.position)
 		if ((event.button_index == BUTTON_LEFT or istouch) and event.pressed):
 			if(event.position != position):
 				var direction = (event.global_position - global_position).normalized()
 				var bala = BALA.instance()
-				#add_child(bala)
 				bala.global_position = global_position + direction
 				#bala.set_bala_direction(direction)
-				
-				bala.rotation= $mira.get_rotation()
+				bala.rotation=rotation+$mira.get_rotation()
 				bala._ready()
 				get_parent().add_child(bala)
 				emit_signal("shot")
+
 
 func _on_Nave_area_entered(area):
 	if ("Ataque" in area.name):		#Ataque del boss

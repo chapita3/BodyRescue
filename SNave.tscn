@@ -52,7 +52,6 @@ animation = "frente"
 [node name="CollisionShapefrente" type="CollisionShape2D" parent="."]
 position = Vector2( 2.04346, -5.69153 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="CollisionShapelado" type="CollisionShape2D" parent="."]
 position = Vector2( 8.7323, -1.61395 )
@@ -82,7 +81,11 @@ scale = Vector2( 0.429708, 0.0366638 )
 
 [node name="ImpulseAbajo" parent="." instance=ExtResource( 7 )]
 
-[node name="explode" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 9 )
+visible = false
+
+[node name="mira" type="RayCast2D" parent="."]
+position = Vector2( 1.94174, -2.21918 )
+enabled = true
+cast_to = Vector2( 70, 0 )
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Nave_body_entered"]

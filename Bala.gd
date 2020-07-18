@@ -11,8 +11,10 @@ func _physics_process(delta):
 	#	velocity = velocity.bounce(collision.normal)
 #		emit_signal("shooted")
 
-func set_bala_direction(direction):
-	velocity = direction * SPEED
+	position+= (angulo * SPEED) * delta
+	
+#func set_bala_direction(direction):
+#	velocity = direction * SPEED
 
 func kill_bala():
 	if (!destroyed):
