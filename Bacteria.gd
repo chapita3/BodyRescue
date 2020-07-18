@@ -29,11 +29,11 @@ func _on_Level1_hide_bacteria():
 func elim():
 	$AnimatedSprite.visible=false
 	$punch.play()
-	$CollisionShape2.disabled=true
-	$CollisionShape2D.disabled=true
-	$CollisionShape3down.disabled=true
-	$CollisionShape3up.disabled=true
-	$CollisionShape4.disabled=true
+	$CollisionShape2D.light_mask=20
+	$CollisionShape2.light_mask=20
+	$CollisionShape3down.light_mask=20
+	$CollisionShape3up.light_mask=20
+	$CollisionShape4.light_mask=20
 
 func level_call():
 	var aux=$AnimatedSprite.animation
