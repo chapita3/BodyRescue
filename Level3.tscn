@@ -146,6 +146,7 @@ wait_time = 5.0
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
+volume_db = -17.444
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD3" from="." to="HUD_game" method="_on_Level3_start_HUD3"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]
