@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://slides/3levelLoose.png" type="Texture" id=1]
 [ext_resource path="res://HUD_game.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://slides/3levelStart.png" type="Texture" id=9]
 [ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=10]
 [ext_resource path="res://Bala_plus.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sound/level_sound.ogg" type="AudioStream" id=12]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -25,8 +26,8 @@ script = ExtResource( 4 )
 Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
 Bala_plus = ExtResource( 11 )
-cantAntbodyMax = 20
-cantBactMax = 20
+cantAntbodyMax = 2
+cantBactMax = 2
 cantBalasMax = 10
 
 [node name="background" type="TextureRect" parent="."]
@@ -142,6 +143,9 @@ __meta__ = {
 
 [node name="TimerBalaPlus" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
 [connection signal="hide_HUD" from="." to="HUD_game" method="hide_HUD"]
 [connection signal="start_HUD3" from="." to="HUD_game" method="_on_Level3_start_HUD3"]
 [connection signal="timeout" from="BacteriaTimer" to="." method="_on_BacteriaTimer_timeout"]

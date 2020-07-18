@@ -1,35 +1,43 @@
-extends Area2D
+extends KinematicBody2D
 
-const SPEED = 600
+const SPEED = 1000
 var velocity = Vector2()
-var angulo
+
 var destroyed = false
 
-func _ready():
-	angulo = Vector2( cos(rotation), sin(rotation) )
-
 func _physics_process(delta):
+	var collision = move_and_collide(velocity*delta)
+	#if collision:
+	#	velocity = velocity.bounce(collision.normal)
+#		emit_signal("shooted")
 
 	position+= (angulo * SPEED) * delta
 	
 #func set_bala_direction(direction):
 #	velocity = direction * SPEED
 
+func kill_bala():
+	if (!destroyed):
+		destroyed = true
+		call_deferred("free")
 
-func _on_Bala_body_entered(body):
+func _on_Area2D_body_entered(body):
 	if body != self:
 		if("Bacteria" in body.name):
 			body.elim()
 			Global.new_bacteria_kill()
+			Global.play()
 		else:
 			if("Bala" in body.name):
-				body.queue_free()
-		queue_free()
+				body.kill_bala()
+		kill_bala()
 
-		
-func _on_Bala_area_entered(area):
+func _on_Area2D_Bala_area_entered(area):
 	if ("Ataque" in area.name):
-		queue_free()
+		kill_bala()
 
 func _on_Visibilidad_screen_exited():
-	queue_free() 
+	queue_free()
+
+func _on_punch_finished():
+	kill_bala()

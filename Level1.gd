@@ -35,6 +35,7 @@ func _on_TimerReady_timeout():
 	Global.load_game()
 	player=Global.player
 	$HUD_game.actualizarVidas(player.lives)
+	$sound.play()
 
 func game_over():
 	Global.set_activo(false)
