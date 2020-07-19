@@ -43,7 +43,7 @@ func _on_TimerStart_timeout():
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarBalas(cantBalasMax)
 	$HUD_game.actualizarVidaBoss($Paths/PathBoss/PathFollowBoss/Boss.life)
-	#$sound.play()
+	$sound.play()
 
 func game_over():
 	Global.set_activo(false)
