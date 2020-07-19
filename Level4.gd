@@ -105,6 +105,7 @@ func _on_BacteriaTimer_timeout():
 	B.rotation = d
 	B.level_call()
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
+	B.change_speed(400,640)
 
 func _on_Nave_shot():	#Se actualizan las balas al disparar
 	cantBalas-=1

@@ -61,5 +61,9 @@ func level_call():
 				$CollisionShape4.rotation=150
 				$CollisionShape4.position=Vector2(-4.078,-31.606)
 
+func change_speed(minV,maxV):
+	velocidad_min=minV
+	velocidad_max=maxV
+
 func _on_punch_finished():
 	queue_free()

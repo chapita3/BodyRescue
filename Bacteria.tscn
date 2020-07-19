@@ -26,6 +26,21 @@ animations = [ {
 "name": "grande8",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "chica6",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "grande5",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "chica1",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "chica2",
@@ -51,39 +66,9 @@ animations = [ {
 "name": "grande4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "chica6",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "grande5",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "grande2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "chica1",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ) ],
-"loop": true,
-"name": "grande6",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 17 ) ],
-"loop": true,
-"name": "grande7",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ) ],
-"loop": true,
-"name": "chica8",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -99,6 +84,21 @@ animations = [ {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "chica3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "chica8",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "grande7",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "grande6",
 "speed": 5.0
 } ]
 

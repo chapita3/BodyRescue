@@ -106,6 +106,7 @@ func _on_BacteriaTimer_timeout():
 	B.rotation = d
 	B.level_call()
 	B.set_linear_velocity(Vector2(rand_range(B.velocidad_min,B.velocidad_max), 0).rotated(d))
+	B.change_speed(350,550)
 
 func play_again():
 	get_tree().change_scene("res://Level3.tscn")
