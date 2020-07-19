@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Interfaz.gd" type="Script" id=1]
-[ext_resource path="res://juego/Body Rescue (1).png" type="Texture" id=2]
+[ext_resource path="res://Body Rescue.png" type="Texture" id=2]
 [ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
