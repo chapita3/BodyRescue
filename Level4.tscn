@@ -11,7 +11,7 @@
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Boss.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Bala_plus.tscn" type="PackedScene" id=11]
-[ext_resource path="res://reloj.png" type="Texture" id=12]
+[ext_resource path="res://Juego/reloj.png" type="Texture" id=12]
 [ext_resource path="res://slides/Win.png" type="Texture" id=13]
 [ext_resource path="res://slides/4levelWin.png" type="Texture" id=14]
 [ext_resource path="res://Sound/level_sound.ogg" type="AudioStream" id=15]
@@ -83,7 +83,7 @@ __meta__ = {
 position = Vector2( 260.097, 396.561 )
 
 [node name="BacteriaTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.6
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -197,7 +197,6 @@ align = 1
 valign = 1
 
 [node name="WinGame" type="TextureRect" parent="."]
-visible = false
 margin_left = -2.95111
 margin_top = -52.0212
 margin_right = 1077.05
@@ -230,6 +229,9 @@ margin_right = 866.466
 margin_bottom = 1318.21
 rect_scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Restart" type="ColorPickerButton" parent="."]
 visible = false
