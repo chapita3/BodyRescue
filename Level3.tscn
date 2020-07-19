@@ -42,6 +42,7 @@ __meta__ = {
 }
 
 [node name="BacteriaTimer" type="Timer" parent="."]
+wait_time = 0.6
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
