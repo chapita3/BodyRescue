@@ -18,6 +18,8 @@ func seek():
 	return steer
 
 func _process(delta):
+	if (Global.activo==false):
+		queue_free()
 	if target:
 		acceleration += seek()
 		velocity += acceleration * delta
