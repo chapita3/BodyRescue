@@ -26,8 +26,8 @@ script = ExtResource( 4 )
 Bacteria = ExtResource( 8 )
 Antibody = ExtResource( 7 )
 Bala_plus = ExtResource( 11 )
-cantAntbodyMax = 2
-cantBactMax = 2
+cantAntbodyMax = 1
+cantBactMax = 1
 cantBalasMax = 10
 
 [node name="background" type="TextureRect" parent="."]
@@ -158,6 +158,7 @@ volume_db = -17.444
 [connection signal="golpe" from="Nave" to="." method="game_over"]
 [connection signal="killed" from="Nave" to="." method="_on_Nave_add_kill"]
 [connection signal="shot" from="Nave" to="." method="_on_Nave_shot"]
+[connection signal="timeout" from="NextScene" to="." method="_on_NextScene_timeout"]
 [connection signal="timeout" from="AntibodyTimer" to="." method="_on_AntibodyTimer_timeout"]
 [connection signal="timeout" from="TimerStart" to="." method="_on_TimerStart_timeout"]
 [connection signal="pressed" from="Again" to="." method="play_again"]

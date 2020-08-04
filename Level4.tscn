@@ -197,6 +197,7 @@ align = 1
 valign = 1
 
 [node name="WinGame" type="TextureRect" parent="."]
+visible = false
 margin_left = -2.95111
 margin_top = -52.0212
 margin_right = 1077.05
