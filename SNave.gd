@@ -14,7 +14,8 @@ func _ready():
 
 func _process(delta):
 	cantBact=Global.bactKill
-	emit_signal("killed",cantBact)
+	if (Global.activo):
+		emit_signal("killed",cantBact)
 	Global.setNave(self)
 
 func _input(event):
