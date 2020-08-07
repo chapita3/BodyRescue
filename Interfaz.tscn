@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Interfaz.gd" type="Script" id=1]
-[ext_resource path="res://Body Rescue.png" type="Texture" id=2]
-[ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://body_rescue.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Gotham_Book_Regular.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 29
@@ -31,19 +31,6 @@ margin_right = 373.0
 margin_bottom = 402.6
 custom_fonts/font = SubResource( 1 )
 text = "PLAY"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ScoreLabel" type="Label" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 419.094
-margin_top = 6.88641
-margin_right = 539.094
-margin_bottom = 64.8864
-align = 1
-valign = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -25,10 +25,10 @@ var player = {
 
 var zone
 var pos={
-	P0=[-8.694,-251.453],
-	P1=[-2.997,-206.43],
-	P2=[-14.336,-279.058],
-	P3=[8,-136],
+	P0=[-21,-259],
+	P1=[-7,-231],
+	P2=[-12,-303],
+	P3=[11,-147],
 	#OLD-POS
 	#P0=[-37.39,161.61],
 	#P1=[-2.997,-206.43],
@@ -62,7 +62,7 @@ func _ready():
 	configure_zone()
 	$button_zone.show()
 	yield($Timer, "timeout")
-	#$alarm.play()
+	$alarm.play()
 
 func inicio():
 	pass
@@ -86,7 +86,6 @@ func selectZone():
 		i=i+1
 	zone=i
 	return zone
-	#return 2
 
 func initialize():
 	var i=0
@@ -97,7 +96,7 @@ func initialize():
 	while(i<=(body_type.size()-1)):
 		body_type_used[i]=0    #[1,0,0,0]
 		i+=1
-	var lpm
+	var l
 
 func get_pos():
 	return pos["P"+str(zone)]
@@ -106,25 +105,29 @@ func get_pos():
 
 func configure_zone():
 	var expos=get_pos() #Busca posicion de la luz
-	$button_zone.text=str(zone)
+	#$button_zone.text=str(zone)
+	$button_zone.text=''
 	#var exbody_type=get_object()
 	$button_zone.set_position(Vector2(expos[0],expos[1]))
 	$button_zone.set_size(Vector2(41,39))
 	if(zone==0):
+		$button_zone.set_size(Vector2(83,29))
 		$body/eyes.enabled=true
 		$body/eyes.show()
 	else:
 		if(zone==1):
 			$body/tooth.enabled=true
-			$button_zone.set_size(Vector2(29,20))
+			$button_zone.set_size(Vector2(55,29))
 			$body/tooth.show()
 		else:
 			if(zone==2):
 				$body/head.enabled=true
+				$button_zone.set_size(Vector2(68,46))
 				$body/head.show()
 			else:
 				if(zone==3):
 					$body/heart.enabled=true
+					$button_zone.set_size(Vector2(55,52))
 					$body/heart.show()
 				else:
 					if(zone==5):

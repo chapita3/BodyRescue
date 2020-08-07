@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Gotham Book Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/Gotham_Book_Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://slides/Loose.png" type="Texture" id=2]
 [ext_resource path="res://Juego/for_hover.png" type="Texture" id=3]
 [ext_resource path="res://slides/Loose_prev.png" type="Texture" id=4]
