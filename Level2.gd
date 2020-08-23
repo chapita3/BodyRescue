@@ -4,12 +4,10 @@ export (PackedScene) var Bacteria
 export (PackedScene) var Antibody
 signal start_HUD2
 signal hide_HUD
-#var Score
 var cantAntbody=0
 export (int) var cantAntbodyMax
 
 var player = {
-#"username":"",
 "score":0,
 "level":0,
 "lives":3
@@ -32,7 +30,7 @@ func _on_TimerStart_timeout():
 	$background.show()
 	Global.load_game()
 	player=Global.player
-	ScoreInicial= player.score
+	ScoreInicial= player.score+1
 	$HUD_game.actualizarScore(ScoreInicial)
 	$HUD_game.actualizarVidas(player.lives)
 	$HUD_game.actualizarAnticuerpos(cantAntbody)

@@ -13,7 +13,6 @@ var cantPlus=0
 var ScoreInicial=0
 
 var player = {
-#"username":"",
 "score":0,
 "level":0,
 "lives":3

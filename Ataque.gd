@@ -1,4 +1,4 @@
-extends Area2D #Tutorial_Part4 ==> UKfzBnfh4Ak
+extends Area2D 
 
 var speed=300
 var steer_force=100

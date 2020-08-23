@@ -9,7 +9,6 @@ var mousePosition
 const BALA = preload("res://Bala.tscn")
 
 func _ready():
-	#hide()
 	limite = get_viewport_rect().size
 
 func _process(delta):

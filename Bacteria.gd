@@ -32,11 +32,6 @@ func elim():
 	set_collision_mask_bit(19,true)
 	set_collision_mask_bit(0,false)
 	set_collision_mask_bit(1,false)
-	#$CollisionShape2D.set_collision_mask(424288)
-	#$CollisionShape2.set_collision_mask(424288)
-	#$CollisionShape3down.set_collision_mask(424288)
-	#$CollisionShape3up.set_collision_mask(424288)
-	#$CollisionShape4.set_collision_mask(424288)
 
 func level_call():
 	var aux=$AnimatedSprite.animation

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready():
-	pass # Replace with function body.
+	pass 
 
 func actualizarScore(score):
 	$Score.text = str(score)

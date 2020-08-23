@@ -11,9 +11,6 @@ func _ready():
 func _physics_process(delta):
 
 	position+= (angulo * SPEED) * delta
-	
-#func set_bala_direction(direction):
-#	velocity = direction * SPEED
 
 
 func _on_Bala_body_entered(body):

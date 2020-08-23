@@ -6,17 +6,14 @@ export (PackedScene) var Bala_plus
 export (int) var cantAntbodyMax
 export (int) var cantBactMax
 export (int) var cantBalasMax
-#export (int) var maxPlus
 signal start_HUD3
 signal hide_HUD
-#var Score
 var cantBalas
 var cantAntbody=0
 var cantPlus=0
 var ScoreInicial
 
 var player = {
-#"username":"",
 "score":0,
 "level":0,
 "lives":3
@@ -146,7 +143,7 @@ func _on_Nave_shot():
 
 func _on_TimerBalaPlus_timeout():
 	var b=Bala_plus.instance()
-	var size=get_viewport().get_visible_rect().size
+	#var size=get_viewport().get_visible_rect().size
 	randomize()
 	var xPos=rand_range(-202.518,258.386)
 	var yPos=rand_range(-253.497,461.749)
