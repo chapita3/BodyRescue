@@ -3,15 +3,14 @@ extends Node
 const SAVE_PATH = "user://saves.sav"
 var bactKill=0
 var nave
-var record=0
 var activo=true
 var analogico = Vector2(0,0)
 
 var player = {
-#"username":"",
 "score":0,
 "level":0,
-"lives":3
+"lives":3,
+"record":0
 }
 
 func new_bacteria_kill():
@@ -21,8 +20,8 @@ func new_game():
 	bactKill=0
 
 func actualizarRecord(r):
-	if (r > record):
-		record=r
+	if (r > player.record):
+		player.record=r
 
 func save_game(score,level,lives):
 	var save_game = File.new()

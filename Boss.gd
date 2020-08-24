@@ -48,7 +48,7 @@ func _on_Area2D_area_entered(area):
 			$TimerAttack.stop()
 			alive=false
 			velocity=0
-			$Area2D/CollisionShapeBoos.disabled=true
+			$Area2D/CollisionShapeBoos.set_deferred('disabled',true);
 			rotation=0
 			rotation_degrees=0
 		emit_signal("life_modify",life)

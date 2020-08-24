@@ -4,8 +4,6 @@ export (PackedScene) var Bacteria
 signal hide_bacteria
 signal start_HUD1
 signal hide_HUD
-#var Score=40
-#onready var save = load("res://Saves.gd").new()
 
 var deleteBacteria =false
 
@@ -17,7 +15,6 @@ var player = {
 }
 
 func _ready():
-	#Score = 0
 	Global.set_activo(true)
 	$Start.show()
 	$TimerReady.start()
@@ -44,7 +41,6 @@ func game_over():
 	emit_signal("hide_bacteria")
 	$ScoreTimer.stop()
 	emit_signal("hide_HUD")
-	#$HUD_game.queue_free()
 	player.score= 0
 	$LevelLoose.visible=true
 	$Again.disabled=false

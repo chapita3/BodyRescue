@@ -12,7 +12,6 @@ signal golpe
 signal catch
 
 func _ready():
-	#hide()
 	$ImpulseArriba.emitting=true
 	$ImpulseArriba.visible=true
 	$CollisionShapefrente.disabled=false
@@ -115,9 +114,11 @@ func enable_dig_collisionShapes(auxx,auxy):
 		$CollisionShapediagder.disabled=true
 		$CollisionShapediagizq.disabled=false
 
-func _on_Nave_body_entered(body):  #cuando hay una colision con un cuerpo
-	$CollisionShapefrente.disabled = true
-	$CollisionShapelado.disabled=true
+func _on_Nave_body_entered(_body):  #cuando hay una colision con un cuerpo
+	$CollisionShapefrente.set_deferred('disabled',true);
+	$CollisionShapelado.set_deferred('disabled',true);
+	$CollisionShapediagder.set_deferred('disabled',true);
+	$CollisionShapediagizq.set_deferred('disabled',true);
 	if (alive):
 		hide()   #se oculta cuando recibe un golpe
 		alive=false
@@ -129,5 +130,5 @@ func inicio(pos):
 	position = pos   #mostrar el personaje
 	show()
 
-func _on_Nave_area_entered(area):
+func _on_Nave_area_entered(_area):
 	emit_signal("catch")

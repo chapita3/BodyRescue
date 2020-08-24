@@ -1,7 +1,6 @@
 extends Node
 
 var player = {
-#"username":"",
 "score":0,
 "level":0,
 "lives":3

@@ -1,6 +1,5 @@
 extends Area2D
 
-#signal nueva_zona
 signal iniciar_juego_zona0
 signal iniciar_juego_zona1
 signal iniciar_juego_zona2
@@ -13,10 +12,8 @@ export (PackedScene) var Scene2
 export (PackedScene) var Scene3
 export (PackedScene) var Scene4
 
-#onready var save = load("res://Saves.gd").new()
 
 var player = {
-#"username":"",
 "score":0,
 "level":0,
 "lives":3,
@@ -29,32 +26,16 @@ var pos={
 	P1=[-7,-231],
 	P2=[-12,-303],
 	P3=[11,-147],
-	#OLD-POS
-	#P0=[-37.39,161.61],
-	#P1=[-2.997,-206.43],
-	#P2=[-8.694,-251.453],
-	#P3=[-10.926,-192.611],
-	#P5=[-38.559,10.316],
-	#P6=[7.754,-135.517],
-	#P7=[-8.154,-277.39],
 }
 var body_type_used ={}
 #var body_type=["skin","tooth","eyes","thyroid","diaphragm","intestine","heart","head"]
 var body_type=["eyes","tooth","head","heart"]
-#var body_type={
-#	O0=[load("res://Sprites/Lights/eyes.gd")],
-#	O1=[load("res://Sprites/Lights/head.gd")],
-#	O2=[load("res://Sprites/Lights/heart.gd")],
-#	O3=[load("res://Sprites/Lights/intestine.gd")],
-#	O4=[load("res://Sprites/Lights/skin.gd")],
-#	O5=[load("res://Sprites/Lights/thyroid.gd")],
-#	O6=[load("res://Sprites/Lights/tooth.gd")],
-#}
+
 
 func _ready():
 	Global.load_game()
 	player=Global.player
-	$HUD_game.actualizarRecord(Global.record)
+	$HUD_game.actualizarRecord(player.record)
 	$HUD_game.actualizarVidas(player.lives)
 	emit_signal("start_HUD0")
 	initialize()
@@ -89,19 +70,15 @@ func selectZone():
 
 func initialize():
 	var i=0
-	var aux=body_type.size()-1
 	while(i<=player.level):
 		body_type_used[i]=1  #[1,_,_,_]
 		i+=1
 	while(i<=(body_type.size()-1)):
 		body_type_used[i]=0    #[1,0,0,0]
 		i+=1
-	var l
 
 func get_pos():
 	return pos["P"+str(zone)]
-#func get_object():
-#	return body_type["O"+str(zone)]
 
 func configure_zone():
 	var expos=get_pos() #Busca posicion de la luz
@@ -146,7 +123,7 @@ func configure_zone():
 	#$body.animation="body_"+body_type[zone]
 	$body/light_animation.play(body_type[zone])
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_Button_pressed():
@@ -168,21 +145,13 @@ func hide_lights():
 	$body/tooth.hide()
 
 func juego_zona0():
-	#iniciar_juego()
 	get_tree().change_scene_to(Scene1)
-	#$fondo0.show()
 	
 func juego_zona1():
-	#iniciar_juego()
 	get_tree().change_scene_to(Scene2)
-	#$fondo1.show()
 	
 func juego_zona2():
-	#iniciar_juego()
 	get_tree().change_scene_to(Scene3)
-	#$fondo2.show()
 	
 func juego_zona3():
-	#iniciar_juego()
 	get_tree().change_scene_to(Scene4)
-	#$fondo3.show()

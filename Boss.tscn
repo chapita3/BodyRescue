@@ -62,7 +62,7 @@ collision_layer = 24
 collision_mask = 24
 script = ExtResource( 1 )
 Attack_thing = ExtResource( 5 )
-life = 200
+life = 20
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -4.57764e-05, 0 )
@@ -95,6 +95,5 @@ anims/damage = SubResource( 3 )
 [node name="punch" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
 [connection signal="timeout" from="TimerAnimation" to="." method="_on_TimerAnimation_timeout"]

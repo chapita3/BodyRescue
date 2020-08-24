@@ -34,5 +34,4 @@ text = "PLAY"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="iniciar_juego" from="." to="." method="nuevo_juego"]
 [connection signal="pressed" from="BotonPlay" to="." method="_on_BotonPlay_pressed"]
