@@ -39,7 +39,7 @@ font_data = ExtResource( 10 )
 script = ExtResource( 4 )
 Bacteria = ExtResource( 2 )
 Antibody = ExtResource( 7 )
-cantAntbodyMax = 1
+cantAntbodyMax = 10
 
 [node name="background" type="TextureRect" parent="."]
 margin_left = -390.068

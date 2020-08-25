@@ -91,7 +91,6 @@ func _on_BacteriaTimer_timeout():
 func play_again():
 	get_tree().change_scene("res://Level1.tscn")
 
-
 func _on_ScoreTimer_timeout():
 	player.score += 1
 	$HUD_game.actualizarScore(player.score)
